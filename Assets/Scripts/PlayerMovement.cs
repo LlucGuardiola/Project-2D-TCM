@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] public float Speed              // Velocitat
-    {  get; private set; }
+    public float Speed              // Velocitat
+    { get { return _speed; } private set { } }
+    
+    [SerializeField] public float _speed;              
     [SerializeField] private int _maxJumpCount;      // Quantitat màxima de salts
     [SerializeField] private float _jumpHeight;      // Alçada del salt
     [SerializeField] private LayerMask _groundLayer; // Detecció de col·lisió amb el ground 
