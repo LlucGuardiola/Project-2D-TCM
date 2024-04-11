@@ -48,7 +48,6 @@ public class MovePlatform : MonoBehaviour
         {
             movingRight = !movingRight;
         }
-
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
