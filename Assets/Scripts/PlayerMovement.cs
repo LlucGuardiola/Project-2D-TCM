@@ -4,22 +4,22 @@ public class PlayerMovement : MonoBehaviour
 {
     public float Speed              // Velocitat
     { get { return _speed; } private set { } }
-    
-    [SerializeField] public float _speed;              
+
+    [SerializeField] private float _speed;              
     [SerializeField] private int _maxJumpCount;      // Quantitat màxima de salts
-    [SerializeField] private float _jumpHeight;      // Alçada del salt
+    [SerializeField] private float _jumpHeight;
     [SerializeField] private LayerMask _groundLayer; // Detecció de col·lisió amb el ground 
 
     private BoxCollider2D _boxCollider; // La caixa de col·lisió del personatge
     private bool _dashing;              // Comprovar si està dasheant o no
     private int _counter;               // Conta els fotogrames que dura el dash
-    private static Rigidbody2D _body;          // Rigidbody del personatge
-    private Animator _animator;         // Component que gestiona les animacions del personatge
-    private int _jumpCount;             // Quantes vegades ha saltat, quan jumpCount = maxJumpCount, jumoCount = 0.
-    private bool _canJump;              // Es pot saltar o no
-    private bool _isJumping;            // Booleana per saber si està saltant (a l'aire)
+    private static Rigidbody2D _body;   
+    private Animator _animator;         
+    private int _jumpCount;             
+    private bool _canJump;              
+    private bool _isJumping;            
     private bool _movingLR;             // Decideix si l'sprite ha de fer flip en eix x o y (si està mirant dreta o esq)
-    private Vector3 _initialPosition;   // Posició inicial
+    private Vector3 _initialPosition;   
     private PhysicsMaterial2D _defaultMaterial, _noFrictionMaterial; /* Material default i material sense
                                                                        fricció (no es queda enganxat a les parets) */
     private void Awake()
