@@ -1,19 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class MovePlatform : MonoBehaviour
 {
+    [SerializeField] private float speed;
+    [SerializeField] private float unitsToRight;
+
     private Vector3 iniPosition;
     private bool movingRight;
-    private float unitsToRight;
     private bool canMove;
+
     // Start is called before the first frame update
     void Start()
     {
         movingRight = true;
         iniPosition = transform.position;
-        unitsToRight = 8f;
         canMove = true;
     }
 
@@ -27,8 +30,8 @@ public class MovePlatform : MonoBehaviour
     }
     private void Move()
     {
-        if (movingRight) { gameObject.transform.Translate( 1 * Time.deltaTime, 0,0 ); }
-        else { gameObject.transform.Translate(-1 * Time.deltaTime, 0, 0); }
+        if (movingRight) { gameObject.transform.Translate(Mathf.Abs(speed) * Time.deltaTime, 0, 0) ; }
+        else { gameObject.transform.Translate(-Mathf.Abs(speed) * Time.deltaTime, 0, 0); }
 
         if (transform.position.x >= iniPosition.x + unitsToRight || transform.position.x <= iniPosition.x)
         {
