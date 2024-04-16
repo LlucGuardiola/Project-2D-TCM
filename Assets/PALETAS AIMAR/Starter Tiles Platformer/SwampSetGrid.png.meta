@@ -1,0 +1,664 @@
+fileFormatVersion: 2
+guid: 0145b01d7e0fcf04fa8001cdea76e598
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: SwampSetGrid_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 68.8
+        width: 17.2
+        height: 17.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 196ced5caac5b154ea1fead9d723e859
+      internalID: -522100196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwampSetGrid_1
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 68.8
+        width: 17.2
+        height: 17.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6adad4192b3672a4b82b426c98f3a03a
+      internalID: 1134839154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwampSetGrid_2
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 68.8
+        width: 17.2
+        height: 17.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a85db9fb284cbe4eb007146c80b56c3
+      internalID: -112334363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwampSetGrid_3
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 68.8
+        width: 17.2
+        height: 17.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb63b4b2817718243bf38319f93d63ab
+      internalID: 1403599991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwampSetGrid_4
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 68.8
+        width: 17.2
+        height: 17.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fabeff79853512248af3829ea308a7e0
+      internalID: 491826257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwampSetGrid_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 51.8
+        width: 17.2
+        height: 17.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 511e0aa74833ec9438f0de051f6b2d72
+      internalID: 1544676891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwampSetGrid_6
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 51.8
+        width: 17.2
+        height: 17.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 451fb0ed200bf2a478ed6173aeb90f09
+      internalID: -68988641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwampSetGrid_7
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 51.8
+        width: 17.2
+        height: 17.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b77d6e99affc15848a3c2d8363f69e23
+      internalID: -965314781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwampSetGrid_8
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 51.8
+        width: 17.2
+        height: 17.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99be9c64f2ede814dbf3554834c3ff6e
+      internalID: 1724308112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwampSetGrid_9
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 51.8
+        width: 17.2
+        height: 17.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e896a1afc8d8cbf438d3ce6d3a90e260
+      internalID: 253811486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwampSetGrid_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 34.8
+        width: 17.2
+        height: 17.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3aa4e4da49f90c48b46cb3bc4a19690
+      internalID: 1878399285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwampSetGrid_11
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 34.8
+        width: 17.2
+        height: 17.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d18c1bc3ccd2f1a40ae384725d96b527
+      internalID: -743375864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwampSetGrid_12
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 34.8
+        width: 17.2
+        height: 17.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6c914e736b751b4ba6ff6d337b1dc76
+      internalID: -588246115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwampSetGrid_13
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 34.8
+        width: 17.2
+        height: 17.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a862e8e4a6e324e40b5372d2d479545f
+      internalID: 1953380821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwampSetGrid_14
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 34.8
+        width: 17.2
+        height: 17.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95bef22d1b2aa004784e583333779b3f
+      internalID: 1869730292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwampSetGrid_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 17.8
+        width: 17.2
+        height: 17.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1bee9b17dc4776747bfdeb40cca2d3bd
+      internalID: -967057449
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwampSetGrid_16
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 17.8
+        width: 17.2
+        height: 17.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77747a6c6386a224ba03f08d08b0334f
+      internalID: 1808929674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwampSetGrid_17
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 17.8
+        width: 17.2
+        height: 17.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6b919082052e88438f0a5ea7c6ad8f6
+      internalID: -637240047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwampSetGrid_18
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 17.8
+        width: 17.2
+        height: 17.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e6712c6e59607942a4577ac5a672b7a
+      internalID: -913016482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwampSetGrid_19
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 17.8
+        width: 17.2
+        height: 17.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d190628f9b3a4d4db8dd929141a1de6
+      internalID: 1311044720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwampSetGrid_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0.79999924
+        width: 17.2
+        height: 17.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a2d4345eabf1c44ca20c270032f122b
+      internalID: 2050537607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwampSetGrid_21
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 0.79999924
+        width: 17.2
+        height: 17.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41515095f50c256458d1fc08d95b9f11
+      internalID: 1607285583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwampSetGrid_22
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 0.79999924
+        width: 17.2
+        height: 17.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 676de216d70fbf34c91948494e22ac2c
+      internalID: -427543269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwampSetGrid_23
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 0.79999924
+        width: 17.2
+        height: 17.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49ef30f905c352549b77c41e362bcd67
+      internalID: 163325882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwampSetGrid_24
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 0.79999924
+        width: 17.2
+        height: 17.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b03e98b6ae05d8546881c927146de9c5
+      internalID: -1408127046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      SwampSetGrid_0: -522100196
+      SwampSetGrid_1: 1134839154
+      SwampSetGrid_10: 1878399285
+      SwampSetGrid_11: -743375864
+      SwampSetGrid_12: -588246115
+      SwampSetGrid_13: 1953380821
+      SwampSetGrid_14: 1869730292
+      SwampSetGrid_15: -967057449
+      SwampSetGrid_16: 1808929674
+      SwampSetGrid_17: -637240047
+      SwampSetGrid_18: -913016482
+      SwampSetGrid_19: 1311044720
+      SwampSetGrid_2: -112334363
+      SwampSetGrid_20: 2050537607
+      SwampSetGrid_21: 1607285583
+      SwampSetGrid_22: -427543269
+      SwampSetGrid_23: 163325882
+      SwampSetGrid_24: -1408127046
+      SwampSetGrid_3: 1403599991
+      SwampSetGrid_4: 491826257
+      SwampSetGrid_5: 1544676891
+      SwampSetGrid_6: -68988641
+      SwampSetGrid_7: -965314781
+      SwampSetGrid_8: 1724308112
+      SwampSetGrid_9: 253811486
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
