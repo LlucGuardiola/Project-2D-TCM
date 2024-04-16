@@ -503,6 +503,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60f477b999e2cf24db994806a0d46570, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasCollision: 0
   speed: 1
   distanceToMove: 6
   startsMovingRight: 1
@@ -1127,6 +1128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60f477b999e2cf24db994806a0d46570, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasCollision: 0
   speed: 1
   distanceToMove: 6
   startsMovingRight: 1

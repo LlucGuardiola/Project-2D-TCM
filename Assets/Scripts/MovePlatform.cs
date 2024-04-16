@@ -7,7 +7,9 @@ using UnityEngine.Animations;
 
 public class MovePlatform : MonoBehaviour
 {
-    private GameObject gameObj; 
+    private GameObject gameObj;
+
+    [SerializeField] private bool hasCollision;
     [SerializeField] private float speed;
     [SerializeField] private float distanceToMove;
     [SerializeField] private bool startsMovingRight;
@@ -51,13 +53,19 @@ public class MovePlatform : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground")) { collided = true; }
-        canMove = false;
+        if (hasCollision)
+        {
+            if (collision.gameObject.CompareTag("Ground")) { collided = true; }
+            canMove = false;
+        }
     } 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collided) { canMove = false; }
-        else { canMove = true; }
+        if (hasCollision)
+        {
+            if (collided) { canMove = false; }
+            else { canMove = true; }
+        }
     }
 }
 
