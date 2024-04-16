@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -9,6 +10,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private int maxJumpCount;      // Quantitat màxima de salts
     [SerializeField] private float jumpHeight;
     [SerializeField] private LayerMask groundLayer; // Detecció de col·lisió amb el ground 
+
+    int counter2;
+    float _speed ;
 
     private BoxCollider2D boxCollider; // La caixa de col·lisió del personatge
     private bool dashing;              // Comprovar si està dasheant o no
@@ -35,6 +39,11 @@ public class PlayerMovement : MonoBehaviour
         noFrictionMaterial.friction = 0;
         dashing = false;
         counter = 0;
+
+
+
+        counter2 = 0;
+        _speed = speed;
     }
     private void Update()
     {
@@ -108,6 +117,8 @@ public class PlayerMovement : MonoBehaviour
         }
         animator.SetBool("run", horizontalInput != 0 && movingLR);
         animator.SetBool("canJump", isJumping);
+
+        Teleport();
     }
     private void Jump()
     {
@@ -138,6 +149,35 @@ public class PlayerMovement : MonoBehaviour
             {
                 return false;
             }
+        }
+    }
+    private void Teleport()
+    {
+        if (Input.GetKey(KeyCode.Alpha1))
+        {
+            speed = 1000000;
+            body.transform.position = new Vector3 (2f, 2f, 0f);
+        }
+        if (Input.GetKey(KeyCode.Alpha2))
+        {
+            speed = 1000000;
+            body.transform.position = new Vector3(261f, 2f, 0f);
+        }
+        if (Input.GetKey(KeyCode.Alpha3))
+        {
+            speed = 1000000;
+            body.transform.position = new Vector3(525f, -1f, 0f);
+        }
+        if (Input.GetKey(KeyCode.Alpha4))
+        {
+            speed = 1000000;
+            body.transform.position = new Vector3(796f, 4f, 0f);
+        }
+        counter++;
+        if (counter == 20)
+        {
+            speed = _speed;
+            counter2 = 0;
         }
     }
 }
