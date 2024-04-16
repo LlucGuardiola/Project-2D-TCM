@@ -90,7 +90,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (dashing)
         {
-
             if (body.GetComponent<SpriteRenderer>().flipX)
             {
                 body.AddForce(new Vector2(1000f, 0));
@@ -173,8 +172,8 @@ public class PlayerMovement : MonoBehaviour
             speed = 1000000;
             body.transform.position = new Vector3(796f, 4f, 0f);
         }
-        counter++;
-        if (counter == 20)
+        counter2++;
+        if (counter2 == 20)
         {
             speed = _speed;
             counter2 = 0;
