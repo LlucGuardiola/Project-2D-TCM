@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     int counter2;
     float _speed ;
 
+    private bool hasFallen;
     private BoxCollider2D boxCollider; // La caixa de col·lisió del personatge
     private bool dashing;              // Comprovar si està dasheant o no
     private int counter;               // Conta els fotogrames que dura el dash
@@ -40,8 +41,7 @@ public class PlayerMovement : MonoBehaviour
         dashing = false;
         counter = 0;
 
-
-
+        hasFallen = false;
         counter2 = 0;
         _speed = speed;
     }
@@ -111,9 +111,10 @@ public class PlayerMovement : MonoBehaviour
 
         // Respawn when falling
         
-        if (body.transform.position.y < -5)
+        if (hasFallen)
         {
             body.transform.position = checkpoint;
+            hasFallen = false;
         }
         
         animator.SetBool("run", horizontalInput != 0 && movingLR);
@@ -189,8 +190,13 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Checkpoint")) 
         {
+            hasFallen = true;
             ManageRespawn(collision.gameObject.transform.position); 
             Destroy(collision.gameObject);
+        }
+        if (collision.gameObject.CompareTag("Deathzone"))
+        {
+            hasFallen = true;
         }
     }
 }
