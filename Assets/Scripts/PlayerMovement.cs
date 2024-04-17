@@ -110,13 +110,14 @@ public class PlayerMovement : MonoBehaviour
         #endregion
 
         // Respawn when falling
+        /*
         if (body.transform.position.y < -5)
         {
             body.transform.position = initialPosition;
         }
+        */
         animator.SetBool("run", horizontalInput != 0 && movingLR);
         animator.SetBool("canJump", isJumping);
-
         Teleport();
     }
     private void Jump()
@@ -160,7 +161,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.Alpha2))
         {
             speed = 1000000;
-            body.transform.position = new Vector3(261f, 2f, 0f);
+            body.transform.position = new Vector3(261f, 15f, 0f);
         }
         if (Input.GetKey(KeyCode.Alpha3))
         {
