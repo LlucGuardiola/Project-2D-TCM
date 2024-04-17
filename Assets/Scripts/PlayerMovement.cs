@@ -120,7 +120,6 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("run", horizontalInput != 0 && movingLR);
         animator.SetBool("canJump", isJumping);
         Teleport();
-
     }
     private void Jump()
     {
