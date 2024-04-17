@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
     private bool canJump;              
     private bool isJumping;            
     private bool movingLR;             // Decideix si l'sprite ha de fer flip en eix x o y (si està mirant dreta o esq)
-    private Vector3 initialPosition;   
+    private Vector3 checkpoint;   
     private PhysicsMaterial2D defaultMaterial, noFrictionMaterial; /* Material default i material sense
                                                                        fricció (no es queda enganxat a les parets) */
     private void Awake()
@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         jumpCount = 0;
-        initialPosition = body.transform.position;
+        checkpoint = body.transform.position;
 
         boxCollider = GetComponent<BoxCollider2D>();
         defaultMaterial = GetComponent<PhysicsMaterial2D>();
@@ -110,15 +110,16 @@ public class PlayerMovement : MonoBehaviour
         #endregion
 
         // Respawn when falling
-        /*
+        
         if (body.transform.position.y < -5)
         {
-            body.transform.position = initialPosition;
+            body.transform.position = checkpoint;
         }
-        */
+        
         animator.SetBool("run", horizontalInput != 0 && movingLR);
         animator.SetBool("canJump", isJumping);
         Teleport();
+
     }
     private void Jump()
     {
@@ -178,6 +179,18 @@ public class PlayerMovement : MonoBehaviour
         {
             speed = _speed;
             counter2 = 0;
+        }
+    }
+    private void ManageRespawn(Vector2 newCheckpoint)
+    {
+        checkpoint = newCheckpoint;
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Checkpoint")) 
+        {
+            ManageRespawn(collision.gameObject.transform.position); 
+            Destroy(collision.gameObject);
         }
     }
 }
