@@ -110,13 +110,14 @@ public class PlayerMovement : MonoBehaviour
         #endregion
 
         // Respawn when falling
+        /*
         if (body.transform.position.y < -5)
         {
             body.transform.position = initialPosition;
         }
+        */
         animator.SetBool("run", horizontalInput != 0 && movingLR);
         animator.SetBool("canJump", isJumping);
-
         Teleport();
     }
     private void Jump()
