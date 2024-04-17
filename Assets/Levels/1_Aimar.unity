@@ -313,7 +313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 850607990}
-  followOffset: {x: 12, y: 1.5}
+  followOffset: {x: 12, y: 3.15}
 --- !u!1 &655264759
 GameObject:
   m_ObjectHideFlags: 0
