@@ -190,7 +190,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Checkpoint")) 
         {
-            hasFallen = true;
             ManageRespawn(collision.gameObject.transform.position); 
             Destroy(collision.gameObject);
         }
