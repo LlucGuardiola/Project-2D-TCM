@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpHeight;
     [SerializeField] private LayerMask groundLayer; // Detecció de col·lisió amb el ground 
 
-    int counter2;
+    int counterDash;
     float _speed ;
 
     private bool hasFallen;
@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
         counter = 0;
 
         hasFallen = false;
-        counter2 = 0;
+        counterDash = 0;
         _speed = speed;
     }
     private void Update()
@@ -174,18 +174,18 @@ public class PlayerMovement : MonoBehaviour
             speed = 1000000;
             body.transform.position = new Vector3(796f, 4f, 0f);
         }
-        counter2++;
-        if (counter2 == 20)
+        counterDash++;
+        if (counterDash == 20)
         {
             speed = _speed;
-            counter2 = 0;
+            counterDash = 0;
         }
     }
     private void ManageRespawn(Vector2 newCheckpoint)
     {
         checkpoint = newCheckpoint;
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision) // Respawn i checkpoints
     {
         if (collision.gameObject.CompareTag("Checkpoint")) 
         {
