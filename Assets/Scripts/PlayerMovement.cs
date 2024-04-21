@@ -162,7 +162,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.Alpha2))
         {
             speed = 1000000;
-            body.transform.position = new Vector3(261f, 15f, 0f);
+            body.transform.position = new Vector3(261f, 2.3f, 0f);
         }
         if (Input.GetKey(KeyCode.Alpha3))
         {
