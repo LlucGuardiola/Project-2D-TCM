@@ -92,11 +92,11 @@ public class PlayerMovement : MonoBehaviour
         {
             if (body.GetComponent<SpriteRenderer>().flipX)
             {
-                body.AddForce(new Vector2(1000f, 0));
+                body.AddForce(new Vector2(900f, 0));
             }
             else
             {
-                body.AddForce(new Vector2(-1000f, 0));
+                body.AddForce(new Vector2(-900f, 0));
             }
             
             counter++;
