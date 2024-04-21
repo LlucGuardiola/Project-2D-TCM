@@ -11,13 +11,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpHeight;
     [SerializeField] private LayerMask groundLayer; // Detecció de col·lisió amb el ground 
 
-    int counterDash;
+    int counterTp;
     float _speed ;
 
     private bool hasFallen;
     private BoxCollider2D boxCollider; // La caixa de col·lisió del personatge
-    private bool dashing;              // Comprovar si està dasheant o no
-    private int counter;               // Conta els fotogrames que dura el dash
     private static Rigidbody2D body;   
     private Animator animator;         
     private int jumpCount;             
@@ -38,11 +36,9 @@ public class PlayerMovement : MonoBehaviour
         defaultMaterial = GetComponent<PhysicsMaterial2D>();
         noFrictionMaterial = new PhysicsMaterial2D();
         noFrictionMaterial.friction = 0;
-        dashing = false;
-        counter = 0;
 
         hasFallen = false;
-        counterDash = 0;
+        counterTp = 0;
         _speed = speed;
     }
     private void Update()
@@ -79,33 +75,6 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && canJump)
         {
             Jump();
-        }
-        #endregion
-
-        #region Dash
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            dashing = true;
-        }
-
-        if (dashing)
-        {
-            if (body.GetComponent<SpriteRenderer>().flipX)
-            {
-                body.AddForce(new Vector2(900f, 0));
-            }
-            else
-            {
-                body.AddForce(new Vector2(-900f, 0));
-            }
-            
-            counter++;
-        }
-
-        if (counter == 50)
-        {
-            dashing = false;
-            counter = 0;
         }
         #endregion
 
@@ -174,11 +143,11 @@ public class PlayerMovement : MonoBehaviour
             speed = 1000000;
             body.transform.position = new Vector3(796f, 4f, 0f);
         }
-        counterDash++;
-        if (counterDash == 20)
+        counterTp++;
+        if (counterTp == 20)
         {
             speed = _speed;
-            counterDash = 0;
+            counterTp = 0;
         }
     }
     private void ManageRespawn(Vector2 newCheckpoint)
