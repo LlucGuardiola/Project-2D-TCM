@@ -39,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
 
         hasFallen = false;
         counterTp = 0;
+        canJump = true;
         _speed = speed;
     }
     private void Update()
@@ -71,24 +72,19 @@ public class PlayerMovement : MonoBehaviour
         #endregion
 
         #region Jump
-        canJump = CanJump();
         if (Input.GetKeyDown(KeyCode.Space) && canJump)
         {
             Jump();
         }
+        canJump = CanJump();
         #endregion
 
-        // Respawn when falling
-        
-        if (hasFallen)
-        {
-            body.transform.position = checkpoint;
-            hasFallen = false;
-        }
+        Respawn();
+
+        Teleport();
         
         animator.SetBool("run", horizontalInput != 0 && movingLR);
         animator.SetBool("canJump", isJumping);
-        Teleport();
     }
     private void Jump()
     {
@@ -104,6 +100,7 @@ public class PlayerMovement : MonoBehaviour
             body.GetComponent<Rigidbody2D>().sharedMaterial = defaultMaterial;
             jumpCount = 0;
             isJumping = false;
+
             return true;
         }
         else                      // Si ESTÀ a l'aire
@@ -164,6 +161,14 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Deathzone"))
         {
             hasFallen = true;
+        }
+    }
+    public void Respawn()
+    {
+        if (hasFallen)
+        {
+            body.transform.position = checkpoint;
+            hasFallen = false;
         }
     }
 }
