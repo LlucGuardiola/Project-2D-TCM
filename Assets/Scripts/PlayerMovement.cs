@@ -156,7 +156,7 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Checkpoint")) 
         {
             ManageRespawn(collision.gameObject.transform.position); 
-            Destroy(collision.gameObject);
+            Destroy(collision.gameObject.GetComponent<BoxCollider2D>());
         }
         if (collision.gameObject.CompareTag("Deathzone"))
         {
