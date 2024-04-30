@@ -118,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-    private void Teleport() //Teleport clicando (1,2,3,4) para canviar de escenas.
+    private void Teleport() // Teleport clicando (1,2,3,4) para canviar de escenas.
     {
         if (Input.GetKey(KeyCode.Alpha1))
         {
