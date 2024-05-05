@@ -23,13 +23,13 @@ public class PlayerAttack : MonoBehaviour
             if (combatMode)
             {
                 animator.SetBool("Combat?", true);
-                Debug.Log("Atcviated");
+                Debug.Log("Combat mode Activated");
                
             }
             else
             {
                 animator.SetBool("Combat?", false);
-                Debug.Log("deactivate");
+                Debug.Log("Combat mode Desactivated");
             }
         }
         if (combatMode)
