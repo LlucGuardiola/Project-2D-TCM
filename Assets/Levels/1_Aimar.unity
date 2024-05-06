@@ -1120,8 +1120,9 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 64
+  player: {fileID: 850607990}
   attackDamage: 25
-  attackRange: 0.5
+  attackRange: 0.9
   attackRate: 2
 --- !u!1 &908135633
 GameObject:
@@ -15331,7 +15332,7 @@ Transform:
   m_GameObject: {fileID: 1312290718}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.336, y: 0.763, z: 0}
+  m_LocalPosition: {x: 0.005, y: 0.758, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

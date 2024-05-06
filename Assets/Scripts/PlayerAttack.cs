@@ -8,6 +8,7 @@ public class PlayerAttack : MonoBehaviour
     public Animator animator;               //Referencia animator
     public Transform attackPoint;    //Punto para rango de ataque
     public LayerMask enemyLayers;    // Capa de enemigos
+    public GameObject player;
 
     public int attackDamage = 25;                 //rango de ataque
     public float attackRange = 0.5f;
@@ -34,7 +35,8 @@ public class PlayerAttack : MonoBehaviour
         }
         if (combatMode)
         {
-            if(Time.time >= nextAttacktime)   
+
+            if(Time.time >= nextAttacktime && player.GetComponent<Rigidbody2D>().velocity.x == 0)   
             {
                 if (Input.GetMouseButtonDown(0))
                 {
