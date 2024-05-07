@@ -44,7 +44,6 @@ public class PlayerAttack : MonoBehaviour
                 {
                     Attack();
                     nextAttacktime = Time.time + 1f / attackRate;
-                    
                 }
             }
             if (player.GetComponent<SpriteRenderer>().flipX)
