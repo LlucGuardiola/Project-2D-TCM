@@ -46,7 +46,10 @@ public class PlayerMovement : MonoBehaviour
     {
         #region Movement
         float horizontalInput = Input.GetAxis("Horizontal");
-        body.velocity = new Vector2(horizontalInput * Speed, body.velocity.y);
+        if (!GetComponent<PlayerAttack>().isAtacking)
+        {
+            body.velocity = new Vector2(horizontalInput * Speed, body.velocity.y);
+        }
 
         if (horizontalInput < 0)
         {
