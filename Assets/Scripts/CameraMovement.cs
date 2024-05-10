@@ -15,7 +15,7 @@ public class CameraMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         Vector2 follow = Player.transform.position;
         float xDifference = Vector2.Distance(Vector2.right * transform.position.x, Vector2.right * follow.x);
@@ -30,8 +30,9 @@ public class CameraMovement : MonoBehaviour
         {
             newPosition.y = follow.y;
         }
-        float moveSpeed = Player.GetComponent<PlayerMovement>().Speed - 1;
-        transform.position = Vector3.MoveTowards(transform.position, newPosition, moveSpeed * Time.deltaTime);
+        float moveSpeed = Player.GetComponent<PlayerMovement>().Speed;
+        transform.position = Vector3.MoveTowards(transform.position, 
+                       newPosition, moveSpeed * Time.deltaTime /* multiplicar * distancia enter centre cam i posició del personatge */);
     }
     private Vector3 CalculateThreshold()
     {
