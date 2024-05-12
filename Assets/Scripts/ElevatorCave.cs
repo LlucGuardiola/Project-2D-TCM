@@ -11,9 +11,8 @@ public class ElevatorCave : MonoBehaviour
 
     public float speed;
     bool isElevatorUp;
-
-   
-
+    bool isPlayer;
+    public int which;
 
     void Start()
     {
@@ -22,37 +21,71 @@ public class ElevatorCave : MonoBehaviour
     }    
     void Update()
     {
+
         StartElevator();
+
+
+
         DisplayColor();
     }
     void StartElevator()
     {
-        
-        if((Input.GetKeyDown(KeyCode.F)))
+        if((Input.GetKeyDown(KeyCode.F)) && isPlayer)
         { 
             if(transform.position.y <= downPosition.position.y)
             {
-                isElevatorUp = false;
+                if(which==2)
+                {
+                    isElevatorUp = true;
+                }
+                else
+                {
+                    isElevatorUp = false;
+                }
+               
 
             }else if(transform.position.y >= upperPosition.position.y)
             {
-                isElevatorUp = true;
+                if (which == 2)
+                {
+                    isElevatorUp = false;
+                }
+                else
+                {
+                    isElevatorUp = true;
+                }
             }
-
-           
         }
         
         if (isElevatorUp)
         {
-            transform.position = Vector2.MoveTowards(transform.position, downPosition.position, speed * Time.deltaTime);
+
+            if (which == 2)
+            {
+                transform.position = Vector2.MoveTowards(transform.position, upperPosition.position, speed * Time.deltaTime);
+            }
+            else
+            {
+
+                transform.position = Vector2.MoveTowards(transform.position, downPosition.position, speed * Time.deltaTime);
+            }
         }
         else
         {
+            if (which == 2)
+            {
+                transform.position = Vector2.MoveTowards(transform.position, downPosition.position, speed * Time.deltaTime);
+            }
+            else
+            {
 
-            transform.position = Vector2.MoveTowards(transform.position, upperPosition.position, speed * Time.deltaTime);
-           
+                transform.position = Vector2.MoveTowards(transform.position, upperPosition.position, speed * Time.deltaTime);
+            }
         }
+             
+        
     }
+
     void DisplayColor()
     {
         if(transform.position.y <= downPosition.position.y|| transform.position.y >= upperPosition.position.y)
@@ -63,6 +96,14 @@ public class ElevatorCave : MonoBehaviour
         {
             elevator.color = Color.red;
         }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        isPlayer = true;
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        isPlayer = false;
     }
     
 }
