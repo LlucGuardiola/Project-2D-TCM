@@ -7,6 +7,8 @@ public class CameraMovement : MonoBehaviour
     public GameObject Player;
     public Vector2 followOffset;
     private Vector2 threshold;
+    private Vector2 distanceVector;
+    private float distance;
 
     // Start is called before the first frame update
     void Start()
@@ -30,9 +32,16 @@ public class CameraMovement : MonoBehaviour
         {
             newPosition.y = follow.y;
         }
+
+        distanceVector = Player.transform.position - transform.position; 
+
+        distance = distanceVector.magnitude;
+        distance = (distance < 5) ? 5 : distance;
+
         float moveSpeed = Player.GetComponent<PlayerMovement>().Speed;
         transform.position = Vector3.MoveTowards(transform.position, 
-                       newPosition, moveSpeed * Time.deltaTime /* multiplicar * distancia enter centre cam i posició del personatge */);
+                       newPosition, moveSpeed * Time.deltaTime * distance);
+        
     }
     private Vector3 CalculateThreshold()
     {
