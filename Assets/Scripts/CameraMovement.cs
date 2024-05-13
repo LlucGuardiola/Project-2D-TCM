@@ -35,8 +35,7 @@ public class CameraMovement : MonoBehaviour
 
         distanceVector = Player.transform.position - transform.position; 
 
-        distance = distanceVector.magnitude;
-        distance = (distance < 10) ? 5 : distance;
+        distance = distanceVector.magnitude * .2f;
         float moveSpeed = Player.GetComponent<PlayerMovement>().Speed;
 
         transform.position = Vector3.MoveTowards(transform.position, 
