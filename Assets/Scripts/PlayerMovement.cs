@@ -38,7 +38,6 @@ public class PlayerMovement : MonoBehaviour
         noFrictionMaterial.friction = 0;
 
         hasFallen = false;
-        counterTp = 0;
         canJump = true;
         _speed = speed;
     }
@@ -125,29 +124,19 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Alpha1))
         {
-            speed = 1000000;
             body.transform.position = new Vector3 (2f, 2f, 0f);
         }
         if (Input.GetKey(KeyCode.Alpha2))
         {
-            speed = 1000000;
             body.transform.position = new Vector3(261f, 2.3f, 0f);
         }
         if (Input.GetKey(KeyCode.Alpha3))
         {
-            speed = 1000000;
             body.transform.position = new Vector3(525f, -1f, 0f);
         }
         if (Input.GetKey(KeyCode.Alpha4))
         {
-            speed = 1000000;
             body.transform.position = new Vector3(796f, 4f, 0f);
-        }
-        counterTp++;
-        if (counterTp == 20)
-        {
-            speed = _speed;
-            counterTp = 0;
         }
     }
     private void ManageRespawn(Vector2 newCheckpoint)
