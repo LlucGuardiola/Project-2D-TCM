@@ -11,9 +11,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpHeight;
     [SerializeField] private LayerMask groundLayer; // Detecció de col·lisió amb el ground 
 
-    int counterTp;
-    float _speed ;
-
     private bool hasFallen;
     private BoxCollider2D boxCollider; // La caixa de col·lisió del personatge
     private static Rigidbody2D body;   
@@ -39,7 +36,6 @@ public class PlayerMovement : MonoBehaviour
 
         hasFallen = false;
         canJump = true;
-        _speed = speed;
     }
     private void Update()
     {
