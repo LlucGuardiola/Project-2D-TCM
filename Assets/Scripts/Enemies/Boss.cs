@@ -53,9 +53,13 @@ public class Boss : MonoBehaviour
     {
         Vector2 newTranform = Vector2.MoveTowards(transform.position, player.transform.position, 10 * Time.deltaTime);
 
-        if (true)
+        if (player.transform.position.x < transform.position.x)
         {
-
+             GetComponent<SpriteRenderer>().flipX = true;
+        }
+        else
+        {
+             GetComponent<SpriteRenderer>().flipX = false;
         }
 
         transform.position = new Vector2(newTranform.x, transform.position.y);
@@ -72,7 +76,7 @@ public class Boss : MonoBehaviour
         dead = true;
         // animator.SetBool("dead", dead);
         GetComponent<Collider2D>().enabled = false;
-        this.enabled = false;
+        enabled = false;
         Destroy(gameObject, 1f);
     }
 }
