@@ -27,11 +27,7 @@ public class Boss : MonoBehaviour
     {
         currentDistance = (player.transform.position - transform.position).magnitude;
 
-        if (!(currentDistance < closestDistance))
-        {
-            Debug.Log(currentDistance);
-            Follow();
-        }
+        Follow();
     }
     public virtual void SetVida(float vida)
     {
@@ -51,19 +47,16 @@ public class Boss : MonoBehaviour
     }
     public virtual void Follow() 
     {
-        Vector2 newTranform = Vector2.MoveTowards(transform.position, player.transform.position, 10 * Time.deltaTime);
+        if (player.transform.position.x < transform.position.x) { GetComponent<SpriteRenderer>().flipX = true; }
+        else { GetComponent<SpriteRenderer>().flipX = false; }
 
-        if (player.transform.position.x < transform.position.x)
+        if (!(currentDistance < closestDistance))
         {
-             GetComponent<SpriteRenderer>().flipX = true;
-        }
-        else
-        {
-             GetComponent<SpriteRenderer>().flipX = false;
-        }
+            Debug.Log(currentDistance);
+            Vector2 newTranform = Vector2.MoveTowards(transform.position, player.transform.position, 10 * Time.deltaTime);
 
-        transform.position = new Vector2(newTranform.x, transform.position.y);
-
+            transform.position = new Vector2(newTranform.x, transform.position.y);
+        }
     }
     public virtual void TakeDamage(int Damage)
     {
