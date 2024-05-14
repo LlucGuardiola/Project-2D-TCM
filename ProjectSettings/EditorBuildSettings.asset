@@ -8,4 +8,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Levels/1_Aimar.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Levels/2_Lluc.unity
+    guid: 6e704a935cdca8b409ff1a2499cae6da
+  - enabled: 1
+    path: Assets/Levels/3_JanB.unity
+    guid: 667a3c5ef9b9ad449bd5093c5447a93b
+  - enabled: 1
+    path: Assets/Levels/4_Edgar.unity
+    guid: 3e14ab70fb55f5b49a03f580a086e105
   m_configObjects: {}
