@@ -2,18 +2,20 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.U2D;
 
 public class Boss : MonoBehaviour
 {
     [SerializeField] protected float vida;
     [SerializeField] protected GameObject player;
     protected float closestDistance;
+    protected float currentDistance;
     protected bool dead = false;
     protected float damage;
 
-    private void Start()
+    public virtual void Start()
     {
-        closestDistance = (player.GetComponent<BoxCollider2D>().size.x + GetComponent<CapsuleCollider2D>().size.x) * 2;
+        closestDistance = player.GetComponent<SpriteRenderer>().sprite.bounds.size.x + GetComponent<SpriteRenderer>().sprite.bounds.size.x;
         Debug.Log(closestDistance);
     }
     public Boss(float vida, float damage)
@@ -23,8 +25,10 @@ public class Boss : MonoBehaviour
     }
     public virtual void Update()
     {
-        if (!((player.transform.position - transform.position).magnitude < closestDistance))
+        currentDistance = (player.transform.position - transform.position).magnitude;
+        if (!(currentDistance < closestDistance))
         {
+            Debug.Log(currentDistance);
             Follow();
         }
     }
@@ -48,7 +52,13 @@ public class Boss : MonoBehaviour
     {
         Vector2 newTranform = Vector2.MoveTowards(transform.position, player.transform.position, 10 * Time.deltaTime);
 
+        if (true)
+        {
+
+        }
+
         transform.position = new Vector2(newTranform.x, transform.position.y);
+
     }
     public virtual void TakeDamage(int Damage)
     {
