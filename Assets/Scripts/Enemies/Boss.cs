@@ -26,6 +26,7 @@ public class Boss : MonoBehaviour
     public virtual void Update()
     {
         currentDistance = (player.transform.position - transform.position).magnitude;
+
         if (!(currentDistance < closestDistance))
         {
             Debug.Log(currentDistance);
