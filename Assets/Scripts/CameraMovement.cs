@@ -7,6 +7,8 @@ public class CameraMovement : MonoBehaviour
     public GameObject Player;
     public Vector2 followOffset;
     private Vector2 threshold;
+    private Vector2 distanceVector;
+    private float distance;
 
     // Start is called before the first frame update
     void Start()
@@ -15,7 +17,7 @@ public class CameraMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         Vector2 follow = Player.transform.position;
         float xDifference = Vector2.Distance(Vector2.right * transform.position.x, Vector2.right * follow.x);
@@ -30,8 +32,15 @@ public class CameraMovement : MonoBehaviour
         {
             newPosition.y = follow.y;
         }
-        float moveSpeed = Player.GetComponent<PlayerMovement>().Speed - 1;
-        transform.position = Vector3.MoveTowards(transform.position, newPosition, moveSpeed * Time.deltaTime);
+
+        distanceVector = Player.transform.position - transform.position; 
+
+        distance = distanceVector.magnitude * .2f;
+        float moveSpeed = Player.GetComponent<PlayerMovement>().Speed;
+
+        transform.position = Vector3.MoveTowards(transform.position, 
+                       newPosition, moveSpeed * Time.deltaTime * distance);
+        
     }
     private Vector3 CalculateThreshold()
     {
