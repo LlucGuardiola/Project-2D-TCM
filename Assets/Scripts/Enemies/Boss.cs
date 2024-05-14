@@ -12,9 +12,11 @@ public class Boss : MonoBehaviour
     protected float currentDistance;
     protected bool dead = false;
     protected float damage;
+    protected Rigidbody2D rb;
 
     public virtual void Start()
     {
+        rb = new Rigidbody2D();
         closestDistance = player.GetComponent<SpriteRenderer>().sprite.bounds.size.x + GetComponent<SpriteRenderer>().sprite.bounds.size.x;
         Debug.Log(closestDistance);
     }

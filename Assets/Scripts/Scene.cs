@@ -5,8 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class Scene : MonoBehaviour
 {
-    void Start()
+    string[] scenes = new string[] { "2_Lluc", "3_JanB", "4_Edgar" };
+    void Awake()
     {
-        // Scene.LoadScene();
+        foreach (var item in scenes)
+        {
+            SceneManager.LoadScene(item, LoadSceneMode.Additive);
+        }
     }
 }
