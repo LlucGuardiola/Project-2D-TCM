@@ -188,7 +188,7 @@ public class PlayerMovement : MonoBehaviour
             LoseLife();
         }
     }
-    
+
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "elevator")
