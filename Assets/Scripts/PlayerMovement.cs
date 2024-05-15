@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private int maxJumpCount;      // Quantitat màxima de salts
     [SerializeField] private float jumpHeight;
     [SerializeField] private LayerMask groundLayer; // Detecció de col·lisió amb el ground 
+    [SerializeField] int vidas;
+    [SerializeField] Slider sliderVidas;
 
     private bool hasFallen;
     private BoxCollider2D boxCollider; // La caixa de col·lisió del personatge
@@ -36,6 +39,8 @@ public class PlayerMovement : MonoBehaviour
 
         hasFallen = false;
         canJump = true;
+        sliderVidas.maxValue = vidas;
+        sliderVidas.value = sliderVidas.maxValue;
     }
     private void Update()
     {
@@ -149,6 +154,7 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Deathzone"))
         {
             hasFallen = true;
+            PerderVida();
         }
     }
     public void Respawn()
@@ -160,12 +166,21 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    void PerderVida()
+    {
+        vidas--;
+        sliderVidas.value = vidas; 
+
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.tag == "elevator")
         {
             transform.parent = collision.gameObject.transform;
         }
+
+       
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -175,5 +190,7 @@ public class PlayerMovement : MonoBehaviour
             transform.parent = null;
         }
     }
+
+    
 }
 
