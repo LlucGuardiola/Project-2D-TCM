@@ -39,7 +39,6 @@ public class PlayerMovement : MonoBehaviour
 
         hasFallen = false;
         canJump = true;
-
         sliderVidas.maxValue = vidas;
         sliderVidas.value = sliderVidas.maxValue;
     }
@@ -155,7 +154,7 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Deathzone"))
         {
             hasFallen = true;
-            LoseLife();
+            PerderVida();
         }
     }
     public void Respawn()
@@ -164,29 +163,23 @@ public class PlayerMovement : MonoBehaviour
         {
             body.transform.position = checkpoint;
             hasFallen = false;
-
         }
     }
 
-    void LoseLife()
+    void PerderVida()
     {
         vidas--;
-        sliderVidas.value = vidas;
-
-       
+        sliderVidas.value = vidas; 
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "elevator")
+        if(collision.gameObject.tag == "elevator")
         {
             transform.parent = collision.gameObject.transform;
         }
 
-        if (collision.gameObject.CompareTag("Deathzone"))
-        {
-            LoseLife();
-        }
+       
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -196,5 +189,7 @@ public class PlayerMovement : MonoBehaviour
             transform.parent = null;
         }
     }
+
+    
 }
 
