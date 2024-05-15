@@ -2547,7 +2547,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  vidas: 20
+  vidas: 100
   sliderVidas: {fileID: 434915010}
 --- !u!95 &850607996
 Animator:
