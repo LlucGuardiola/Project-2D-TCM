@@ -10,15 +10,18 @@ public class Boss : MonoBehaviour
     [SerializeField] protected GameObject player;
     protected float closestDistance;
     protected float currentDistance;
+    protected Vector3 currentPosition;
     protected bool dead = false;
     protected float damage;
     protected Rigidbody2D rb;
+    protected Animator animator;
+    private bool isMoving;
 
     public virtual void Start()
     {
+        animator = GetComponent<Animator>();
         rb = new Rigidbody2D();
         closestDistance = player.GetComponent<SpriteRenderer>().sprite.bounds.size.x + GetComponent<SpriteRenderer>().sprite.bounds.size.x;
-        Debug.Log(closestDistance);
     }
     public Boss(float vida, float damage)
     {
@@ -29,7 +32,11 @@ public class Boss : MonoBehaviour
     {
         currentDistance = (player.transform.position - transform.position).magnitude;
 
+        Debug.Log(currentPosition + " - " + transform.position);
         Follow();
+
+        animator.SetBool("isRunning", currentPosition != transform.position);
+        
     }
     public virtual void SetVida(float vida)
     {
@@ -49,14 +56,14 @@ public class Boss : MonoBehaviour
     }
     public virtual void Follow() 
     {
+        currentPosition = transform.position;
+        
         if (player.transform.position.x < transform.position.x) { GetComponent<SpriteRenderer>().flipX = true; }
         else { GetComponent<SpriteRenderer>().flipX = false; }
 
         if (!(currentDistance < closestDistance))
         {
-            Debug.Log(currentDistance);
             Vector2 newTranform = Vector2.MoveTowards(transform.position, player.transform.position, 10 * Time.deltaTime);
-
             transform.position = new Vector2(newTranform.x, transform.position.y);
         }
     }
