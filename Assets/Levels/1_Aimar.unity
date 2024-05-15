@@ -19508,6 +19508,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 850607990}
+    - target: {fileID: 4633589121146241611, guid: fe8d7aa12d8c4604eac77fb673312c55, type: 3}
+      propertyPath: deathAnim
+      value: 
+      objectReference: {fileID: 7400000, guid: ebc193c42488cd840840704b8bce3d30, type: 2}
     - target: {fileID: 5482120055792288608, guid: fe8d7aa12d8c4604eac77fb673312c55, type: 3}
       propertyPath: m_SortingOrder
       value: 1

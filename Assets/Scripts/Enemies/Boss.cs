@@ -8,6 +8,8 @@ public class Boss : MonoBehaviour
 {
     [SerializeField] protected float vida;
     [SerializeField] protected GameObject player;
+    [SerializeField] protected AnimationClip deathAnim;
+
     protected float closestDistance;
     protected float currentDistance;
     protected Vector3 currentPosition;
@@ -15,7 +17,11 @@ public class Boss : MonoBehaviour
     protected float damage;
     protected Rigidbody2D rb;
     protected Animator animator;
-    private bool isMoving;
+
+    protected float attackRate = 2f;                 //Cooldown attack
+    protected float nextAttacktime = 0f;
+    protected Transform attackPoint;    //Punto para rango de ataque
+
 
     public virtual void Start()
     {
@@ -70,15 +76,31 @@ public class Boss : MonoBehaviour
     public virtual void TakeDamage(int Damage)
     {
         vida -= Damage;
-        // animator.SetTrigger("hit");
+        animator.SetTrigger("Hit");
         if (vida <= 0) { Die(); }
     }
     public virtual void Die()
     {
         dead = true;
-        // animator.SetBool("dead", dead);
+        animator.SetBool("Dead", dead);
         GetComponent<Collider2D>().enabled = false;
         enabled = false;
-        Destroy(gameObject, 1f);
+        Destroy(gameObject, deathAnim.length);
+    }
+    public void Attack()
+    {
+        if (Time.time >= nextAttacktime && (currentPosition != transform.position))
+        {
+            Attack();
+            nextAttacktime = Time.time + 1f / attackRate;
+        }
+        if (player.GetComponent<SpriteRenderer>().flipX)
+        {
+            attackPoint.transform.position = new Vector2(player.transform.position.x + .8f, player.transform.position.y + 1.5f);
+        }
+        else
+        {
+            attackPoint.transform.position = new Vector2(player.transform.position.x - .8f, player.transform.position.y + 1.5f);
+        }
     }
 }
