@@ -170,6 +170,7 @@ public class PlayerMovement : MonoBehaviour
     {
         vidas--;
         sliderVidas.value = vidas; 
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
