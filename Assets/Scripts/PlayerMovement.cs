@@ -52,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && canJump)
+        if (Input.GetKeyDown(KeyCode.Space) && canJump && GetComponent<PlayerAttack>().isAtacking == false)
         {
             jumpCount++;
             body.velocity = new Vector2(body.velocity.x, jumpHeight * 2);
