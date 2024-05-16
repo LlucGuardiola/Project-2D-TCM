@@ -4,18 +4,17 @@ using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float Speed              // Velocitat
-    { get { return speed; } private set { } }
-
-    [SerializeField] private float speed;
-    [SerializeField] private int maxJumpCount;      // Quantitat màxima de salts
+    [SerializeField] private int maxJumpCount;      
     [SerializeField] private float jumpHeight;
-    [SerializeField] private LayerMask groundLayer; // Detecció de col·lisió amb el ground 
+    [SerializeField] private LayerMask groundLayer; // Detecció de col·lisió amb ground 
     [SerializeField] int vidas;
     [SerializeField] Slider sliderVidas;
 
+    public float Speed
+    { get { return Speed; } private set { } }
+
     private bool hasFallen;
-    private BoxCollider2D boxCollider; // La caixa de col·lisió del personatge
+    private BoxCollider2D boxCollider; 
     private static Rigidbody2D body;
     private Animator animator;
     private int jumpCount;
