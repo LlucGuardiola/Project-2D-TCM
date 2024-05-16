@@ -1,5 +1,7 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
@@ -10,7 +12,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundLayer; // Detecció de col·lisió amb ground 
     [SerializeField] int vidas;
     [SerializeField] Slider sliderVidas;
-    
+
+
+
+    public float fuerzaGolpe;
+    private bool puedeMoverse = true;
     private bool hasFallen;
     private BoxCollider2D boxCollider; 
     private static Rigidbody2D body;
@@ -22,6 +28,9 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 checkpoint;
     private PhysicsMaterial2D defaultMaterial, noFrictionMaterial; /* Material default i material sense
                                                                        fricció (no es queda enganxat a les parets) */
+
+   
+
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
@@ -108,6 +117,9 @@ public class PlayerMovement : MonoBehaviour
     }
     public void Movement()
     {
+        if (!puedeMoverse) return;  
+
+
         float horizontalInput = Input.GetAxis("Horizontal");
 
         if (!GetComponent<PlayerAttack>().isAtacking)
@@ -174,6 +186,36 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.parent = null;
         }
+    }
+
+
+    public void AplicarGolpe ()
+    {
+        puedeMoverse = false;
+
+        Vector2 direccion;
+
+        if (body.velocity.x > 0)
+        {
+            direccion = new Vector2(-1, 1);
+            body.AddForce(direccion * fuerzaGolpe);
+
+        }
+        else
+        {
+            direccion= new Vector2(1,1);
+            body.AddForce(direccion * fuerzaGolpe);
+
+        }
+
+        StartCoroutine (EsperarYActivarMovimiento());    
+    }
+
+
+    IEnumerator EsperarYActivarMovimiento ()
+    {
+        //DA TIEMPO A QUE EL PERSONAJE SALGA VOLANDO Y NO SE ACTIVE EL MOVIMIENTO AL INSTANTE
+        yield return new WaitForSeconds(0.1f);
     }
 }
 
