@@ -42,8 +42,74 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Update()
     {
-        #region Movement
+        Movement();
+        
+        #region Jump
+        if (Input.GetKeyDown(KeyCode.Space) && canJump)
+        {
+            Jump();
+        }
+        canJump = CanJump();
+        #endregion
+
+        Respawn();
+
+        Teleport();
+    }
+    private void Jump()
+    {
+        jumpCount++;
+        body.velocity = new Vector2(body.velocity.x, jumpHeight * 2);
+    }
+    private bool CanJump()
+    {
+        RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.1f, groundLayer);
+
+        if (hit.collider != null) // Si NO està a l'aire
+        {
+            body.GetComponent<Rigidbody2D>().sharedMaterial = defaultMaterial;
+            jumpCount = 0;
+            isJumping = false;
+
+            return true;
+        }
+        else                      // Si ESTÀ a l'aire
+        {
+            body.GetComponent<Rigidbody2D>().sharedMaterial = noFrictionMaterial;
+            isJumping = true;
+
+            if (jumpCount < maxJumpCount - 1) { return true; }
+            else { return false; }
+        }
+    }
+    private void Teleport() // Teleport clicando (1,2,3,4) para canviar de escenas.
+    {
+        if (Input.GetKey(KeyCode.Alpha1)) { body.transform.position = new Vector3(2f, 2f, 0f); }
+        if (Input.GetKey(KeyCode.Alpha2)) { body.transform.position = new Vector3(261f, 2.3f, 0f); }
+        if (Input.GetKey(KeyCode.Alpha3)) { body.transform.position = new Vector3(525f, -1f, 0f); }
+        if (Input.GetKey(KeyCode.Alpha4)) { body.transform.position = new Vector3(796f, 4f, 0f); }
+    }
+    private void ManageRespawn(Vector2 newCheckpoint)
+    {
+        checkpoint = newCheckpoint;
+    }
+    private void OnTriggerEnter2D(Collider2D collision) // Respawn i checkpoints
+    {
+        if (collision.gameObject.CompareTag("Checkpoint"))
+        {
+            ManageRespawn(collision.gameObject.transform.position);
+            Destroy(collision.gameObject.GetComponent<BoxCollider2D>());
+        }
+        if (collision.gameObject.CompareTag("Deathzone"))
+        {
+            hasFallen = true;
+            LooseLife();
+        }
+    }
+    public void Movement()
+    {
         float horizontalInput = Input.GetAxis("Horizontal");
+
         if (!GetComponent<PlayerAttack>().isAtacking)
         {
             body.velocity = new Vector2(horizontalInput * Speed, body.velocity.y);
@@ -70,78 +136,9 @@ public class PlayerMovement : MonoBehaviour
                 body.velocity = new Vector2(body.velocity.x * 0.1f, body.velocity.y);
             }
         }
-        #endregion
-
-        #region Jump
-        if (Input.GetKeyDown(KeyCode.Space) && canJump)
-        {
-            Jump();
-        }
-        canJump = CanJump();
-        #endregion
-
-        Respawn();
-
-        Teleport();
 
         animator.SetBool("run", horizontalInput != 0 && movingLR);
         animator.SetBool("canJump", isJumping);
-    }
-    private void Jump()
-    {
-        jumpCount++;
-        body.velocity = new Vector2(body.velocity.x, jumpHeight * 2);
-    }
-    private bool CanJump()
-    {
-        RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.1f, groundLayer);
-
-        if (hit.collider != null) // Si NO està a l'aire
-        {
-            body.GetComponent<Rigidbody2D>().sharedMaterial = defaultMaterial;
-            jumpCount = 0;
-            isJumping = false;
-
-            return true;
-        }
-        else                      // Si ESTÀ a l'aire
-        {
-            body.GetComponent<Rigidbody2D>().sharedMaterial = noFrictionMaterial;
-            isJumping = true;
-
-            if (jumpCount < maxJumpCount - 1)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-    }
-    private void Teleport() // Teleport clicando (1,2,3,4) para canviar de escenas.
-    {
-        if (Input.GetKey(KeyCode.Alpha1)) { body.transform.position = new Vector3(2f, 2f, 0f); }
-        if (Input.GetKey(KeyCode.Alpha2)) { body.transform.position = new Vector3(261f, 2.3f, 0f); }
-        if (Input.GetKey(KeyCode.Alpha3)) { body.transform.position = new Vector3(525f, -1f, 0f); }
-        if (Input.GetKey(KeyCode.Alpha4)) { body.transform.position = new Vector3(796f, 4f, 0f); }
-    }
-    private void ManageRespawn(Vector2 newCheckpoint)
-    {
-        checkpoint = newCheckpoint;
-    }
-    private void OnTriggerEnter2D(Collider2D collision) // Respawn i checkpoints
-    {
-        if (collision.gameObject.CompareTag("Checkpoint"))
-        {
-            ManageRespawn(collision.gameObject.transform.position);
-            Destroy(collision.gameObject.GetComponent<BoxCollider2D>());
-        }
-        if (collision.gameObject.CompareTag("Deathzone"))
-        {
-            hasFallen = true;
-            LooseLife();
-        }
     }
     public void Respawn()
     {
