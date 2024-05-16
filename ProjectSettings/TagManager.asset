@@ -8,7 +8,6 @@ TagManager:
   - Checkpoint
   - Deathzone
   - elevator
-  - Enemy
   layers:
   - Default
   - TransparentFX
