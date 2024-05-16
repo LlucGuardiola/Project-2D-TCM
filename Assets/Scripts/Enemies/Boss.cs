@@ -9,6 +9,7 @@ public class Boss : MonoBehaviour
     [SerializeField] protected float vida;
     [SerializeField] protected GameObject player;
     [SerializeField] protected AnimationClip deathAnim;
+    [SerializeField] protected BoxCollider2D bossArea;
 
     protected float closestDistance;
     protected float currentDistance;
@@ -38,11 +39,9 @@ public class Boss : MonoBehaviour
     {
         currentDistance = (player.transform.position - transform.position).magnitude;
 
-        Debug.Log(currentPosition + " - " + transform.position);
         Follow();
 
         animator.SetBool("isRunning", currentPosition != transform.position);
-        
     }
     public virtual void SetVida(float vida)
     {
@@ -67,10 +66,25 @@ public class Boss : MonoBehaviour
         if (player.transform.position.x < transform.position.x) { GetComponent<SpriteRenderer>().flipX = true; }
         else { GetComponent<SpriteRenderer>().flipX = false; }
 
-        if (!(currentDistance < closestDistance))
+        if (!(currentDistance < closestDistance) && CanFollow())
         {
             Vector2 newTranform = Vector2.MoveTowards(transform.position, player.transform.position, 10 * Time.deltaTime);
             transform.position = new Vector2(newTranform.x, transform.position.y);
+        }
+    }
+    private bool CanFollow()
+    {
+        Vector2 newTranform = Vector2.MoveTowards(transform.position, player.transform.position, 10 * Time.deltaTime);
+
+        if (newTranform.x < transform.position.x)
+        {
+            if (transform.position.x - 1 < bossArea.transform.position.x - (bossArea.size.x / 2)) { return false; }
+            else { return true; }
+        }
+        else
+        {
+            if (transform.position.x + 1 > bossArea.transform.position.x + (bossArea.size.x / 2)) { return false; }
+            else { return true; }
         }
     }
     public virtual void TakeDamage(int Damage)

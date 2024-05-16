@@ -3,6 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -12,9 +13,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundLayer; // Detecció de col·lisió amb ground 
     [SerializeField] float vidas;
     [SerializeField] Slider sliderVidas;
+    [SerializeField] TrailRenderer tr;
 
+    private bool canDash = true;
+    private bool isDashing;
 
-
+    public bool CanGetDamaged { get; private set; } = true;
     public float fuerzaGolpe;
     private bool puedeMoverse = true;
     private bool hasFallen;
@@ -24,11 +28,10 @@ public class PlayerMovement : MonoBehaviour
     private int jumpCount;
     private bool canJump;
     private bool isJumping;
-    private bool movingLR;    // Decideix si l'sprite ha de fer flip en eix x o y (si està mirant dreta o esq)
+    private bool movingRL;    // Decideix si l'sprite ha de fer flip en eix x o y (si està mirant dreta o esq)
     private Vector3 checkpoint;
     private PhysicsMaterial2D defaultMaterial, noFrictionMaterial; /* Material default i material sense
                                                                        fricció (no es queda enganxat a les parets) */
-
 
     private void Awake()
     {
@@ -57,6 +60,11 @@ public class PlayerMovement : MonoBehaviour
         Respawn();
 
         Teleport();
+
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && GetComponent<PlayerAttack>().isAtacking == false)
+        {
+            StartCoroutine(Dash(0.2f, 1, 30));
+        }
     }
     private void Jump()
     {
@@ -115,6 +123,7 @@ public class PlayerMovement : MonoBehaviour
     public void Movement()
     {
         if (!puedeMoverse) return;  
+        if (isDashing) { return; }
 
         float horizontalInput = Input.GetAxis("Horizontal");
 
@@ -126,17 +135,17 @@ public class PlayerMovement : MonoBehaviour
         if (horizontalInput < 0) { body.GetComponent<SpriteRenderer>().flipX = false; }
         else if (horizontalInput > 0) { body.GetComponent<SpriteRenderer>().flipX = true; }
 
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) { movingLR = true; }
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) { movingRL = true; }
         else
         {
-            movingLR = false;
+            movingRL = false;
             if (body.velocity.x != 0 && !isJumping)
             {
                 body.velocity = new Vector2(body.velocity.x * 0.1f, body.velocity.y);
             }
         }
 
-        animator.SetBool("run", horizontalInput != 0 && movingLR);
+        animator.SetBool("run", horizontalInput != 0 && movingRL);
         animator.SetBool("canJump", isJumping);
     }
     public void Respawn()
@@ -195,7 +204,32 @@ public class PlayerMovement : MonoBehaviour
         //DA TIEMPO A QUE EL PERSONAJE SALGA VOLANDO Y NO SE ACTIVE EL MOVIMIENTO AL INSTANTE
         yield return new WaitForSeconds(0.4f);
         puedeMoverse = true;
-        LoseLife(5);
+        LoseLife(10);
+    }
+    private IEnumerator Dash(float dashingTime, float dashingCooldown, float dashingPower)
+    {
+        canDash = false;
+        isDashing = true;
+        float originalGravity = body.gravityScale;
+        body.gravityScale = 0f;
+        tr.emitting = true;
+        body.velocity = GetComponent<SpriteRenderer>().flipX == true ? new Vector2(1 * dashingPower , 0.1f) : 
+                                                                       new Vector2(-1 * dashingPower, 0.1f);
+
+        yield return new WaitForSeconds(dashingTime / 3);
+        CanGetDamaged = true;
+        Debug.Log(CanGetDamaged);
+
+        yield return new WaitForSeconds(dashingTime / 3 * 2 );
+        body.gravityScale = originalGravity;
+        isDashing = false;
+        tr.emitting = false;
+        CanGetDamaged = false;
+        Debug.Log(CanGetDamaged);
+
+
+        yield return new WaitForSeconds(dashingCooldown);
+        canDash = true;
     }
 }
 
