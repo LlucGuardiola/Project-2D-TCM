@@ -10,27 +10,30 @@ public class PlayerAttack : MonoBehaviour
     public Transform attackPoint;    //Punto para rango de ataque
     public LayerMask enemyLayers;    // Capa de enemigos
     public GameObject player;
-    
+
     public bool isAtacking = false;
     public int attackDamage = 25;                 //rango de ataque
     public float attackRange = 0.5f;
 
     public float attackRate = 2f;                 //Cooldown attack
     float nextAttacktime = 0f;
-    
+
     private void Update()
     {
+        Debug.Log(isAtacking);
         if (Input.GetKeyDown(KeyCode.E))   // Activar modo Combate
         {
             combatMode = !combatMode;    
             if (combatMode)
             {
                 animator.SetBool("Combat?", true);
+                Debug.Log("Combat mode Activated");
                
             }
             else
             {
                 animator.SetBool("Combat?", false);
+                Debug.Log("Combat mode Deactivated");
             }
         }
         if (combatMode)
@@ -75,7 +78,7 @@ public class PlayerAttack : MonoBehaviour
 
         foreach (Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<Boss>().TakeDamage(attackDamage);
+            enemy.GetComponent<TestsEnemy>().TakeDamage(attackDamage);
         }
     }
 }

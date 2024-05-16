@@ -10,6 +10,17 @@ public class BossEdgar : Boss
     {
 
     }
+
+    void Start()
+    {
+
+    }
+
+    public override void Update()
+    {
+
+    }
+
     public override float GetDamage() { return damage; }
     public override void MakeDamage(float damage) { vida -= damage; }
     public override float GetVida() { return vida; }
