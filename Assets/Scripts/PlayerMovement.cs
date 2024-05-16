@@ -160,6 +160,13 @@ public class PlayerMovement : MonoBehaviour
     {
         vidas-=damageDealt;
         sliderVidas.value = vidas;
+
+        if (vidas <= 0)
+        {
+            ManageRespawn(checkpoint); 
+            vidas = sliderVidas.maxValue; 
+            sliderVidas.value = vidas;
+        }
     }
     private void OnCollisionEnter2D(Collision2D collision) ///////////////////////////////////////// codi repetit?
     {
