@@ -53,13 +53,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Movement();
         
-        #region Jump
-        if (Input.GetKeyDown(KeyCode.Space) && canJump)
-        {
-            Jump();
-        }
-        canJump = CanJump();
-        #endregion
+        Jump();
 
         Respawn();
 
@@ -67,8 +61,12 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Jump()
     {
-        jumpCount++;
-        body.velocity = new Vector2(body.velocity.x, jumpHeight * 2);
+        if (Input.GetKeyDown(KeyCode.Space) && canJump && GetComponent<PlayerAttack>().isAtacking == false)
+        {
+            jumpCount++;
+            body.velocity = new Vector2(body.velocity.x, jumpHeight * 2);
+        }
+        canJump = CanJump();
     }
     private bool CanJump()
     {
@@ -127,19 +125,10 @@ public class PlayerMovement : MonoBehaviour
             body.velocity = new Vector2(horizontalInput * Speed, body.velocity.y);
         }
 
-        if (horizontalInput < 0)
-        {
-            body.GetComponent<SpriteRenderer>().flipX = false;
-        }
-        else if (horizontalInput > 0)
-        {
-            body.GetComponent<SpriteRenderer>().flipX = true;
-        }
+        if (horizontalInput < 0) { body.GetComponent<SpriteRenderer>().flipX = false; }
+        else if (horizontalInput > 0) { body.GetComponent<SpriteRenderer>().flipX = true; }
 
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
-        {
-            movingLR = true;
-        }
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) { movingLR = true; }
         else
         {
             movingLR = false;
