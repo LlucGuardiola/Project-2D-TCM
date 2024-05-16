@@ -44,13 +44,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Movement();
         
-        #region Jump
-        if (Input.GetKeyDown(KeyCode.Space) && canJump)
-        {
-            Jump();
-        }
-        canJump = CanJump();
-        #endregion
+        Jump();
 
         Respawn();
 
@@ -58,8 +52,12 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Jump()
     {
-        jumpCount++;
-        body.velocity = new Vector2(body.velocity.x, jumpHeight * 2);
+        if (Input.GetKeyDown(KeyCode.Space) && canJump)
+        {
+            jumpCount++;
+            body.velocity = new Vector2(body.velocity.x, jumpHeight * 2);
+        }
+        canJump = CanJump();
     }
     private bool CanJump()
     {
