@@ -5,34 +5,35 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    private bool combatMode = false;         //Modo combate 
+         //Modo combate 
     public Animator animator;               //Referencia animator
     public Transform attackPoint;    //Punto para rango de ataque
     public LayerMask enemyLayers;    // Capa de enemigos
     public GameObject player;
-    
+
     public bool isAtacking = false;
     public int attackDamage = 25;                 //rango de ataque
     public float attackRange = 0.5f;
-
+    public bool combatState;
     public float attackRate = 2f;                 //Cooldown attack
     float nextAttacktime = 0f;
-    
+   public void SetCombatState(bool combatState)
+    {
+       this.combatState = combatState;
+    }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))   // Activar modo Combate
+        
+        if (combatState)
         {
-            combatMode = !combatMode;    
-            if (combatMode)
-            {
-                animator.SetBool("Combat?", true);
-            }
-            else
-            {
-                animator.SetBool("Combat?", false);
-            }
+            animator.SetBool("Combat?", true);
         }
-        if (combatMode)
+        else
+        {
+            animator.SetBool("Combat?", false);
+        }
+
+        if (combatState)
         {
             if(Time.time >= nextAttacktime && player.GetComponent<Rigidbody2D>().velocity.x == 0)   
             {
