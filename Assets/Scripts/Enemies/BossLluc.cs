@@ -8,11 +8,6 @@ public class BossLluc : Boss
 
     public BossLluc(float vida, float damage) : base(vida, damage) { }
 
-    void Start()
-    {
-
-    }
-
     public override void Update()
     {
 
