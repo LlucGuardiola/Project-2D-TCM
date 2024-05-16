@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private int maxJumpCount;      
     [SerializeField] private float jumpHeight;
     [SerializeField] private LayerMask groundLayer; // Detecció de col·lisió amb ground 
-    [SerializeField] int vidas;
+    [SerializeField] float vidas;
     [SerializeField] Slider sliderVidas;
 
 
@@ -29,7 +29,6 @@ public class PlayerMovement : MonoBehaviour
     private PhysicsMaterial2D defaultMaterial, noFrictionMaterial; /* Material default i material sense
                                                                        fricció (no es queda enganxat a les parets) */
 
-   
 
     private void Awake()
     {
@@ -100,7 +99,7 @@ public class PlayerMovement : MonoBehaviour
     {
         checkpoint = newCheckpoint;
     }
-    private void OnTriggerEnter2D(Collider2D collision) // Respawn i checkpoints
+    private void OnTriggerEnter2D(Collider2D collision) // Respawn i checkpoints ///////////////// codi repetit?
     {
         if (collision.gameObject.CompareTag("Checkpoint"))
         {
@@ -110,13 +109,12 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Deathzone"))
         {
             hasFallen = true;
-            LoseLife();
+            LoseLife(10);
         }
     }
     public void Movement()
     {
         if (!puedeMoverse) return;  
-
 
         float horizontalInput = Input.GetAxis("Horizontal");
 
@@ -149,14 +147,12 @@ public class PlayerMovement : MonoBehaviour
             hasFallen = false;
         }
     }
-
-    void LoseLife()
+    void LoseLife(float damageDealt)
     {
-        vidas--;
+        vidas-=damageDealt;
         sliderVidas.value = vidas;
     }
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision) ///////////////////////////////////////// codi repetit?
     {
         if (collision.gameObject.CompareTag("elevator"))
         {
@@ -165,10 +161,9 @@ public class PlayerMovement : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Deathzone"))
         {
-            LoseLife();
+            LoseLife(10);
         }
     }
-
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("elevator"))
@@ -176,8 +171,6 @@ public class PlayerMovement : MonoBehaviour
             transform.parent = null;
         }
     }
-
-
     public void AplicarGolpe ()
     {
         puedeMoverse = false;
@@ -188,23 +181,21 @@ public class PlayerMovement : MonoBehaviour
         {
             direccion = new Vector2(-1, 1);
             body.AddForce(direccion * fuerzaGolpe);
-
         }
         else
         {
-            direccion= new Vector2(1,1);
+            direccion = new Vector2(1,1);
             body.AddForce(direccion * fuerzaGolpe);
-
         }
 
         StartCoroutine (EsperarYActivarMovimiento());    
     }
-
-
     IEnumerator EsperarYActivarMovimiento ()
     {
         //DA TIEMPO A QUE EL PERSONAJE SALGA VOLANDO Y NO SE ACTIVE EL MOVIMIENTO AL INSTANTE
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.4f);
+        puedeMoverse = true;
+        LoseLife(5);
     }
 }
 
