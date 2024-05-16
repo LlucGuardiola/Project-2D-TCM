@@ -26,7 +26,6 @@ public class PlayerAttack : MonoBehaviour
             if (combatMode)
             {
                 animator.SetBool("Combat?", true);
-               
             }
             else
             {
@@ -58,18 +57,18 @@ public class PlayerAttack : MonoBehaviour
     {
         animator.SetTrigger("Attack");  //Animación 
     }
-    private void OnDrawGizmosSelected()   //Dibujar esfera para ver rango de ataque
+    private void OnDrawGizmosSelected()  //Dibujar esfera para ver rango de ataque
     {
         if(attackPoint == null)
             return;
      
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
-    private void SwitchAttacking() // Activated in animation
+    private void SwitchAttacking() // Activated within animation
     {
         isAtacking = !isAtacking;
     }
-    private void Hit() // Activated in animation
+    private void Hit() // Activated within animation
     {
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);  //Detectar enemigos en un rango especificado
 

@@ -113,19 +113,10 @@ public class PlayerMovement : MonoBehaviour
             body.velocity = new Vector2(horizontalInput * Speed, body.velocity.y);
         }
 
-        if (horizontalInput < 0)
-        {
-            body.GetComponent<SpriteRenderer>().flipX = false;
-        }
-        else if (horizontalInput > 0)
-        {
-            body.GetComponent<SpriteRenderer>().flipX = true;
-        }
+        if (horizontalInput < 0) { body.GetComponent<SpriteRenderer>().flipX = false; }
+        else if (horizontalInput > 0) { body.GetComponent<SpriteRenderer>().flipX = true; }
 
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
-        {
-            movingLR = true;
-        }
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) { movingLR = true; }
         else
         {
             movingLR = false;
