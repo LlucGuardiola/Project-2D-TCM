@@ -121,22 +121,10 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Teleport() // Teleport clicando (1,2,3,4) para canviar de escenas.
     {
-        if (Input.GetKey(KeyCode.Alpha1))
-        {
-            body.transform.position = new Vector3(2f, 2f, 0f);
-        }
-        if (Input.GetKey(KeyCode.Alpha2))
-        {
-            body.transform.position = new Vector3(261f, 2.3f, 0f);
-        }
-        if (Input.GetKey(KeyCode.Alpha3))
-        {
-            body.transform.position = new Vector3(525f, -1f, 0f);
-        }
-        if (Input.GetKey(KeyCode.Alpha4))
-        {
-            body.transform.position = new Vector3(796f, 4f, 0f);
-        }
+        if (Input.GetKey(KeyCode.Alpha1)) { body.transform.position = new Vector3(2f, 2f, 0f); }
+        if (Input.GetKey(KeyCode.Alpha2)) { body.transform.position = new Vector3(261f, 2.3f, 0f); }
+        if (Input.GetKey(KeyCode.Alpha3)) { body.transform.position = new Vector3(525f, -1f, 0f); }
+        if (Input.GetKey(KeyCode.Alpha4)) { body.transform.position = new Vector3(796f, 4f, 0f); }
     }
     private void ManageRespawn(Vector2 newCheckpoint)
     {
@@ -152,7 +140,7 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Deathzone"))
         {
             hasFallen = true;
-            LoseLife();
+            LooseLife();
         }
     }
     public void Respawn()
@@ -161,34 +149,31 @@ public class PlayerMovement : MonoBehaviour
         {
             body.transform.position = checkpoint;
             hasFallen = false;
-
         }
     }
 
-    void LoseLife()
+    void LooseLife()
     {
         vidas--;
         sliderVidas.value = vidas;
-
-
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "elevator")
+        if (collision.gameObject.CompareTag("elevator"))
         {
             transform.parent = collision.gameObject.transform;
         }
 
         if (collision.gameObject.CompareTag("Deathzone"))
         {
-            LoseLife();
+            LooseLife();
         }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "elevator")
+        if (collision.gameObject.CompareTag("elevator"))
         {
             transform.parent = null;
         }
