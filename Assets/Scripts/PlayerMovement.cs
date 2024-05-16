@@ -103,7 +103,7 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Deathzone"))
         {
             hasFallen = true;
-            LooseLife();
+            LoseLife();
         }
     }
     public void Movement()
@@ -149,7 +149,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void LooseLife()
+    void LoseLife()
     {
         vidas--;
         sliderVidas.value = vidas;
@@ -164,7 +164,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Deathzone"))
         {
-            LooseLife();
+            LoseLife();
         }
     }
 
