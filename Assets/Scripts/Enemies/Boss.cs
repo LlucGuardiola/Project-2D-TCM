@@ -43,11 +43,11 @@ public class Boss : MonoBehaviour
     {
         currentDistance = (player.transform.position - transform.position).magnitude;
 
-        Follow();
+        Attack();
 
         animator.SetBool("isRunning", currentPosition != transform.position);
 
-        Attack();
+        Follow();
     }
     public virtual void SetVida(float vida) { }
     public virtual float GetVida() { return vida; }
@@ -55,12 +55,10 @@ public class Boss : MonoBehaviour
     public virtual float GetDamage() { return damage; }
     public virtual void Follow() 
     {
-        currentPosition = transform.position;
-        
         if (player.transform.position.x < transform.position.x) { GetComponent<SpriteRenderer>().flipX = true; }
         else { GetComponent<SpriteRenderer>().flipX = false; }
 
-        if (!(currentDistance < closestDistance) && CanFollow() && !isAtacking)
+        if (CanFollow())
         {
             Vector2 newTranform = Vector2.MoveTowards(transform.position, player.transform.position, 10 * Time.deltaTime);
             transform.position = new Vector2(newTranform.x, transform.position.y);
@@ -68,10 +66,12 @@ public class Boss : MonoBehaviour
     }
     private bool CanFollow()
     {
+        currentPosition = transform.position;
+
+        if (isAtacking || isDashing || (currentDistance < closestDistance)) { return false; }
+
         Vector2 newTranform = Vector2.MoveTowards(transform.position, player.transform.position, 10 * Time.deltaTime);
         
-        if (isDashing) { return false; }
-
         if (newTranform.x < transform.position.x)
         {
             if (transform.position.x - 1 < bossArea.transform.position.x - (bossArea.size.x / 2)) { return false; }
@@ -91,7 +91,7 @@ public class Boss : MonoBehaviour
             Die(); 
         }
 
-        StartCoroutine(Dash(0.2f, 1, 30));
+        StartCoroutine(Dash(0.2f, 1, 20));
         animator.SetTrigger("Hit");
     }
     private IEnumerator Dash(float dashingTime, float dashingCooldown, float dashingPower)
@@ -110,10 +110,9 @@ public class Boss : MonoBehaviour
             yield return null;
         }
 
-        yield return 2;
+        yield return new WaitForSeconds(1);
         Debug.Log("HOLA");
         isDashing = false;
-        StopCoroutine(Dash(0, 0, 0));
     }
     public virtual void Die()
     {
