@@ -159,7 +159,7 @@ public class Boss : MonoBehaviour
         {
             if (player.GetComponent<PlayerMovement>().CanGetDamaged)
             {
-                player.GetComponent<PlayerMovement>().LoseLife(10); /////////////////////////////////////////////////
+                player.GetComponent<PlayerMovement>().LoseLife(UnityEngine.Random.Range(7, 15)); /////////////////////////////////////////////////
             }
         }
     }
