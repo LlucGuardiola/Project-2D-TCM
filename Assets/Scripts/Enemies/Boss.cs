@@ -55,10 +55,12 @@ public class Boss : MonoBehaviour
     public virtual float GetDamage() { return damage; }
     public virtual void Follow() 
     {
+        currentPosition = transform.position;
+
         if (player.transform.position.x < transform.position.x) { GetComponent<SpriteRenderer>().flipX = true; }
         else { GetComponent<SpriteRenderer>().flipX = false; }
 
-        if (CanFollow())
+        if (!(currentDistance < closestDistance) && CanFollow() && !isAtacking && !isDashing)
         {
             Vector2 newTranform = Vector2.MoveTowards(transform.position, player.transform.position, 10 * Time.deltaTime);
             transform.position = new Vector2(newTranform.x, transform.position.y);
@@ -66,10 +68,6 @@ public class Boss : MonoBehaviour
     }
     private bool CanFollow()
     {
-        currentPosition = transform.position;
-
-        if (isAtacking || isDashing || (currentDistance < closestDistance)) { return false; }
-
         Vector2 newTranform = Vector2.MoveTowards(transform.position, player.transform.position, 10 * Time.deltaTime);
         
         if (newTranform.x < transform.position.x)
@@ -91,10 +89,10 @@ public class Boss : MonoBehaviour
             Die(); 
         }
 
-        StartCoroutine(Dash(0.2f, 1, 20));
+        StartCoroutine(Dash(0.2f, 20));
         animator.SetTrigger("Hit");
     }
-    private IEnumerator Dash(float dashingTime, float dashingCooldown, float dashingPower)
+    private IEnumerator Dash(float dashingTime, float dashingPower)
     {
         // tr.emitting = true;
 
@@ -111,7 +109,7 @@ public class Boss : MonoBehaviour
         }
 
         yield return new WaitForSeconds(1);
-        Debug.Log("HOLA");
+        Debug.Log("Test test test test su puta mAAAAAAAAdreeeeeee");
         isDashing = false;
     }
     public virtual void Die()
