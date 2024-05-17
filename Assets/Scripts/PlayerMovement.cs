@@ -156,7 +156,7 @@ public class PlayerMovement : MonoBehaviour
             hasFallen = false;
         }
     }
-    void LoseLife(float damageDealt)
+    public void LoseLife(float damageDealt)
     {
         vidas-=damageDealt;
         sliderVidas.value = vidas;
@@ -224,16 +224,13 @@ public class PlayerMovement : MonoBehaviour
                                                                        new Vector2(-1 * dashingPower, 0.1f);
 
         yield return new WaitForSeconds(dashingTime / 3);
-        CanGetDamaged = true;
-        Debug.Log(CanGetDamaged);
+        CanGetDamaged = false;
 
         yield return new WaitForSeconds(dashingTime / 3 * 2 );
         body.gravityScale = originalGravity;
         isDashing = false;
         tr.emitting = false;
-        CanGetDamaged = false;
-        Debug.Log(CanGetDamaged);
-
+        CanGetDamaged = true;
 
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
