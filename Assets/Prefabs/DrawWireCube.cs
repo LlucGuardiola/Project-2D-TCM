@@ -13,6 +13,7 @@ public class DrawWireCube : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         player = GameObject.FindWithTag("Player");
+        audioSource.volume = 0.08f;
     }
 
     private void OnDrawGizmos()
