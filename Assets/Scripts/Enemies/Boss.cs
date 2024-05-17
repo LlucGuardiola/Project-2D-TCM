@@ -89,19 +89,16 @@ public class Boss : MonoBehaviour
         if (vida <= 0) 
         { 
             Die(); 
-            return; 
         }
-        
+
         StartCoroutine(Dash(0.2f, 1, 30));
         animator.SetTrigger("Hit");
     }
     private IEnumerator Dash(float dashingTime, float dashingCooldown, float dashingPower)
     {
-        Debug.Log("BOMBARDEEN TORREMOLINOS");
         // tr.emitting = true;
 
-        float start = Time.time;
-        float end = start + dashingTime;
+        float end = Time.time + dashingTime;
         isDashing = true;
 
         while (Time.time < end)
@@ -113,10 +110,10 @@ public class Boss : MonoBehaviour
             yield return null;
         }
 
-        yield return dashingCooldown;
+        yield return 2;
+        Debug.Log("HOLA");
         isDashing = false;
         StopCoroutine(Dash(0, 0, 0));
-
     }
     public virtual void Die()
     {
