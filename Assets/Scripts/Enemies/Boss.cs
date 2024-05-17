@@ -1,6 +1,7 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.U2D;
 
@@ -19,6 +20,7 @@ public class Boss : MonoBehaviour
     protected Animator animator;
 
     protected bool canDash = true;
+    protected bool isDashing = false;
 
     public float attackRange;
     public LayerMask playerLayer;    // Capa de enemigos
@@ -67,6 +69,8 @@ public class Boss : MonoBehaviour
     private bool CanFollow()
     {
         Vector2 newTranform = Vector2.MoveTowards(transform.position, player.transform.position, 10 * Time.deltaTime);
+        
+        if (isDashing) { return false; }
 
         if (newTranform.x < transform.position.x)
         {
@@ -81,29 +85,38 @@ public class Boss : MonoBehaviour
     }
     public virtual void TakeDamage(int Damage)
     {
-        StartCoroutine(Dash(0.2f, 1, 2));
         vida -= Damage;
+        if (vida <= 0) 
+        { 
+            Die(); 
+            return; 
+        }
+        
+        StartCoroutine(Dash(0.2f, 1, 30));
         animator.SetTrigger("Hit");
-        if (vida <= 0) { Die(); }
     }
     private IEnumerator Dash(float dashingTime, float dashingCooldown, float dashingPower)
     {
         Debug.Log("BOMBARDEEN TORREMOLINOS");
         // tr.emitting = true;
 
-        canDash = true;
         float start = Time.time;
-        float end = Time.time + 1;
+        float end = start + dashingTime;
+        isDashing = true;
 
-        while (start != end && canDash)
+        while (Time.time < end)
         {
-            transform.position = GetComponent<SpriteRenderer>().flipX == true ? new Vector3(transform.position.x + 1 * dashingPower * Time.deltaTime, transform.position.y, 0) :
-                                                                            new Vector3(transform.position.x + -1 * dashingPower * Time.deltaTime, transform.position.y, 0);
-            start = Time.time;
+            transform.position = GetComponent<SpriteRenderer>().flipX ?
+                new Vector3(transform.position.x +  1 * dashingPower * Time.deltaTime, transform.position.y, 0) :
+                new Vector3(transform.position.x + -1 * dashingPower * Time.deltaTime, transform.position.y, 0);
+
             yield return null;
         }
-        canDash = false;
-        yield return new WaitForSeconds(dashingCooldown + dashingTime);
+
+        yield return dashingCooldown;
+        isDashing = false;
+        StopCoroutine(Dash(0, 0, 0));
+
     }
     public virtual void Die()
     {
