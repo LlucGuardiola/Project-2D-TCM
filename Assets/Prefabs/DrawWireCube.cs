@@ -15,7 +15,6 @@ public class DrawWireCube : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         audioSource.volume = 0.08f;
     }
-
     private void OnDrawGizmos()
     {
         if (boxCollider != null)
@@ -30,7 +29,7 @@ public class DrawWireCube : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject == player)
         {
             audioSource.Play();
             player.GetComponent<PlayerAttack>().SetCombatState(true);
@@ -39,14 +38,10 @@ public class DrawWireCube : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject == player)
         {
             audioSource.Stop();
             player.GetComponent<PlayerAttack>().SetCombatState(false);
-           
-           
         }
     }
-   
-
 }
