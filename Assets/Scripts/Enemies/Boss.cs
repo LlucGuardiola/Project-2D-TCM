@@ -18,6 +18,8 @@ public class Boss : MonoBehaviour
     protected float damage;
     protected Animator animator;
 
+    protected bool canDash = true;
+
     public float attackRange;
     public LayerMask playerLayer;    // Capa de enemigos
     private bool isAtacking = false;
@@ -79,7 +81,7 @@ public class Boss : MonoBehaviour
     }
     public virtual void TakeDamage(int Damage)
     {
-        Dash(0.2f, 1, 2); 
+        StartCoroutine(Dash(0.2f, 1, 2));
         vida -= Damage;
         animator.SetTrigger("Hit");
         if (vida <= 0) { Die(); }
@@ -88,10 +90,19 @@ public class Boss : MonoBehaviour
     {
         Debug.Log("BOMBARDEEN TORREMOLINOS");
         // tr.emitting = true;
-        transform.position = GetComponent<SpriteRenderer>().flipX == true ? new Vector3(transform.position.x + 1 * dashingPower, 0, 0) :
-                                                                            new Vector3(transform.position.x + -1 * dashingPower, 0, 0);
-        
-        // tr.emitting = false;
+
+        canDash = true;
+        float start = Time.time;
+        float end = Time.time + 1;
+
+        while (start != end && canDash)
+        {
+            transform.position = GetComponent<SpriteRenderer>().flipX == true ? new Vector3(transform.position.x + 1 * dashingPower * Time.deltaTime, transform.position.y, 0) :
+                                                                            new Vector3(transform.position.x + -1 * dashingPower * Time.deltaTime, transform.position.y, 0);
+            start = Time.time;
+            yield return null;
+        }
+        canDash = false;
         yield return new WaitForSeconds(dashingCooldown + dashingTime);
     }
     public virtual void Die()
