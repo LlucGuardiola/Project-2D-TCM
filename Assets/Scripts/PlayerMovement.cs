@@ -162,7 +162,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (vidas <= 0)
         {
-            ManageRespawn(checkpoint); 
+            hasFallen = true; 
             vidas = sliderVidas.maxValue; 
             sliderVidas.value = vidas;
         }
