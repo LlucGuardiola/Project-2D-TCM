@@ -219,7 +219,7 @@ public class PlayerMovement : MonoBehaviour
         float originalGravity = body.gravityScale;
         body.gravityScale = 0f;
         tr.emitting = true;
-        body.velocity = GetComponent<SpriteRenderer>().flipX == true ? new Vector2(1 * dashingPower , 0.1f) : 
+        body.velocity = GetComponent<SpriteRenderer>().flipX == true ? new Vector2( 1 * dashingPower, 0.1f) : 
                                                                        new Vector2(-1 * dashingPower, 0.1f);
 
         yield return new WaitForSeconds(dashingTime / 3);

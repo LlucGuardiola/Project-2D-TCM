@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -19,7 +20,6 @@ public class Boss : MonoBehaviour
     protected float damage;
     protected Animator animator;
 
-    protected bool canDash = true;
     protected bool isDashing = false;
 
     public float attackRange;
@@ -42,12 +42,12 @@ public class Boss : MonoBehaviour
     public virtual void Update()
     {
         currentDistance = (player.transform.position - transform.position).magnitude;
+        animator.SetBool("isRunning", currentPosition != transform.position);
 
         Attack();
 
-        animator.SetBool("isRunning", currentPosition != transform.position);
-
         Follow();
+
     }
     public virtual void SetVida(float vida) { }
     public virtual float GetVida() { return vida; }
@@ -60,13 +60,14 @@ public class Boss : MonoBehaviour
         if (player.transform.position.x < transform.position.x) { GetComponent<SpriteRenderer>().flipX = true; }
         else { GetComponent<SpriteRenderer>().flipX = false; }
 
-        if (!(currentDistance < closestDistance) && CanFollow() && !isAtacking && !isDashing)
+        Debug.Log(IsInsideBossArea() + " " + !isAtacking + " " + !isDashing + " " + !(currentDistance < closestDistance));
+        if (IsInsideBossArea() && !isAtacking && !isDashing && !(currentDistance < closestDistance))
         {
             Vector2 newTranform = Vector2.MoveTowards(transform.position, player.transform.position, 10 * Time.deltaTime);
             transform.position = new Vector2(newTranform.x, transform.position.y);
         }
     }
-    private bool CanFollow()
+    private bool IsInsideBossArea()
     {
         Vector2 newTranform = Vector2.MoveTowards(transform.position, player.transform.position, 10 * Time.deltaTime);
         
@@ -96,8 +97,8 @@ public class Boss : MonoBehaviour
     {
         // tr.emitting = true;
 
-        float end = Time.time + dashingTime;
         isDashing = true;
+        float end = Time.time + dashingTime;
 
         while (Time.time < end)
         {
@@ -109,7 +110,6 @@ public class Boss : MonoBehaviour
         }
 
         yield return new WaitForSeconds(1);
-        Debug.Log("Test test test test su puta mAAAAAAAAdreeeeeee");
         isDashing = false;
     }
     public virtual void Die()
@@ -124,8 +124,10 @@ public class Boss : MonoBehaviour
     {
         if (IsPlayerNearEnemy() && Time.time >= nextAttacktime)
         {
-            animator.SetTrigger("Attack");
-            nextAttacktime = Time.time + Random.Range(1,3);
+            int i = UnityEngine.Random.Range(0, 2);
+            string attack = i == 0 ? "Attack" : "Attack2";
+            animator.SetTrigger(attack);
+            nextAttacktime = Time.time + UnityEngine.Random.Range(1, 3);
         }
 
         if (!GetComponent<SpriteRenderer>().flipX)
@@ -161,8 +163,12 @@ public class Boss : MonoBehaviour
             }
         }
     }
-    private void SwitchAttacking() // Activated within animation
+    private void AttackAnimation() { StartCoroutine(StartAttack()); } // Activated within the animation
+    
+    private IEnumerator StartAttack()
     {
-        isAtacking = !isAtacking;
+        isAtacking = true;
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorClipInfo(0)[0].clip.length);
+        isAtacking = false;
     }
 }

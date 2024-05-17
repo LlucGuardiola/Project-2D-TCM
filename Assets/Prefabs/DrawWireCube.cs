@@ -6,13 +6,13 @@ using UnityEngine;
 public class DrawWireCube : MonoBehaviour
 {
     [SerializeField] private BoxCollider2D boxCollider;
-    // private AudioSource audioSource;
+    private AudioSource audioSource;
     private GameObject player;
 
     private void Awake()
     {
-        // audioSource = GetComponent<AudioSource>();
-        // audioSource.volume = 0.08f;
+        audioSource = GetComponent<AudioSource>();
+        audioSource.volume = 0.08f;
         player = GameObject.FindWithTag("Player");
     }
     private void OnDrawGizmos()
@@ -32,7 +32,7 @@ public class DrawWireCube : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             player.GetComponent<PlayerAttack>().SetCombatState(true);
-            // audioSource.Play();
+            audioSource.Play();
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -40,7 +40,7 @@ public class DrawWireCube : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             player.GetComponent<PlayerAttack>().SetCombatState(false);
-            // audioSource.Stop();
+            audioSource.Stop();
         }
     }
 }
