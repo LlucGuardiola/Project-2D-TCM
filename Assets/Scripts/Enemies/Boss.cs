@@ -164,7 +164,6 @@ public class Boss : MonoBehaviour
         }
     }
     private void AttackAnimation() { StartCoroutine(StartAttack()); } // Activated within the animation
-    
     private IEnumerator StartAttack()
     {
         isAtacking = true;

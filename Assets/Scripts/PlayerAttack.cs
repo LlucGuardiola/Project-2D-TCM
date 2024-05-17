@@ -52,7 +52,6 @@ public class PlayerAttack : MonoBehaviour
             }
         }
     }
-
     void Attack()
     {
         animator.SetTrigger("Attack");  //Animación 
@@ -64,9 +63,13 @@ public class PlayerAttack : MonoBehaviour
      
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
-    private void SwitchAttacking() // Activated within animation and used in player movement
+
+    private void AttackAnimation() { StartCoroutine(StartAttack()); } // Activated within the animation
+    private IEnumerator StartAttack()
     {
-        isAtacking = !isAtacking;
+        isAtacking = true;
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorClipInfo(0)[0].clip.length - 0.1f);
+        isAtacking = false;
     }
     private void Hit() // Activated within animation
     {
