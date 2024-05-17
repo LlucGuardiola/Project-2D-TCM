@@ -16,18 +16,20 @@ public class Boss : MonoBehaviour
     protected Vector3 currentPosition;
     protected bool dead = false;
     protected float damage;
-    protected Rigidbody2D rb;
     protected Animator animator;
 
-    protected float attackRate = 2f;                 //Cooldown attack
+    protected bool canDash = true;
+
+    public float attackRange;
+    public LayerMask playerLayer;    // Capa de enemigos
+    private bool isAtacking = false;
     protected float nextAttacktime = 0f;
-    protected Transform attackPoint;    //Punto para rango de ataque
+    [SerializeField] protected Transform attackPoint;    //Punto para rango de ataque
 
 
     public virtual void Start()
     {
         animator = GetComponent<Animator>();
-        rb = new Rigidbody2D();
         closestDistance = player.GetComponent<SpriteRenderer>().sprite.bounds.size.x + GetComponent<SpriteRenderer>().sprite.bounds.size.x;
     }
     public Boss(float vida, float damage)
@@ -42,23 +44,13 @@ public class Boss : MonoBehaviour
         Follow();
 
         animator.SetBool("isRunning", currentPosition != transform.position);
-    }
-    public virtual void SetVida(float vida)
-    {
 
+        Attack();
     }
-    public virtual float GetVida()
-    {
-        return vida;
-    }
-    public virtual void MakeDamage(float damage)
-    {
-
-    }
-    public virtual float GetDamage()
-    {
-        return damage;
-    }
+    public virtual void SetVida(float vida) { }
+    public virtual float GetVida() { return vida; }
+    public virtual void MakeDamage(float damage) { }
+    public virtual float GetDamage() { return damage; }
     public virtual void Follow() 
     {
         currentPosition = transform.position;
@@ -66,7 +58,7 @@ public class Boss : MonoBehaviour
         if (player.transform.position.x < transform.position.x) { GetComponent<SpriteRenderer>().flipX = true; }
         else { GetComponent<SpriteRenderer>().flipX = false; }
 
-        if (!(currentDistance < closestDistance) && CanFollow())
+        if (!(currentDistance < closestDistance) && CanFollow() && !isAtacking)
         {
             Vector2 newTranform = Vector2.MoveTowards(transform.position, player.transform.position, 10 * Time.deltaTime);
             transform.position = new Vector2(newTranform.x, transform.position.y);
@@ -89,9 +81,29 @@ public class Boss : MonoBehaviour
     }
     public virtual void TakeDamage(int Damage)
     {
+        StartCoroutine(Dash(0.2f, 1, 2));
         vida -= Damage;
         animator.SetTrigger("Hit");
         if (vida <= 0) { Die(); }
+    }
+    private IEnumerator Dash(float dashingTime, float dashingCooldown, float dashingPower)
+    {
+        Debug.Log("BOMBARDEEN TORREMOLINOS");
+        // tr.emitting = true;
+
+        canDash = true;
+        float start = Time.time;
+        float end = Time.time + 1;
+
+        while (start != end && canDash)
+        {
+            transform.position = GetComponent<SpriteRenderer>().flipX == true ? new Vector3(transform.position.x + 1 * dashingPower * Time.deltaTime, transform.position.y, 0) :
+                                                                            new Vector3(transform.position.x + -1 * dashingPower * Time.deltaTime, transform.position.y, 0);
+            start = Time.time;
+            yield return null;
+        }
+        canDash = false;
+        yield return new WaitForSeconds(dashingCooldown + dashingTime);
     }
     public virtual void Die()
     {
@@ -103,18 +115,47 @@ public class Boss : MonoBehaviour
     }
     public void Attack()
     {
-        if (Time.time >= nextAttacktime && (currentPosition != transform.position))
+        if (IsPlayerNearEnemy() && Time.time >= nextAttacktime)
         {
-            Attack();
-            nextAttacktime = Time.time + 1f / attackRate;
+            animator.SetTrigger("Attack");
+            nextAttacktime = Time.time + Random.Range(1,3);
         }
-        if (player.GetComponent<SpriteRenderer>().flipX)
+
+        if (!GetComponent<SpriteRenderer>().flipX)
         {
-            attackPoint.transform.position = new Vector2(player.transform.position.x + .8f, player.transform.position.y + 1.5f);
+            attackPoint.transform.position = new Vector2(transform.position.x + 3.5f, transform.position.y + 1.1f);
         }
         else
         {
-            attackPoint.transform.position = new Vector2(player.transform.position.x - .8f, player.transform.position.y + 1.5f);
+            attackPoint.transform.position = new Vector2(transform.position.x - 3.5f, transform.position.y + 1.1f);
         }
+    }
+    bool IsPlayerNearEnemy()
+    {
+        float distance = Vector3.Distance(transform.position, player.transform.position);
+        return distance <= attackRange * 2;
+    }
+    private void OnDrawGizmosSelected()  //Dibujar esfera para ver rango de ataque
+    {
+        if (attackPoint == null)
+            return;
+
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+    }
+    private void Hit() // Activated within animation
+    {
+        Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playerLayer);  //Detectar enemigos en un rango especificado
+
+        foreach (Collider2D player in hitPlayer)
+        {
+            if (player.GetComponent<PlayerMovement>().CanGetDamaged)
+            {
+                player.GetComponent<PlayerMovement>().LoseLife(10); /////////////////////////////////////////////////
+            }
+        }
+    }
+    private void SwitchAttacking() // Activated within animation
+    {
+        isAtacking = !isAtacking;
     }
 }

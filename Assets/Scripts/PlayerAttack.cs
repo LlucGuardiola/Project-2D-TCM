@@ -23,7 +23,6 @@ public class PlayerAttack : MonoBehaviour
     }
     private void Update()
     {
-        
         if (combatState)
         {
             animator.SetBool("Combat?", true);
@@ -65,7 +64,7 @@ public class PlayerAttack : MonoBehaviour
      
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
-    private void SwitchAttacking() // Activated within animation
+    private void SwitchAttacking() // Activated within animation and used in player movement
     {
         isAtacking = !isAtacking;
     }
