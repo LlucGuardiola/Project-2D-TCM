@@ -8,6 +8,7 @@ public class BossJan : Boss
 
     public BossJan(float vida, float damage) : base(vida, damage) { }
 
+<<<<<<< HEAD
     void Start()
     {
 
@@ -18,6 +19,8 @@ public class BossJan : Boss
 
     }
 
+=======
+>>>>>>> c8ddc7067d45fda73e9fee55602a47c9a32aa4a3
     public override float GetDamage() { return damage; }
     public override void MakeDamage(float damage) { vida -= damage; }
     public override float GetVida() { return vida; }

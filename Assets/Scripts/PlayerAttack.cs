@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    private bool combatMode = false;         //Modo combate 
+         //Modo combate 
     public Animator animator;               //Referencia animator
     public Transform attackPoint;    //Punto para rango de ataque
     public LayerMask enemyLayers;    // Capa de enemigos
@@ -14,9 +14,10 @@ public class PlayerAttack : MonoBehaviour
     public bool isAtacking = false;
     public int attackDamage = 25;                 //rango de ataque
     public float attackRange = 0.5f;
-
+    public bool combatState;
     public float attackRate = 2f;                 //Cooldown attack
     float nextAttacktime = 0f;
+<<<<<<< HEAD
 
     private void Update()
     {
@@ -35,8 +36,25 @@ public class PlayerAttack : MonoBehaviour
                 animator.SetBool("Combat?", false);
                 Debug.Log("Combat mode Deactivated");
             }
+=======
+   public void SetCombatState(bool combatState)
+    {
+       this.combatState = combatState;
+    }
+    private void Update()
+    {
+        
+        if (combatState)
+        {
+            animator.SetBool("Combat?", true);
+>>>>>>> c8ddc7067d45fda73e9fee55602a47c9a32aa4a3
         }
-        if (combatMode)
+        else
+        {
+            animator.SetBool("Combat?", false);
+        }
+
+        if (combatState)
         {
             if(Time.time >= nextAttacktime && player.GetComponent<Rigidbody2D>().velocity.x == 0)   
             {
@@ -61,18 +79,18 @@ public class PlayerAttack : MonoBehaviour
     {
         animator.SetTrigger("Attack");  //Animación 
     }
-    private void OnDrawGizmosSelected()   //Dibujar esfera para ver rango de ataque
+    private void OnDrawGizmosSelected()  //Dibujar esfera para ver rango de ataque
     {
         if(attackPoint == null)
             return;
      
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
-    private void SwitchAttacking() // Activated in animation
+    private void SwitchAttacking() // Activated within animation
     {
         isAtacking = !isAtacking;
     }
-    private void Hit() // Activated in animation
+    private void Hit() // Activated within animation
     {
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);  //Detectar enemigos en un rango especificado
 

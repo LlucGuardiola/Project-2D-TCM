@@ -1,5 +1,7 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+<<<<<<< HEAD
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -13,8 +15,30 @@ public class PlayerMovement : MonoBehaviour
 
     int counterTp;
     float _speed ;
+=======
+using UnityEngine.Rendering;
+using UnityEngine.UI;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
+public class PlayerMovement : MonoBehaviour
+{
+    public float Speed;
+    [SerializeField] private int maxJumpCount;      
+    [SerializeField] private float jumpHeight;
+    [SerializeField] private LayerMask groundLayer; // Detecció de col·lisió amb ground 
+    [SerializeField] float vidas;
+    [SerializeField] Slider sliderVidas;
+    [SerializeField] TrailRenderer tr;
+>>>>>>> c8ddc7067d45fda73e9fee55602a47c9a32aa4a3
+
+    private bool canDash = true;
+    private bool isDashing;
+
+    public bool CanGetDamaged { get; private set; } = true;
+    public float fuerzaGolpe;
+    private bool puedeMoverse = true;
     private bool hasFallen;
+<<<<<<< HEAD
     private BoxCollider2D boxCollider; // La caixa de col·lisió del personatge
     private static Rigidbody2D body;   
     private Animator animator;         
@@ -23,8 +47,19 @@ public class PlayerMovement : MonoBehaviour
     private bool isJumping;            
     private bool movingLR;             // Decideix si l'sprite ha de fer flip en eix x o y (si està mirant dreta o esq)
     private Vector3 checkpoint;   
+=======
+    private BoxCollider2D boxCollider; 
+    private static Rigidbody2D body;
+    private Animator animator;
+    private int jumpCount;
+    private bool canJump;
+    private bool isJumping;
+    private bool movingRL;    // Decideix si l'sprite ha de fer flip en eix x o y (si està mirant dreta o esq)
+    private Vector3 checkpoint;
+>>>>>>> c8ddc7067d45fda73e9fee55602a47c9a32aa4a3
     private PhysicsMaterial2D defaultMaterial, noFrictionMaterial; /* Material default i material sense
                                                                        fricció (no es queda enganxat a les parets) */
+
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
@@ -43,55 +78,33 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Update()
     {
-        #region Movement
-        float horizontalInput = Input.GetAxis("Horizontal");
-        if (!GetComponent<PlayerAttack>().isAtacking)
-        {
-            body.velocity = new Vector2(horizontalInput * Speed, body.velocity.y);
-        }
-
-        if (horizontalInput < 0)
-        {
-            body.GetComponent<SpriteRenderer>().flipX = false;
-        }
-        else if (horizontalInput > 0)
-        {
-            body.GetComponent<SpriteRenderer>().flipX = true;
-        }
-
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
-        {
-            movingLR = true;
-        }
-        else
-        {
-            movingLR = false;
-            if (body.velocity.x != 0 && !isJumping)
-            {
-                body.velocity = new Vector2(body.velocity.x * 0.1f, body.velocity.y);
-            }
-        }
-        #endregion
-
-        #region Jump
-        if (Input.GetKeyDown(KeyCode.Space) && canJump)
-        {
-            Jump();
-        }
-        canJump = CanJump();
-        #endregion
+        Movement();
+        
+        Jump();
 
         Respawn();
 
         Teleport();
+<<<<<<< HEAD
         
         animator.SetBool("run", horizontalInput != 0 && movingLR);
         animator.SetBool("canJump", isJumping);
+=======
+
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && GetComponent<PlayerAttack>().isAtacking == false)
+        {
+            StartCoroutine(Dash(0.2f, 1, 30));
+        }
+>>>>>>> c8ddc7067d45fda73e9fee55602a47c9a32aa4a3
     }
     private void Jump()
     {
-        jumpCount++;
-        body.velocity = new Vector2(body.velocity.x, jumpHeight * 2);
+        if (Input.GetKeyDown(KeyCode.Space) && canJump && GetComponent<PlayerAttack>().isAtacking == false)
+        {
+            jumpCount++;
+            body.velocity = new Vector2(body.velocity.x, jumpHeight * 2);
+        }
+        canJump = CanJump();
     }
     private bool CanJump()
     {
@@ -110,18 +123,13 @@ public class PlayerMovement : MonoBehaviour
             body.GetComponent<Rigidbody2D>().sharedMaterial = noFrictionMaterial;
             isJumping = true;
 
-            if (jumpCount < maxJumpCount - 1)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            if (jumpCount < maxJumpCount - 1) { return true; }
+            else { return false; }
         }
     }
     private void Teleport() // Teleport clicando (1,2,3,4) para canviar de escenas.
     {
+<<<<<<< HEAD
         if (Input.GetKey(KeyCode.Alpha1))
         {
             body.transform.position = new Vector3 (2f, 2f, 0f);
@@ -138,12 +146,18 @@ public class PlayerMovement : MonoBehaviour
         {
             body.transform.position = new Vector3(796f, 4f, 0f);
         }
+=======
+        if (Input.GetKey(KeyCode.Alpha1)) { body.transform.position = new Vector3(2f, 2f, 0f); }
+        if (Input.GetKey(KeyCode.Alpha2)) { body.transform.position = new Vector3(261f, 2.3f, 0f); }
+        if (Input.GetKey(KeyCode.Alpha3)) { body.transform.position = new Vector3(525f, -1f, 0f); }
+        if (Input.GetKey(KeyCode.Alpha4)) { body.transform.position = new Vector3(796f, 4f, 0f); }
+>>>>>>> c8ddc7067d45fda73e9fee55602a47c9a32aa4a3
     }
     private void ManageRespawn(Vector2 newCheckpoint)
     {
         checkpoint = newCheckpoint;
     }
-    private void OnTriggerEnter2D(Collider2D collision) // Respawn i checkpoints
+    private void OnTriggerEnter2D(Collider2D collision) // Respawn i checkpoints ///////////////// codi repetit?
     {
         if (collision.gameObject.CompareTag("Checkpoint")) 
         {
@@ -153,7 +167,39 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Deathzone"))
         {
             hasFallen = true;
+<<<<<<< HEAD
+=======
+            LoseLife(10);
+>>>>>>> c8ddc7067d45fda73e9fee55602a47c9a32aa4a3
         }
+    }
+    public void Movement()
+    {
+        if (!puedeMoverse) return;  
+        if (isDashing) { return; }
+
+        float horizontalInput = Input.GetAxis("Horizontal");
+
+        if (!GetComponent<PlayerAttack>().isAtacking)
+        {
+            body.velocity = new Vector2(horizontalInput * Speed, body.velocity.y);
+        }
+
+        if (horizontalInput < 0) { body.GetComponent<SpriteRenderer>().flipX = false; }
+        else if (horizontalInput > 0) { body.GetComponent<SpriteRenderer>().flipX = true; }
+
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) { movingRL = true; }
+        else
+        {
+            movingRL = false;
+            if (body.velocity.x != 0 && !isJumping)
+            {
+                body.velocity = new Vector2(body.velocity.x * 0.1f, body.velocity.y);
+            }
+        }
+
+        animator.SetBool("run", horizontalInput != 0 && movingRL);
+        animator.SetBool("canJump", isJumping);
     }
     public void Respawn()
     {
@@ -163,6 +209,7 @@ public class PlayerMovement : MonoBehaviour
             hasFallen = false;
         }
     }
+<<<<<<< HEAD
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -170,14 +217,89 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.parent = collision.gameObject.transform;
         }
-    }
+=======
+    void LoseLife(float damageDealt)
+    {
+        vidas-=damageDealt;
+        sliderVidas.value = vidas;
 
+        if (vidas <= 0)
+        {
+            ManageRespawn(checkpoint); 
+            vidas = sliderVidas.maxValue; 
+            sliderVidas.value = vidas;
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D collision) ///////////////////////////////////////// codi repetit?
+    {
+        if (collision.gameObject.CompareTag("elevator"))
+        {
+            transform.parent = collision.gameObject.transform;
+        }
+
+        if (collision.gameObject.CompareTag("Deathzone"))
+        {
+            LoseLife(10);
+        }
+>>>>>>> c8ddc7067d45fda73e9fee55602a47c9a32aa4a3
+    }
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "elevator")
+        if (collision.gameObject.CompareTag("elevator"))
         {
             transform.parent = null;
         }
+    }
+    public void AplicarGolpe ()
+    {
+        puedeMoverse = false;
+
+        Vector2 direccion;
+
+        if (body.velocity.x > 0)
+        {
+            direccion = new Vector2(-1, 1);
+            body.AddForce(direccion * fuerzaGolpe);
+        }
+        else
+        {
+            direccion = new Vector2(1,1);
+            body.AddForce(direccion * fuerzaGolpe);
+        }
+
+        StartCoroutine (EsperarYActivarMovimiento());    
+    }
+    IEnumerator EsperarYActivarMovimiento ()
+    {
+        //DA TIEMPO A QUE EL PERSONAJE SALGA VOLANDO Y NO SE ACTIVE EL MOVIMIENTO AL INSTANTE
+        yield return new WaitForSeconds(0.4f);
+        puedeMoverse = true;
+        LoseLife(10);
+    }
+    private IEnumerator Dash(float dashingTime, float dashingCooldown, float dashingPower)
+    {
+        canDash = false;
+        isDashing = true;
+        float originalGravity = body.gravityScale;
+        body.gravityScale = 0f;
+        tr.emitting = true;
+        body.velocity = GetComponent<SpriteRenderer>().flipX == true ? new Vector2(1 * dashingPower , 0.1f) : 
+                                                                       new Vector2(-1 * dashingPower, 0.1f);
+
+        yield return new WaitForSeconds(dashingTime / 3);
+        CanGetDamaged = true;
+        Debug.Log(CanGetDamaged);
+
+        yield return new WaitForSeconds(dashingTime / 3 * 2 );
+        body.gravityScale = originalGravity;
+        isDashing = false;
+        tr.emitting = false;
+        CanGetDamaged = false;
+        Debug.Log(CanGetDamaged);
+
+
+        yield return new WaitForSeconds(dashingCooldown);
+        canDash = true;
     }
 }
 
