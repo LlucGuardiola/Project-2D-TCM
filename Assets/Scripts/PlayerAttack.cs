@@ -17,7 +17,8 @@ public class PlayerAttack : MonoBehaviour
     public bool combatState;
     public float attackRate = 2f;                 //Cooldown attack
     float nextAttacktime = 0f;
-   public void SetCombatState(bool combatState)
+
+    public void SetCombatState(bool combatState)
     {
        this.combatState = combatState;
     }
@@ -34,12 +35,13 @@ public class PlayerAttack : MonoBehaviour
 
         if (combatState)
         {
-            if(Time.time >= nextAttacktime && player.GetComponent<Rigidbody2D>().velocity.x == 0)   
+            if(Time.time >= nextAttacktime)   
             {
                 if (Input.GetMouseButtonDown(0))
                 {
                     Attack();
-                    nextAttacktime = Time.time + 1f / attackRate;
+                    if(!GetComponent<PlayerMovement>().MovingRL) StartCoroutine(Dash(1000));
+                    nextAttacktime = Time.time + animator.GetCurrentAnimatorClipInfo(0)[0].clip.length / attackRate;
                 }
             }
             if (player.GetComponent<SpriteRenderer>().flipX)
@@ -55,6 +57,20 @@ public class PlayerAttack : MonoBehaviour
     void Attack()
     {
         animator.SetTrigger("Attack");  //Animación 
+    }
+    private IEnumerator Dash(float dashingPower)
+    {
+        yield return null;
+        
+        float end = Time.time + animator.GetCurrentAnimatorClipInfo(0)[0].clip.length / 3;
+
+        while (Time.time < end)
+        {
+            player.GetComponent<Rigidbody2D>().velocity = GetComponent<SpriteRenderer>().flipX == true ?
+                                                          new Vector2( 1 * dashingPower * Time.deltaTime, 0.1f) :
+                                                          new Vector2(-1 * dashingPower * Time.deltaTime, 0.1f);
+            yield return null;
+        }
     }
     private void OnDrawGizmosSelected()  //Dibujar esfera para ver rango de ataque
     {

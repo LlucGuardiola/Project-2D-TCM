@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
     private int jumpCount;
     private bool canJump;
     private bool isJumping;
-    private bool movingRL;    // Decideix si l'sprite ha de fer flip en eix x o y (si està mirant dreta o esq)
+    public bool MovingRL { get; private set; }              // Decideix si l'sprite ha de fer flip en eix x o y (si està mirant dreta o esq)
     private Vector3 checkpoint;
     private PhysicsMaterial2D defaultMaterial, noFrictionMaterial; /* Material default i material sense
                                                                        fricció (no es queda enganxat a les parets) */
@@ -122,7 +122,7 @@ public class PlayerMovement : MonoBehaviour
     public void Movement()
     {
         if (!puedeMoverse) return;  
-        if (isDashing) { return; }
+        if (isDashing) return; 
 
         float horizontalInput = Input.GetAxis("Horizontal");
 
@@ -134,17 +134,17 @@ public class PlayerMovement : MonoBehaviour
         if (horizontalInput < 0) { body.GetComponent<SpriteRenderer>().flipX = false; }
         else if (horizontalInput > 0) { body.GetComponent<SpriteRenderer>().flipX = true; }
 
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) { movingRL = true; }
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) && !GetComponent<PlayerAttack>().isAtacking) { MovingRL = true; }
         else
         {
-            movingRL = false;
+            MovingRL = false;
             if (body.velocity.x != 0 && !isJumping)
             {
                 body.velocity = new Vector2(body.velocity.x * 0.1f, body.velocity.y);
             }
         }
 
-        animator.SetBool("run", horizontalInput != 0 && movingRL);
+        animator.SetBool("run", horizontalInput != 0 && MovingRL);
         animator.SetBool("canJump", isJumping);
     }
     public void Respawn()

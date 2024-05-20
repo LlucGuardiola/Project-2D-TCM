@@ -60,7 +60,7 @@ public class Boss : MonoBehaviour
         if (player.transform.position.x < transform.position.x) { GetComponent<SpriteRenderer>().flipX = true; }
         else { GetComponent<SpriteRenderer>().flipX = false; }
 
-        Debug.Log(IsInsideBossArea() + " " + !isAtacking + " " + !isDashing + " " + !(currentDistance < closestDistance));
+        // Debug.Log(IsInsideBossArea() + " " + !isAtacking + " " + !isDashing + " " + !(currentDistance < closestDistance));
         if (IsInsideBossArea() && !isAtacking && !isDashing && !(currentDistance < closestDistance))
         {
             Vector2 newTranform = Vector2.MoveTowards(transform.position, player.transform.position, 10 * Time.deltaTime);
