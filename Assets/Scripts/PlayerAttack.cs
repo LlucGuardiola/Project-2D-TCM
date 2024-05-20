@@ -61,8 +61,9 @@ public class PlayerAttack : MonoBehaviour
     private IEnumerator Dash(float dashingPower)
     {
         yield return null;
-        
-        float end = Time.time + animator.GetCurrentAnimatorClipInfo(0)[0].clip.length / 3;
+        yield return animator.GetCurrentAnimatorClipInfo(0)[0].clip.length / 2;
+
+        float end = Time.time + animator.GetCurrentAnimatorClipInfo(0)[0].clip.length / 2;
 
         while (Time.time < end)
         {
@@ -84,7 +85,7 @@ public class PlayerAttack : MonoBehaviour
     private IEnumerator StartAttack()
     {
         isAtacking = true;
-        yield return new WaitForSeconds(animator.GetCurrentAnimatorClipInfo(0)[0].clip.length - 0.1f);
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorClipInfo(0)[0].clip.length * 1.1f);
         isAtacking = false;
     }
     private void Hit() // Activated within animation

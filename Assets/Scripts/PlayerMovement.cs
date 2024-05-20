@@ -134,7 +134,8 @@ public class PlayerMovement : MonoBehaviour
         if (horizontalInput < 0) { body.GetComponent<SpriteRenderer>().flipX = false; }
         else if (horizontalInput > 0) { body.GetComponent<SpriteRenderer>().flipX = true; }
 
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) && !GetComponent<PlayerAttack>().isAtacking) { MovingRL = true; }
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) && !GetComponent<PlayerAttack>().isAtacking) 
+        { MovingRL = true; }
         else
         {
             MovingRL = false;
@@ -222,10 +223,9 @@ public class PlayerMovement : MonoBehaviour
         body.velocity = GetComponent<SpriteRenderer>().flipX == true ? new Vector2( 1 * dashingPower, 0.1f) : 
                                                                        new Vector2(-1 * dashingPower, 0.1f);
 
-        yield return new WaitForSeconds(dashingTime / 3);
         CanGetDamaged = false;
 
-        yield return new WaitForSeconds(dashingTime / 3 * 2 );
+        yield return new WaitForSeconds(dashingTime * 1.1f);
         body.gravityScale = originalGravity;
         isDashing = false;
         tr.emitting = false;
