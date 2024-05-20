@@ -21,6 +21,7 @@ public class Boss : MonoBehaviour
     protected Animator animator;
 
     protected bool isDashing = false;
+    protected bool canDash;
 
     public float attackRange;
     public LayerMask playerLayer;    // Capa de enemigos
@@ -31,6 +32,7 @@ public class Boss : MonoBehaviour
 
     public virtual void Start()
     {
+        canDash = true;
         animator = GetComponent<Animator>();
         closestDistance = player.GetComponent<SpriteRenderer>().sprite.bounds.size.x + GetComponent<SpriteRenderer>().sprite.bounds.size.x;
     }
@@ -48,6 +50,7 @@ public class Boss : MonoBehaviour
 
         Follow();
 
+        ManageDash();
     }
     public virtual void SetVida(float vida) { }
     public virtual float GetVida() { return vida; }
@@ -55,12 +58,13 @@ public class Boss : MonoBehaviour
     public virtual float GetDamage() { return damage; }
     public virtual void Follow() 
     {
+        if (currentDistance > bossArea.size.x / 2) { return; }
+
         currentPosition = transform.position;
 
         if (player.transform.position.x < transform.position.x) { GetComponent<SpriteRenderer>().flipX = true; }
         else { GetComponent<SpriteRenderer>().flipX = false; }
 
-        // Debug.Log(IsInsideBossArea() + " " + !isAtacking + " " + !isDashing + " " + !(currentDistance < closestDistance));
         if (IsInsideBossArea() && !isAtacking && !isDashing && !(currentDistance < closestDistance))
         {
             Vector2 newTranform = Vector2.MoveTowards(transform.position, player.transform.position, 10 * Time.deltaTime);
@@ -90,10 +94,26 @@ public class Boss : MonoBehaviour
             Die(); 
         }
 
-        StartCoroutine(Dash(0.2f, 20));
+        StartCoroutine(Dash(0.2f, 20, false, 1));
         animator.SetTrigger("Hit");
     }
-    private IEnumerator Dash(float dashingTime, float dashingPower)
+    private void ManageDash()
+    {
+        int rngNumber = UnityEngine.Random.Range(1, 3);
+
+        if (currentDistance > 10 && currentDistance < 30 && rngNumber % 2 == 0 && canDash && !isAtacking)
+        {
+            StartCoroutine(Dash(0.2f, 25, true, 0));
+            canDash = false;
+            StartCoroutine(WaitForSeconds(5));
+        }
+    }
+    private IEnumerator WaitForSeconds(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        canDash = true;
+    }
+    private IEnumerator Dash(float dashingTime, float dashingPower, bool dashTowardsPlayer, float dashingCooldown)
     {
         // tr.emitting = true;
 
@@ -102,14 +122,24 @@ public class Boss : MonoBehaviour
 
         while (Time.time < end)
         {
-            transform.position = GetComponent<SpriteRenderer>().flipX ?
-                new Vector3(transform.position.x +  1 * dashingPower * Time.deltaTime, transform.position.y, 0) :
-                new Vector3(transform.position.x + -1 * dashingPower * Time.deltaTime, transform.position.y, 0);
+            switch (dashTowardsPlayer)
+            {
+                case true:
+                    transform.position = GetComponent<SpriteRenderer>().flipX ?
+                    new Vector3(transform.position.x + -1 * dashingPower * Time.deltaTime, transform.position.y, 0) :
+                    new Vector3(transform.position.x +  1 * dashingPower * Time.deltaTime, transform.position.y, 0);
+                    break;
 
+                default:
+                transform.position = GetComponent<SpriteRenderer>().flipX ?
+                    new Vector3(transform.position.x +  1 * dashingPower * Time.deltaTime, transform.position.y, 0) :
+                    new Vector3(transform.position.x + -1 * dashingPower * Time.deltaTime, transform.position.y, 0);
+                break;
+            }
             yield return null;
         }
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(dashingCooldown);
         isDashing = false;
     }
     public virtual void Die()

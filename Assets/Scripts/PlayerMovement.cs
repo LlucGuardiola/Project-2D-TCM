@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] TrailRenderer tr;
 
     private bool canDash = true;
-    private bool isDashing;
+    public bool IsDashing { get; private set; }
 
     public bool CanGetDamaged { get; private set; } = true;
     public float fuerzaGolpe;
@@ -73,6 +73,7 @@ public class PlayerMovement : MonoBehaviour
             body.velocity = new Vector2(body.velocity.x, jumpHeight * 2);
         }
         canJump = CanJump();
+        animator.SetBool("canJump", isJumping);
     }
     private bool CanJump()
     {
@@ -122,17 +123,16 @@ public class PlayerMovement : MonoBehaviour
     public void Movement()
     {
         if (!puedeMoverse) return;  
-        if (isDashing) return; 
+        if (IsDashing) return; 
 
         float horizontalInput = Input.GetAxis("Horizontal");
 
         if (!GetComponent<PlayerAttack>().isAtacking)
         {
             body.velocity = new Vector2(horizontalInput * Speed, body.velocity.y);
+            if (horizontalInput < 0) { body.GetComponent<SpriteRenderer>().flipX = false; }
+            else if (horizontalInput > 0) { body.GetComponent<SpriteRenderer>().flipX = true; }
         }
-
-        if (horizontalInput < 0) { body.GetComponent<SpriteRenderer>().flipX = false; }
-        else if (horizontalInput > 0) { body.GetComponent<SpriteRenderer>().flipX = true; }
 
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) && !GetComponent<PlayerAttack>().isAtacking) 
         { MovingRL = true; }
@@ -145,8 +145,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        animator.SetBool("run", horizontalInput != 0 && MovingRL);
-        animator.SetBool("canJump", isJumping);
+        animator.SetBool("run", body.velocity.x != 0 && MovingRL);
     }
     public void Respawn()
     {
@@ -216,7 +215,7 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator Dash(float dashingTime, float dashingCooldown, float dashingPower)
     {
         canDash = false;
-        isDashing = true;
+        IsDashing = true;
         float originalGravity = body.gravityScale;
         body.gravityScale = 0f;
         tr.emitting = true;
@@ -227,7 +226,7 @@ public class PlayerMovement : MonoBehaviour
 
         yield return new WaitForSeconds(dashingTime * 1.1f);
         body.gravityScale = originalGravity;
-        isDashing = false;
+        IsDashing = false;
         tr.emitting = false;
         CanGetDamaged = true;
 

@@ -15,7 +15,7 @@ public class PlayerAttack : MonoBehaviour
     public int attackDamage = 25;                 //rango de ataque
     public float attackRange = 0.5f;
     public bool combatState;
-    public float attackRate = 2f;                 //Cooldown attack
+    public float attackRate = 2;                 //Cooldown attack
     float nextAttacktime = 0f;
 
     public void SetCombatState(bool combatState)
@@ -37,11 +37,11 @@ public class PlayerAttack : MonoBehaviour
         {
             if(Time.time >= nextAttacktime)   
             {
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButtonDown(0) && !GetComponent<PlayerMovement>().IsDashing)
                 {
                     Attack();
                     if(!GetComponent<PlayerMovement>().MovingRL) StartCoroutine(Dash(1000));
-                    nextAttacktime = Time.time + animator.GetCurrentAnimatorClipInfo(0)[0].clip.length / attackRate;
+                    nextAttacktime = Time.time + attackRate / 2;
                 }
             }
             if (player.GetComponent<SpriteRenderer>().flipX)
