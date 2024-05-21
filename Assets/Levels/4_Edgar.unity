@@ -5099,6 +5099,10 @@ PrefabInstance:
       propertyPath: bossArea
       value: 
       objectReference: {fileID: 1331508182}
+    - target: {fileID: 7608412785482726252, guid: 21e05c7792f768e49862581c49803cfc, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
