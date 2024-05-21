@@ -96,7 +96,12 @@ public class PlayerAttack : MonoBehaviour
         {
             if (enemy is not CapsuleCollider2D)
             {
+                Debug.Log("literalmente la cabra");
                 enemy.GetComponent<Boss>().TakeDamage(attackDamage);
+            }
+            else
+            {
+                Debug.Log("Faaaaaaaaaaak");
             }
         }
     }
