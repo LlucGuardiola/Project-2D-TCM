@@ -31,11 +31,11 @@ public class Boss : MonoBehaviour
 
     public void Awake()
     {
-        player = GameObject.FindWithTag("Player");
 
     }
     public virtual void Start()
     {
+        player = GameObject.FindWithTag("Player");
         canDash = true;
         animator = GetComponent<Animator>();
         closestDistance = player.GetComponent<SpriteRenderer>().sprite.bounds.size.x + GetComponent<SpriteRenderer>().sprite.bounds.size.x;
