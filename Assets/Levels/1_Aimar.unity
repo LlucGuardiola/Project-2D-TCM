@@ -811,6 +811,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6727743168665523286, guid: d896a56f1f49da6469d6968ea0864257, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4f6c1faa32a635147b09ab03fa526513, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2798,6 +2802,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vidas: 100
   sliderVidas: {fileID: 434915010}
+  LifeCounter: 0
 --- !u!114 &850607999
 MonoBehaviour:
   m_ObjectHideFlags: 0

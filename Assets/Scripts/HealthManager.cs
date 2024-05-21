@@ -8,6 +8,7 @@ public class HealthManager : MonoBehaviour
 {
     [SerializeField] float vidas;
     [SerializeField] Slider sliderVidas;
+    public int LifeCounter;
 
     private void Start()
     {
@@ -24,6 +25,9 @@ public class HealthManager : MonoBehaviour
             GetComponent<ManageRespawn>().HasToRespawn = true;
             vidas = sliderVidas.maxValue;
             sliderVidas.value = vidas;
+
+            LifeCounter++;
+            Debug.Log(LifeCounter);
         }
     }
 }

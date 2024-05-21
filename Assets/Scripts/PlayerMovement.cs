@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     private int jumpCount;
     private bool canJump;
     private bool isJumping;
+
     public bool ApplyingInput { get; private set; }              // Decideix si l'sprite ha de fer flip en eix x o y (si està mirant dreta o esq)
     private PhysicsMaterial2D defaultMaterial, noFrictionMaterial; /* Material default i material sense
                                                                        fricció (no es queda enganxat a les parets) */
