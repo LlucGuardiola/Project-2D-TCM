@@ -36,7 +36,6 @@ public class Boss : MonoBehaviour
         animator = GetComponent<Animator>();
         Vector3 worldSize = Vector3.Scale(player.GetComponent<BoxCollider2D>().size, transform.localScale);
         closestDistance = worldSize.x;
-        
     }
     public Boss(float vida, float damage)
     {
@@ -97,7 +96,7 @@ public class Boss : MonoBehaviour
             Die(); 
         }
 
-        StartCoroutine(Dash(0.2f, 20, false, 1));
+        StartCoroutine(Dash(0.2f, 10, false, 1));
         animator.SetTrigger("Hit");
     }
     private void ManageDash()
@@ -131,10 +130,10 @@ public class Boss : MonoBehaviour
                     transform.position = GetComponent<SpriteRenderer>().flipX ?
                     new Vector3(transform.position.x + -1 * dashingPower * Time.deltaTime, transform.position.y, 0) :
                     new Vector3(transform.position.x +  1 * dashingPower * Time.deltaTime, transform.position.y, 0);
-                    break;
+                break;
 
                 default:
-                transform.position = GetComponent<SpriteRenderer>().flipX ?
+                    transform.position = GetComponent<SpriteRenderer>().flipX ?
                     new Vector3(transform.position.x +  1 * dashingPower * Time.deltaTime, transform.position.y, 0) :
                     new Vector3(transform.position.x + -1 * dashingPower * Time.deltaTime, transform.position.y, 0);
                 break;
@@ -155,7 +154,7 @@ public class Boss : MonoBehaviour
     }
     public void Attack()
     {
-        if (IsPlayerNearEnemy() && Time.time >= nextAttacktime)
+        if (IsPlayerInRange() && Time.time >= nextAttacktime)
         {
             int i = UnityEngine.Random.Range(0, 2);
             string attack = i == 0 ? "Attack" : "Attack2";
@@ -172,7 +171,7 @@ public class Boss : MonoBehaviour
             attackPoint.transform.position = new Vector2(transform.position.x - 3.5f, transform.position.y + 1.1f);
         }
     }
-    bool IsPlayerNearEnemy()
+    bool IsPlayerInRange()
     {
         float distance = Vector3.Distance(transform.position, player.transform.position);
         return distance <= attackRange * 2;
