@@ -40,7 +40,7 @@ public class PlayerAttack : MonoBehaviour
                 if (Input.GetMouseButtonDown(0) && !GetComponent<PlayerMovement>().IsDashing)
                 {
                     Attack();
-                    if(!GetComponent<PlayerMovement>().MovingRL) StartCoroutine(Dash(1000));
+                    if(!GetComponent<PlayerMovement>().ApplyingInput) StartCoroutine(Dash(1000));
                     nextAttacktime = Time.time + attackRate / 2;
                 }
             }

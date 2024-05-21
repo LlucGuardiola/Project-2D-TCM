@@ -20,14 +20,14 @@ public class PlayerMovement : MonoBehaviour
     public bool CanGetDamaged { get; private set; } = true;
     public float fuerzaGolpe;
     private bool puedeMoverse = true;
-    private bool hasFallen;
+    private bool hasToRespawn;
     private BoxCollider2D boxCollider; 
     private static Rigidbody2D body;
     private Animator animator;
     private int jumpCount;
     private bool canJump;
     private bool isJumping;
-    public bool MovingRL { get; private set; }              // Decideix si l'sprite ha de fer flip en eix x o y (si està mirant dreta o esq)
+    public bool ApplyingInput { get; private set; }              // Decideix si l'sprite ha de fer flip en eix x o y (si està mirant dreta o esq)
     private Vector3 checkpoint;
     private PhysicsMaterial2D defaultMaterial, noFrictionMaterial; /* Material default i material sense
                                                                        fricció (no es queda enganxat a les parets) */
@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
         noFrictionMaterial = new PhysicsMaterial2D();
         noFrictionMaterial.friction = 0;
 
-        hasFallen = false;
+        hasToRespawn = false;
         canJump = true;
 
         sliderVidas.maxValue = vidas;
@@ -60,14 +60,14 @@ public class PlayerMovement : MonoBehaviour
 
         Teleport();
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && GetComponent<PlayerAttack>().isAtacking == false)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && !GetComponent<PlayerAttack>().isAtacking)
         {
             StartCoroutine(Dash(0.2f, 1, 30));
         }
     }
     private void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && canJump && GetComponent<PlayerAttack>().isAtacking == false)
+        if (Input.GetKeyDown(KeyCode.Space) && canJump && !GetComponent<PlayerAttack>().isAtacking)
         {
             jumpCount++;
             body.velocity = new Vector2(body.velocity.x, jumpHeight * 2);
@@ -116,7 +116,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Deathzone"))
         {
-            hasFallen = true;
+            hasToRespawn = true;
             LoseLife(10);
         }
     }
@@ -135,24 +135,24 @@ public class PlayerMovement : MonoBehaviour
         }
 
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) && !GetComponent<PlayerAttack>().isAtacking) 
-        { MovingRL = true; }
+        { ApplyingInput = true; }
         else
         {
-            MovingRL = false;
+            ApplyingInput = false;
             if (body.velocity.x != 0 && !isJumping)
             {
                 body.velocity = new Vector2(body.velocity.x * 0.1f, body.velocity.y);
             }
         }
 
-        animator.SetBool("run", body.velocity.x != 0 && MovingRL);
+        animator.SetBool("run", body.velocity.x != 0 && ApplyingInput);
     }
     public void Respawn()
     {
-        if (hasFallen)
+        if (hasToRespawn)
         {
             body.transform.position = checkpoint;
-            hasFallen = false;
+            hasToRespawn = false;
         }
     }
     public void LoseLife(float damageDealt)
@@ -162,7 +162,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (vidas <= 0)
         {
-            hasFallen = true; 
+            hasToRespawn = true; 
             vidas = sliderVidas.maxValue; 
             sliderVidas.value = vidas;
         }
