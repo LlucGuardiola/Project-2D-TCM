@@ -21,7 +21,7 @@ public class HealthManager : MonoBehaviour
 
         if (vidas <= 0)
         {
-            GetComponent<PlayerMovement>().HasToRespawn = true;
+            GetComponent<ManageRespawn>().HasToRespawn = true;
             vidas = sliderVidas.maxValue;
             sliderVidas.value = vidas;
         }

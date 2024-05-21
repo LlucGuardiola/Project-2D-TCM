@@ -7,9 +7,4 @@ public class BossAimar : Boss
     // Espai per crear variables
 
     public BossAimar(float vida, float damage) : base(vida, damage) { }
-
-    public override float GetDamage() { return damage; }
-    public override void MakeDamage(float damage) { vida -= damage; }
-    public override float GetVida() { return vida; }
-    public override void SetVida(float vida) { this.vida = vida; }
 }

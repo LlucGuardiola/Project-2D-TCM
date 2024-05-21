@@ -55,10 +55,6 @@ public class Boss : MonoBehaviour
 
         ManageDash();
     }
-    public virtual void SetVida(float vida) { }
-    public virtual float GetVida() { return vida; }
-    public virtual void MakeDamage(float damage) { }
-    public virtual float GetDamage() { return damage; }
     public virtual void Follow() 
     {
         if (currentDistance > bossArea.size.x / 2) { return; }
@@ -68,7 +64,6 @@ public class Boss : MonoBehaviour
         if (player.transform.position.x < transform.position.x) { GetComponent<SpriteRenderer>().flipX = true; }
         else { GetComponent<SpriteRenderer>().flipX = false; }
 
-        // Debug.Log(currentDistance + " " + closestDistance);
         if (IsInsideBossArea() && !isAtacking && !isDashing && !(currentDistance < closestDistance))
         {
             Vector2 newTranform = Vector2.MoveTowards(transform.position, player.transform.position, 10 * Time.deltaTime);
@@ -119,8 +114,6 @@ public class Boss : MonoBehaviour
     }
     private IEnumerator Dash(float dashingTime, float dashingPower, bool dashTowardsPlayer, float dashingCooldown)
     {
-        // tr.emitting = true;
-
         isDashing = true;
         float end = Time.time + dashingTime;
 
@@ -195,7 +188,7 @@ public class Boss : MonoBehaviour
         {
             if (player.GetComponent<PlayerMovement>().CanGetDamage)
             {
-                GetComponent<HealthManager>().LoseLife(10);
+                player.GetComponent<HealthManager>().LoseLife(10);
                 hasHit = true; 
             }
         }

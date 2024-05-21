@@ -17,7 +17,6 @@ public class PlayerMovement : MonoBehaviour
 
     public bool CanGetDamage { get; private set; } = true;
     public bool CanMove;
-    public bool HasToRespawn;
     private BoxCollider2D boxCollider; 
     private static Rigidbody2D body;
     private Animator animator;
@@ -25,7 +24,6 @@ public class PlayerMovement : MonoBehaviour
     private bool canJump;
     private bool isJumping;
     public bool ApplyingInput { get; private set; }              // Decideix si l'sprite ha de fer flip en eix x o y (si està mirant dreta o esq)
-    private Vector3 checkpoint;
     private PhysicsMaterial2D defaultMaterial, noFrictionMaterial; /* Material default i material sense
                                                                        fricció (no es queda enganxat a les parets) */
 
@@ -34,7 +32,6 @@ public class PlayerMovement : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         jumpCount = 0;
-        checkpoint = body.transform.position;
 
         boxCollider = GetComponent<BoxCollider2D>();
         defaultMaterial = GetComponent<PhysicsMaterial2D>();
@@ -42,7 +39,6 @@ public class PlayerMovement : MonoBehaviour
         noFrictionMaterial.friction = 0;
 
         CanMove = true;
-        HasToRespawn = false;
         canJump = true;
     }
     private void Update()
@@ -50,8 +46,6 @@ public class PlayerMovement : MonoBehaviour
         Movement();
         
         Jump();
-
-        Respawn();
 
         Teleport();
 
@@ -98,23 +92,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.Alpha3)) { body.transform.position = new Vector3(525f, -1f, 0f); }
         if (Input.GetKey(KeyCode.Alpha4)) { body.transform.position = new Vector3(796f, 4f, 0f); }
     }
-    private void ManageRespawn(Vector2 newCheckpoint) /*   FUERA MOROS   */
-    {
-        checkpoint = newCheckpoint;
-    }
-    private void OnTriggerEnter2D(Collider2D collision) // Respawn i checkpoints 
-    {
-        if (collision.gameObject.CompareTag("Checkpoint"))
-        {
-            ManageRespawn(collision.gameObject.transform.position);
-            Destroy(collision.gameObject.GetComponent<BoxCollider2D>());
-        }
-        if (collision.gameObject.CompareTag("Deathzone"))
-        {
-            HasToRespawn = true;
-            GetComponent<HealthManager>().LoseLife(10);
-        }
-    }
+    
     public void Movement()
     {
         if (!CanMove) return;  
@@ -142,28 +120,6 @@ public class PlayerMovement : MonoBehaviour
 
         animator.SetBool("run", body.velocity.x != 0 && ApplyingInput);
     }
-    public void Respawn()  /*   FUERA MOROS   */
-    {
-        if (HasToRespawn)
-        {
-            body.transform.position = checkpoint;
-            HasToRespawn = false;
-        }
-    }
-    private void OnCollisionEnter2D(Collision2D collision) 
-    {
-        if (collision.gameObject.CompareTag("elevator"))
-        {
-            transform.parent = collision.gameObject.transform;
-        }
-    }
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("elevator"))
-        {
-            transform.parent = null;
-        }
-    }
     private IEnumerator Dash(float dashingTime, float dashingCooldown, float dashingPower)
     {
         canDash = false;
@@ -184,6 +140,33 @@ public class PlayerMovement : MonoBehaviour
 
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
+    }
+    private void OnTriggerEnter2D(Collider2D collision) // Respawn i checkpoints 
+    {
+        if (collision.gameObject.CompareTag("Checkpoint"))
+        {
+            GetComponent<ManageRespawn>().NewCheckpoint(collision.gameObject.transform.position);
+            Destroy(collision.gameObject.GetComponent<BoxCollider2D>());
+        }
+        if (collision.gameObject.CompareTag("Deathzone"))
+        {
+            GetComponent<ManageRespawn>().HasToRespawn = true;
+            GetComponent<HealthManager>().LoseLife(10);
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D collision) 
+    {
+        if (collision.gameObject.CompareTag("elevator"))
+        {
+            transform.parent = collision.gameObject.transform;
+        }
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("elevator"))
+        {
+            transform.parent = null;
+        }
     }
 }
 
