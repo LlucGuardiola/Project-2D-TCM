@@ -21,7 +21,6 @@ public class Boss : MonoBehaviour
     protected float damage;
     protected Animator animator;
 
-    private AudioSource audioSource; ///////////////////////////////////////////////////////
     private bool hasHit = false;
     protected bool isDashing = false;
     protected bool canDash;
@@ -39,7 +38,6 @@ public class Boss : MonoBehaviour
         animator = GetComponent<Animator>();
         Vector3 worldSize = Vector3.Scale(player.GetComponent<BoxCollider2D>().size, transform.localScale);
         closestDistance = worldSize.x;
-        audioSource = GetComponent<AudioSource>(); ///////////////////////////////////////////////////////////
     }
     public Boss(float vida, float damage)
     {
@@ -198,7 +196,6 @@ public class Boss : MonoBehaviour
             if (player.GetComponent<PlayerMovement>().CanGetDamage)
             {
                 player.GetComponent<PlayerMovement>().LoseLife(5);
-                audioSource.Play();
                 hasHit = true; 
             }
         }
@@ -209,6 +206,7 @@ public class Boss : MonoBehaviour
     {
         if (isAtacking) yield break;
         isAtacking = true;
+        
         yield return new WaitForSeconds(animator.GetCurrentAnimatorClipInfo(0)[0].clip.length);
         isAtacking = false;
         ResetHit();
