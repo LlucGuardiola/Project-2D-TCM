@@ -91,10 +91,13 @@ public class PlayerAttack : MonoBehaviour
     private void Hit() // Activated within animation
     {
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);  //Detectar enemigos en un rango especificado
-
+        
         foreach (Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<Boss>().TakeDamage(attackDamage);
+            if (enemy is not CapsuleCollider2D)
+            {
+                enemy.GetComponent<Boss>().TakeDamage(attackDamage);
+            }
         }
     }
 }
