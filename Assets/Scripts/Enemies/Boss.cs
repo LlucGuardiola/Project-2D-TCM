@@ -34,7 +34,9 @@ public class Boss : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         canDash = true;
         animator = GetComponent<Animator>();
-        closestDistance = player.GetComponent<SpriteRenderer>().sprite.bounds.size.x + GetComponent<SpriteRenderer>().sprite.bounds.size.x;
+        Vector3 worldSize = Vector3.Scale(player.GetComponent<BoxCollider2D>().size, transform.localScale);
+        closestDistance = worldSize.x;
+        
     }
     public Boss(float vida, float damage)
     {
@@ -65,6 +67,7 @@ public class Boss : MonoBehaviour
         if (player.transform.position.x < transform.position.x) { GetComponent<SpriteRenderer>().flipX = true; }
         else { GetComponent<SpriteRenderer>().flipX = false; }
 
+        Debug.Log(currentDistance + " " + closestDistance);
         if (IsInsideBossArea() && !isAtacking && !isDashing && !(currentDistance < closestDistance))
         {
             Vector2 newTranform = Vector2.MoveTowards(transform.position, player.transform.position, 10 * Time.deltaTime);
