@@ -29,10 +29,6 @@ public class Boss : MonoBehaviour
     protected float nextAttacktime = 0f;
     [SerializeField] protected Transform attackPoint;    //Punto para rango de ataque
 
-    public void Awake()
-    {
-
-    }
     public virtual void Start()
     {
         player = GameObject.FindWithTag("Player");
