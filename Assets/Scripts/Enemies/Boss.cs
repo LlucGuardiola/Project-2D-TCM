@@ -9,10 +9,10 @@ using UnityEngine.U2D;
 public class Boss : MonoBehaviour
 {
     [SerializeField] protected float vida;
-    [SerializeField] protected GameObject player;
     [SerializeField] protected AnimationClip deathAnim;
     [SerializeField] protected BoxCollider2D bossArea;
 
+    protected GameObject player;
     protected float closestDistance;
     protected float currentDistance;
     protected Vector3 currentPosition;
@@ -29,7 +29,11 @@ public class Boss : MonoBehaviour
     protected float nextAttacktime = 0f;
     [SerializeField] protected Transform attackPoint;    //Punto para rango de ataque
 
+    public void Awake()
+    {
+        player = GameObject.FindWithTag("Player");
 
+    }
     public virtual void Start()
     {
         canDash = true;

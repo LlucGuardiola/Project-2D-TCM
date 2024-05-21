@@ -59,7 +59,6 @@ public class ElevatorCave : MonoBehaviour
         
         if (isElevatorUp)
         {
-
             if (which == 2)
             {
                 transform.position = Vector2.MoveTowards(transform.position, upperPosition.position, speed * Time.deltaTime);
