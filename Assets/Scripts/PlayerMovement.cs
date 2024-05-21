@@ -107,7 +107,7 @@ public class PlayerMovement : MonoBehaviour
     {
         checkpoint = newCheckpoint;
     }
-    private void OnTriggerEnter2D(Collider2D collision) // Respawn i checkpoints ///////////////// codi repetit?
+    private void OnTriggerEnter2D(Collider2D collision) // Respawn i checkpoints 
     {
         if (collision.gameObject.CompareTag("Checkpoint"))
         {
@@ -167,16 +167,11 @@ public class PlayerMovement : MonoBehaviour
             sliderVidas.value = vidas;
         }
     }
-    private void OnCollisionEnter2D(Collision2D collision) ///////////////////////////////////////// codi repetit?
+    private void OnCollisionEnter2D(Collision2D collision) 
     {
         if (collision.gameObject.CompareTag("elevator"))
         {
             transform.parent = collision.gameObject.transform;
-        }
-
-        if (collision.gameObject.CompareTag("Deathzone"))
-        {
-            LoseLife(10);
         }
     }
     private void OnCollisionExit2D(Collision2D collision)
