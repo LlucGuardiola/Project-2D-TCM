@@ -6165,7 +6165,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2801123851974390177, guid: 0fecbd3d2ce640d4f978691f1159a264, type: 3}
       propertyPath: vida
-      value: 200
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2801123851974390177, guid: 0fecbd3d2ce640d4f978691f1159a264, type: 3}
       propertyPath: bossArea
