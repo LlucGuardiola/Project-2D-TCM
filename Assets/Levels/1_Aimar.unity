@@ -195,6 +195,7 @@ MonoBehaviour:
   GreenSlime: 0
   GraySlime: 0
   BlueSlime: 0
+  fuerzaGolpe: 2000
 --- !u!50 &654118
 Rigidbody2D:
   serializedVersion: 4
@@ -2642,6 +2643,7 @@ GameObject:
   - component: {fileID: 850607995}
   - component: {fileID: 850607996}
   - component: {fileID: 850607997}
+  - component: {fileID: 850607998}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -2809,10 +2811,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  vidas: 100
-  sliderVidas: {fileID: 434915010}
   tr: {fileID: 1597720667}
-  fuerzaGolpe: 3000
+  CanMove: 1
+  HasToRespawn: 0
 --- !u!95 &850607996
 Animator:
   serializedVersion: 5
@@ -2857,6 +2858,20 @@ MonoBehaviour:
   attackRange: 0.9
   combatState: 0
   attackRate: 2
+--- !u!114 &850607998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 850607990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62e3522d78b010048b8879da92afc45e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vidas: 100
+  sliderVidas: {fileID: 434915010}
 --- !u!1 &868593023
 GameObject:
   m_ObjectHideFlags: 0
@@ -17452,6 +17467,7 @@ MonoBehaviour:
   GreenSlime: 0
   GraySlime: 0
   BlueSlime: 0
+  fuerzaGolpe: 0
 --- !u!58 &1307567233
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -20673,6 +20689,7 @@ MonoBehaviour:
   GreenSlime: 0
   GraySlime: 0
   BlueSlime: 0
+  fuerzaGolpe: 0
 --- !u!50 &2101999422
 Rigidbody2D:
   serializedVersion: 4

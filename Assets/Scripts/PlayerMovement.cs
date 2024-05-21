@@ -10,17 +10,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private int maxJumpCount;      
     [SerializeField] private float jumpHeight;
     [SerializeField] private LayerMask groundLayer; // Detecció de col·lisió amb ground 
-    [SerializeField] float vidas;
-    [SerializeField] Slider sliderVidas;
     [SerializeField] TrailRenderer tr;
 
     private bool canDash = true;
     public bool IsDashing { get; private set; }
 
     public bool CanGetDamage { get; private set; } = true;
-    public float fuerzaGolpe;
-    private bool puedeMoverse = true;
-    private bool hasToRespawn;
+    public bool CanMove;
+    public bool HasToRespawn;
     private BoxCollider2D boxCollider; 
     private static Rigidbody2D body;
     private Animator animator;
@@ -44,11 +41,9 @@ public class PlayerMovement : MonoBehaviour
         noFrictionMaterial = new PhysicsMaterial2D();
         noFrictionMaterial.friction = 0;
 
-        hasToRespawn = false;
+        CanMove = true;
+        HasToRespawn = false;
         canJump = true;
-
-        sliderVidas.maxValue = vidas;
-        sliderVidas.value = sliderVidas.maxValue;
     }
     private void Update()
     {
@@ -103,7 +98,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.Alpha3)) { body.transform.position = new Vector3(525f, -1f, 0f); }
         if (Input.GetKey(KeyCode.Alpha4)) { body.transform.position = new Vector3(796f, 4f, 0f); }
     }
-    private void ManageRespawn(Vector2 newCheckpoint)
+    private void ManageRespawn(Vector2 newCheckpoint) /*   FUERA MOROS   */
     {
         checkpoint = newCheckpoint;
     }
@@ -116,13 +111,13 @@ public class PlayerMovement : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Deathzone"))
         {
-            hasToRespawn = true;
-            LoseLife(10);
+            HasToRespawn = true;
+            GetComponent<HealthManager>().LoseLife(10);
         }
     }
     public void Movement()
     {
-        if (!puedeMoverse) return;  
+        if (!CanMove) return;  
         if (IsDashing) return; 
 
         float horizontalInput = Input.GetAxis("Horizontal");
@@ -147,24 +142,12 @@ public class PlayerMovement : MonoBehaviour
 
         animator.SetBool("run", body.velocity.x != 0 && ApplyingInput);
     }
-    public void Respawn()
+    public void Respawn()  /*   FUERA MOROS   */
     {
-        if (hasToRespawn)
+        if (HasToRespawn)
         {
             body.transform.position = checkpoint;
-            hasToRespawn = false;
-        }
-    }
-    public void LoseLife(float damageDealt)
-    {
-        vidas-=damageDealt;
-        sliderVidas.value = vidas;
-
-        if (vidas <= 0)
-        {
-            hasToRespawn = true; 
-            vidas = sliderVidas.maxValue; 
-            sliderVidas.value = vidas;
+            HasToRespawn = false;
         }
     }
     private void OnCollisionEnter2D(Collision2D collision) 
@@ -180,32 +163,6 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.parent = null;
         }
-    }
-    public void AplicarGolpe ()
-    {
-        puedeMoverse = false;
-
-        Vector2 direccion;
-
-        if (body.velocity.x > 0)
-        {
-            direccion = new Vector2(-1, 1);
-            body.AddForce(direccion * fuerzaGolpe);
-        }
-        else
-        {
-            direccion = new Vector2(1,1);
-            body.AddForce(direccion * fuerzaGolpe);
-        }
-
-        StartCoroutine (EsperarYActivarMovimiento());    
-    }
-    IEnumerator EsperarYActivarMovimiento ()
-    {
-        //DA TIEMPO A QUE EL PERSONAJE SALGA VOLANDO Y NO SE ACTIVE EL MOVIMIENTO AL INSTANTE
-        yield return new WaitForSeconds(0.4f);
-        puedeMoverse = true;
-        LoseLife(10);
     }
     private IEnumerator Dash(float dashingTime, float dashingCooldown, float dashingPower)
     {

@@ -195,7 +195,7 @@ public class Boss : MonoBehaviour
         {
             if (player.GetComponent<PlayerMovement>().CanGetDamage)
             {
-                player.GetComponent<PlayerMovement>().LoseLife(5);
+                GetComponent<HealthManager>().LoseLife(10);
                 hasHit = true; 
             }
         }
