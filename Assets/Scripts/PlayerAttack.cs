@@ -94,14 +94,9 @@ public class PlayerAttack : MonoBehaviour
         
         foreach (Collider2D enemy in hitEnemies)
         {
-            if (enemy is not CapsuleCollider2D)
+            if (enemy is CapsuleCollider2D)
             {
-                Debug.Log("literalmente la cabra");
                 enemy.GetComponent<Boss>().TakeDamage(attackDamage);
-            }
-            else
-            {
-                Debug.Log("Faaaaaaaaaaak");
             }
         }
     }

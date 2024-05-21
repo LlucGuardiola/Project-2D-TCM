@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Collections;
 using UnityEngine;
 using UnityEngine.U2D;
 
@@ -20,6 +21,8 @@ public class Boss : MonoBehaviour
     protected float damage;
     protected Animator animator;
 
+    private AudioSource audioSource; ///////////////////////////////////////////////////////
+    private bool hasHit = false;
     protected bool isDashing = false;
     protected bool canDash;
 
@@ -36,6 +39,7 @@ public class Boss : MonoBehaviour
         animator = GetComponent<Animator>();
         Vector3 worldSize = Vector3.Scale(player.GetComponent<BoxCollider2D>().size, transform.localScale);
         closestDistance = worldSize.x;
+        audioSource = GetComponent<AudioSource>(); ///////////////////////////////////////////////////////////
     }
     public Boss(float vida, float damage)
     {
@@ -154,14 +158,6 @@ public class Boss : MonoBehaviour
     }
     public void Attack()
     {
-        if (IsPlayerInRange() && Time.time >= nextAttacktime)
-        {
-            int i = UnityEngine.Random.Range(0, 2);
-            string attack = i == 0 ? "Attack" : "Attack2";
-            animator.SetTrigger(attack);
-            nextAttacktime = Time.time + UnityEngine.Random.Range(1, 3);
-        }
-
         if (!GetComponent<SpriteRenderer>().flipX)
         {
             attackPoint.transform.position = new Vector2(transform.position.x + 3.5f, transform.position.y + 1.1f);
@@ -169,6 +165,14 @@ public class Boss : MonoBehaviour
         else
         {
             attackPoint.transform.position = new Vector2(transform.position.x - 3.5f, transform.position.y + 1.1f);
+        }
+
+        if (IsPlayerInRange() && Time.time >= nextAttacktime)
+        {
+            int i = UnityEngine.Random.Range(0, 2);
+            string attack = i == 0 ? "Attack" : "Attack2";
+            animator.SetTrigger(attack);
+            nextAttacktime = Time.time + UnityEngine.Random.Range(1, 3);
         }
     }
     bool IsPlayerInRange()
@@ -185,21 +189,28 @@ public class Boss : MonoBehaviour
     }
     private void Hit() // Activated within animation
     {
-        Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playerLayer);  //Detectar enemigos en un rango especificado
+        if (hasHit) return; 
+
+        Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playerLayer);  
 
         foreach (Collider2D player in hitPlayer)
         {
-            if (player.GetComponent<PlayerMovement>().CanGetDamaged)
+            if (player.GetComponent<PlayerMovement>().CanGetDamage)
             {
-                player.GetComponent<PlayerMovement>().LoseLife(UnityEngine.Random.Range(7, 15)); /////////////////////////////////////////////////
+                player.GetComponent<PlayerMovement>().LoseLife(5);
+                audioSource.Play();
+                hasHit = true; 
             }
         }
     }
+    public void ResetHit() { hasHit = false; }
     private void AttackAnimation() { StartCoroutine(StartAttack()); } // Activated within the animation
     private IEnumerator StartAttack()
     {
+        if (isAtacking) yield break;
         isAtacking = true;
         yield return new WaitForSeconds(animator.GetCurrentAnimatorClipInfo(0)[0].clip.length);
         isAtacking = false;
+        ResetHit();
     }
 }
