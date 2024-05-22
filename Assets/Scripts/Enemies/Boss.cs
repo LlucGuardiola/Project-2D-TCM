@@ -163,7 +163,7 @@ public class Boss : MonoBehaviour
             int i = UnityEngine.Random.Range(0, 2);
             string attack = i == 0 ? "Attack" : "Attack2";
             animator.SetTrigger(attack);
-            nextAttacktime = Time.time + UnityEngine.Random.Range(1, 3.5f);
+            nextAttacktime = Time.time + UnityEngine.Random.Range(1, 3.6f);
         }
     }
     bool IsPlayerInRange()
