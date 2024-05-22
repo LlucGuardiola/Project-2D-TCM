@@ -9,7 +9,7 @@ public class EnemigoSlime : MonoBehaviour
     [SerializeField] private bool GraySlime;
     [SerializeField] private bool BlueSlime;
 
-    public float fuerzaGolpe;
+    public float hitStrength;
     private Animator animator;
     private GameObject player;
     private bool canGetDamage;
@@ -28,10 +28,10 @@ public class EnemigoSlime : MonoBehaviour
     {
          if (collision.gameObject.CompareTag("Player") && canGetDamage)
          {
-            AplicarGolpe();
+            ApplyHit();
          }
     }
-    public void AplicarGolpe()
+    public void ApplyHit()
     {
         player.GetComponent<PlayerMovement>().CanMove = false;
 
@@ -40,18 +40,18 @@ public class EnemigoSlime : MonoBehaviour
         if (player.GetComponent<Rigidbody2D>().velocity.x > 0)
         {
             direccion = new Vector2(-1, 1);
-            player.GetComponent<Rigidbody2D>().AddForce(direccion * fuerzaGolpe);
+            player.GetComponent<Rigidbody2D>().AddForce(direccion * hitStrength);
         }
         else
         {
             direccion = new Vector2(1, 1);
-            player.GetComponent<Rigidbody2D>().AddForce(direccion * fuerzaGolpe);
+            player.GetComponent<Rigidbody2D>().AddForce(direccion * hitStrength);
         }
         canGetDamage = false;
 
-        StartCoroutine(EsperarYActivarMovimiento());
+        StartCoroutine(WaitAndActivateMovement());
     }
-    IEnumerator EsperarYActivarMovimiento()
+    IEnumerator WaitAndActivateMovement()
     {
         player.GetComponent<HealthManager>().LoseLife(10);
         yield return new WaitForSeconds(0.4f);
