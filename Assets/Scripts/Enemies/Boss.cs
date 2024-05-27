@@ -150,7 +150,7 @@ public class Boss : MonoBehaviour
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 
-    private void Hit()
+    private void Hit() // Activated within the animation
     {
         if (hasHit) return;
 
@@ -164,13 +164,13 @@ public class Boss : MonoBehaviour
             }
         }
     }
-
+        
     public void ResetHit()
     {
         hasHit = false;
     }
 
-    private void AttackAnimation()
+    private void AttackAnimation() // Activated within the animation
     {
         StartCoroutine(StartAttack());
     }
