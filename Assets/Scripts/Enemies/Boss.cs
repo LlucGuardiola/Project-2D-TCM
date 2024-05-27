@@ -1,11 +1,5 @@
-using JetBrains.Annotations;
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Antlr3.Runtime.Collections;
 using UnityEngine;
-using UnityEngine.U2D;
 
 public class Boss : MonoBehaviour
 {
@@ -23,95 +17,86 @@ public class Boss : MonoBehaviour
 
     private bool hasHit = false;
     protected bool isDashing = false;
-    protected bool canDash;
+    protected bool canDash = true;
 
     public float attackRange;
-    public LayerMask playerLayer;    // Capa de enemigos
-    private bool isAtacking = false;
-    protected float nextAttacktime = 0f;
-    [SerializeField] protected Transform attackPoint;    //Punto para rango de ataque
+    public LayerMask playerLayer;
+    private bool isAttacking = false;
+    protected float nextAttackTime = 0f;
+    [SerializeField] protected Transform attackPoint;
 
     public virtual void Start()
     {
         player = GameObject.FindWithTag("Player");
-        canDash = true;
         animator = GetComponent<Animator>();
         Vector3 worldSize = Vector3.Scale(player.GetComponent<BoxCollider2D>().size, transform.localScale);
         closestDistance = worldSize.x;
     }
+
     public Boss(float vida, float damage)
     {
         this.vida = vida;
         this.damage = damage;
     }
+
     public virtual void Update()
     {
-        currentDistance = (player.transform.position - transform.position).magnitude;
+        currentDistance = Vector3.Distance(player.transform.position, transform.position);
         animator.SetBool("isRunning", currentPosition != transform.position);
 
         Attack();
-
         Follow();
-
         ManageDash();
     }
-    public virtual void Follow() 
+
+    public virtual void Follow()
     {
-        if (currentDistance > bossArea.size.x / 2) { return; }
+        if (currentDistance > bossArea.size.x / 2) return;
 
         currentPosition = transform.position;
 
-        if (player.transform.position.x < transform.position.x) { GetComponent<SpriteRenderer>().flipX = true; }
-        else { GetComponent<SpriteRenderer>().flipX = false; }
+        GetComponent<SpriteRenderer>().flipX = player.transform.position.x < transform.position.x;
 
-        if (IsInsideBossArea() && !isAtacking && !isDashing && !(currentDistance < closestDistance))
+        if (IsInsideBossArea() && !isAttacking && !isDashing && currentDistance > closestDistance)
         {
-            Vector2 newTranform = Vector2.MoveTowards(transform.position, player.transform.position, 10 * Time.deltaTime);
-            transform.position = new Vector2(newTranform.x, transform.position.y);
+            Vector2 newPosition = Vector2.MoveTowards(transform.position, player.transform.position, 10 * Time.deltaTime);
+            transform.position = new Vector2(newPosition.x, transform.position.y);
         }
     }
+
     private bool IsInsideBossArea()
     {
-        Vector2 newTranform = Vector2.MoveTowards(transform.position, player.transform.position, 10 * Time.deltaTime);
-        
-        if (newTranform.x < transform.position.x)
-        {
-            if (transform.position.x - 1 < bossArea.transform.position.x - (bossArea.size.x / 2)) { return false; }
-            else { return true; }
-        }
-        else
-        {
-            if (transform.position.x + 1 > bossArea.transform.position.x + (bossArea.size.x / 2)) { return false; }
-            else { return true; }
-        }
+        float bossAreaMinX = bossArea.transform.position.x - (bossArea.size.x / 2);
+        float bossAreaMaxX = bossArea.transform.position.x + (bossArea.size.x / 2);
+
+        return transform.position.x > bossAreaMinX && transform.position.x < bossAreaMaxX;
     }
-    public virtual void TakeDamage(int Damage)
+
+    public virtual void TakeDamage(int damage)
     {
-        vida -= Damage;
-        if (vida <= 0) 
-        { 
-            Die(); 
-        }
+        vida -= damage;
+        if (vida <= 0) Die();
 
         StartCoroutine(Dash(0.2f, 10, false, 1));
         animator.SetTrigger("Hit");
     }
+
     private void ManageDash()
     {
-        int rngNumber = UnityEngine.Random.Range(1, 3);
-
-        if (currentDistance > 10 && currentDistance < 30 && rngNumber % 2 == 0 && canDash && !isAtacking)
+        if (currentDistance > 10 && currentDistance < 30 && UnityEngine.Random.Range(0, 2) == 0 && canDash && !isAttacking)
         {
             StartCoroutine(Dash(0.2f, 25, true, 0));
             canDash = false;
-            StartCoroutine(WaitForSeconds(5));
+            StartCoroutine(ResetDash(5));
         }
     }
-    private IEnumerator WaitForSeconds(float seconds)
+
+    private IEnumerator ResetDash(float seconds)
     {
         yield return new WaitForSeconds(seconds);
         canDash = true;
     }
+
     private IEnumerator Dash(float dashingTime, float dashingPower, bool dashTowardsPlayer, float dashingCooldown)
     {
         isDashing = true;
@@ -119,26 +104,16 @@ public class Boss : MonoBehaviour
 
         while (Time.time < end)
         {
-            switch (dashTowardsPlayer)
-            {
-                case true:
-                    transform.position = GetComponent<SpriteRenderer>().flipX ?
-                    new Vector3(transform.position.x + -1 * dashingPower * Time.deltaTime, transform.position.y, 0) :
-                    new Vector3(transform.position.x +  1 * dashingPower * Time.deltaTime, transform.position.y, 0);
-                break;
-
-                default:
-                    transform.position = GetComponent<SpriteRenderer>().flipX ?
-                    new Vector3(transform.position.x +  1 * dashingPower * Time.deltaTime, transform.position.y, 0) :
-                    new Vector3(transform.position.x + -1 * dashingPower * Time.deltaTime, transform.position.y, 0);
-                break;
-            }
+            float dashDirection = dashTowardsPlayer ? 1 : -1;
+            dashDirection *= GetComponent<SpriteRenderer>().flipX ? -1 : 1;
+            transform.position += new Vector3(dashDirection * dashingPower * Time.deltaTime, 0, 0);
             yield return null;
         }
 
         yield return new WaitForSeconds(dashingCooldown);
         isDashing = false;
     }
+
     public virtual void Die()
     {
         dead = true;
@@ -147,61 +122,66 @@ public class Boss : MonoBehaviour
         enabled = false;
         Destroy(gameObject, deathAnim.length);
     }
+
     public void Attack()
     {
-        if (!GetComponent<SpriteRenderer>().flipX)
-        {
-            attackPoint.transform.position = new Vector2(transform.position.x + 3.5f, transform.position.y + 1.1f);
-        }
-        else
-        {
-            attackPoint.transform.position = new Vector2(transform.position.x - 3.5f, transform.position.y + 1.1f);
-        }
+        attackPoint.position = new Vector2(
+            transform.position.x + (GetComponent<SpriteRenderer>().flipX ? -3.5f : 3.5f),
+            transform.position.y + 1.1f
+        );
 
-        if (IsPlayerInRange() && Time.time >= nextAttacktime)
+        if (IsPlayerInRange() && Time.time >= nextAttackTime)
         {
-            int i = UnityEngine.Random.Range(0, 2);
-            string attack = i == 0 ? "Attack" : "Attack2";
-            animator.SetTrigger(attack);
-            nextAttacktime = Time.time + UnityEngine.Random.Range(1, 3.6f);
+            string attackTrigger = UnityEngine.Random.Range(0, 2) == 0 ? "Attack" : "Attack2";
+            animator.SetTrigger(attackTrigger);
+            nextAttackTime = Time.time + UnityEngine.Random.Range(1, 3.6f);
         }
     }
-    bool IsPlayerInRange()
+
+    private bool IsPlayerInRange()
     {
-        float distance = Vector3.Distance(transform.position, player.transform.position);
-        return distance <= attackRange * 2;
+        return Vector3.Distance(transform.position, player.transform.position) <= attackRange * 2;
     }
-    private void OnDrawGizmosSelected()  //Dibujar esfera para ver rango de ataque
+
+    private void OnDrawGizmosSelected()
     {
-        if (attackPoint == null)
-            return;
+        if (attackPoint == null) return;
 
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
-    private void Hit() // Activated within animation
+
+    private void Hit()
     {
-        if (hasHit) return; 
+        if (hasHit) return;
 
-        Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playerLayer);  
-
-        foreach (Collider2D player in hitPlayer)
+        Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playerLayer);
+        foreach (Collider2D hitPlayer in hitPlayers)
         {
-            if (player.GetComponent<PlayerMovement>().CanGetDamage)
+            if (hitPlayer.GetComponent<PlayerMovement>().CanGetDamage)
             {
-                player.GetComponent<HealthManager>().LoseLife(10);
-                hasHit = true; 
+                hitPlayer.GetComponent<HealthManager>().LoseLife(10);
+                hasHit = true;
             }
         }
     }
-    public void ResetHit() { hasHit = false; }
-    private void AttackAnimation() { StartCoroutine(StartAttack()); } // Activated within the animation
+
+    public void ResetHit()
+    {
+        hasHit = false;
+    }
+
+    private void AttackAnimation()
+    {
+        StartCoroutine(StartAttack());
+    }
+
     private IEnumerator StartAttack()
     {
-        if (isAtacking) yield break;
-        isAtacking = true;
-        
+        if (isAttacking) yield break;
+        isAttacking = true;
+
         yield return new WaitForSeconds(animator.GetCurrentAnimatorClipInfo(0)[0].clip.length);
-        isAtacking = false;
+        isAttacking = false;
         ResetHit();
     }
 }
