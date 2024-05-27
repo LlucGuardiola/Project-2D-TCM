@@ -35,7 +35,7 @@ public class PlayerAttack : MonoBehaviour
 
         if (combatState)
         {
-            if(Time.time >= nextAttacktime)   
+            if(Time.time >= nextAttacktime && !player.GetComponent<PlayerMovement>().IsJumping)   
             {
                 if (Input.GetMouseButtonDown(0) && !GetComponent<PlayerMovement>().IsDashing)
                 {

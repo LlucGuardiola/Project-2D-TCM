@@ -152,7 +152,7 @@ MonoBehaviour:
   GreenSlime: 0
   GraySlime: 0
   BlueSlime: 0
-  fuerzaGolpe: 2000
+  hitStrength: 2000
 --- !u!58 &8547669990670847720
 CircleCollider2D:
   m_ObjectHideFlags: 0

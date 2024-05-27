@@ -8939,11 +8939,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4079092231987273743, guid: 64ad26f35d95fc84997ad93db1292861, type: 3}
       propertyPath: m_Size.y
-      value: 0.15969303
+      value: 0.12157443
       objectReference: {fileID: 0}
     - target: {fileID: 4079092231987273743, guid: 64ad26f35d95fc84997ad93db1292861, type: 3}
       propertyPath: m_Offset.y
-      value: 0.07821001
+      value: 0.059150703
       objectReference: {fileID: 0}
     - target: {fileID: 5373330553216305745, guid: 64ad26f35d95fc84997ad93db1292861, type: 3}
       propertyPath: m_LocalScale.x
@@ -9008,6 +9008,30 @@ PrefabInstance:
     - target: {fileID: 5373330553216305747, guid: 64ad26f35d95fc84997ad93db1292861, type: 3}
       propertyPath: m_TagString
       value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 7657256558514739492, guid: 64ad26f35d95fc84997ad93db1292861, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].x
+      value: -0.9793306
+      objectReference: {fileID: 0}
+    - target: {fileID: 7657256558514739492, guid: 64ad26f35d95fc84997ad93db1292861, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].y
+      value: 0.12057728
+      objectReference: {fileID: 0}
+    - target: {fileID: 7657256558514739492, guid: 64ad26f35d95fc84997ad93db1292861, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[5].x
+      value: 0.96168256
+      objectReference: {fileID: 0}
+    - target: {fileID: 7657256558514739492, guid: 64ad26f35d95fc84997ad93db1292861, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[5].y
+      value: 0.12381678
+      objectReference: {fileID: 0}
+    - target: {fileID: 8666753539894232769, guid: 64ad26f35d95fc84997ad93db1292861, type: 3}
+      propertyPath: m_Size.y
+      value: 0.12327814
+      objectReference: {fileID: 0}
+    - target: {fileID: 8666753539894232769, guid: 64ad26f35d95fc84997ad93db1292861, type: 3}
+      propertyPath: m_Offset.y
+      value: 1.0610417
       objectReference: {fileID: 0}
     - target: {fileID: 8827655428071708691, guid: 64ad26f35d95fc84997ad93db1292861, type: 3}
       propertyPath: m_Layer
@@ -24403,7 +24427,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.31214476, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -24414,7 +24438,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.6242893, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &1192581212
 GameObject:

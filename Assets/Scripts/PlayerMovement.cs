@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     private int jumpCount;
     private bool canJump;
-    private bool isJumping;
+    public bool IsJumping { get; private set; }
 
     public bool ApplyingInput { get; private set; }              // Decideix si l'sprite ha de fer flip en eix x o y (si està mirant dreta o esq)
     private PhysicsMaterial2D defaultMaterial, noFrictionMaterial; /* Material default i material sense
@@ -63,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
             body.velocity = new Vector2(body.velocity.x, jumpHeight * 2);
         }
         canJump = CanJump();
-        animator.SetBool("canJump", isJumping);
+        animator.SetBool("canJump", IsJumping);
     }
     private bool CanJump()
     {
@@ -73,14 +73,14 @@ public class PlayerMovement : MonoBehaviour
         {
             body.GetComponent<Rigidbody2D>().sharedMaterial = defaultMaterial;
             jumpCount = 0;
-            isJumping = false;
+            IsJumping = false;
 
             return true;
         }
         else                      // Si ESTÀ a l'aire
         {
             body.GetComponent<Rigidbody2D>().sharedMaterial = noFrictionMaterial;
-            isJumping = true;
+            IsJumping = true;
 
             if (jumpCount < maxJumpCount - 1) { return true; }
             else { return false; }
@@ -93,7 +93,6 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.Alpha3)) { body.transform.position = new Vector3(525f, -1f, 0f); }
         if (Input.GetKey(KeyCode.Alpha4)) { body.transform.position = new Vector3(796f, 4f, 0f); }
     }
-    
     public void Movement()
     {
         if (!CanMove) return;  
@@ -113,7 +112,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             ApplyingInput = false;
-            if (body.velocity.x != 0 && !isJumping)
+            if (body.velocity.x != 0 && !IsJumping)
             {
                 body.velocity = new Vector2(body.velocity.x * 0.1f, body.velocity.y);
             }
