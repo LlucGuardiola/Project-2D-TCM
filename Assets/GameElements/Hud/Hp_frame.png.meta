@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< Updated upstream:Assets/GameElements/Hud/Hp_frame.png.meta
 guid: 9d5f6625b0b035841a1153f7e5466a94
-=======
-guid: d86b193d87e03d74fbf1ba2c9c6d1300
->>>>>>> Stashed changes:Assets/Sprites/UnderwaterFantasy/underwater-artwork/far.png.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -67,9 +63,9 @@ TextureImporter:
   compressionQualitySet: 0
   textureFormatSet: 0
   ignorePngGamma: 0
-  applyGammaDecoding: 0
+  applyGammaDecoding: 1
   swizzle: 50462976
-  cookieLightType: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
