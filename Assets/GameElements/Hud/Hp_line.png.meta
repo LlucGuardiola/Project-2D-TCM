@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream:Assets/GameElements/Hud/Hp_line.png.meta
 guid: 4f8e653bf1c0b054680c13a05741c202
+=======
+guid: c30e639024e2d224f9c19e57c9b4e1c3
+>>>>>>> Stashed changes:Assets/Sprites/UnderwaterFantasy/underwater-artwork/foreground-1.png.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -63,9 +67,9 @@ TextureImporter:
   compressionQualitySet: 0
   textureFormatSet: 0
   ignorePngGamma: 0
-  applyGammaDecoding: 1
+  applyGammaDecoding: 0
   swizzle: 50462976
-  cookieLightType: 1
+  cookieLightType: 0
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
