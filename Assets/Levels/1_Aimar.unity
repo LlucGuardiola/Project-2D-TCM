@@ -2479,8 +2479,10 @@ MonoBehaviour:
   dialogueText: {fileID: 1506413380}
   dialogueLines:
   - Hola, parece que te has quedado dormido otra vez...
-  - Acabas de entrar en un lugar del cual no vas a poder salir tan facilmente !
-  - Holaaa
+  - "Acabas de entrar en un lugar muy profundo de tus sue\xF1os !!"
+  - Para poder salir tendras que superar 4 niveles :(
+  - En cada nivel tendras que conseguir una llave para poder pasar al siguiente nivel,
+    mucha suerte con tu aventura :)
 --- !u!1 &751700434
 GameObject:
   m_ObjectHideFlags: 0
