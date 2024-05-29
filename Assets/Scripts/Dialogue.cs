@@ -6,7 +6,7 @@ using TMPro;
 public class Dialogue : MonoBehaviour
 {
    [SerializeField] private GameObject dialoguePanel;
-   [SerializeField] private TextMeshPro dialogueText;
+   [SerializeField] private TMP_Text dialogueText;
    [SerializeField,TextArea(6,8)] private string[] dialogueLines;
 
     private bool isPlayerInRange;
@@ -17,13 +17,13 @@ public class Dialogue : MonoBehaviour
 
     private void Update()
     {
-        if (isPlayerInRange == true && Input.GetButton("Fire1"))
+        if (isPlayerInRange && Input.GetButtonDown("Fire1"))
         {
             if (!dialogueStart)
             {
                StartDialogue();
             }
-            else if (dialogueText.text ==dialogueLines[lineIndex])
+            else if (dialogueText.text == dialogueLines[lineIndex])
             {
                 NextDialogueLine();
             }
@@ -42,6 +42,7 @@ public class Dialogue : MonoBehaviour
     private void NextDialogueLine ()
     {
         lineIndex++;
+
         if (lineIndex < dialogueLines.Length)
         {
             StartCoroutine(ShowLine());
