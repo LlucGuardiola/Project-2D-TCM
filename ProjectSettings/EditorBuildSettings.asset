@@ -6,9 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Levels/Menu.unity
-    guid: 51299a7dc2a0a264f98745d48f468a7a
-  - enabled: 1
     path: Assets/Levels/Game scene.unity
     guid: 1bbc17fe55755674393fffde8baec6c2
   - enabled: 1
@@ -23,4 +20,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Levels/4_Edgar.unity
     guid: 3e14ab70fb55f5b49a03f580a086e105
+  - enabled: 1
+    path: Assets/Levels/HUD.unity
+    guid: 3996da23131bb224f81fff09091c0708
+  - enabled: 1
+    path: Assets/Levels/Menu.unity
+    guid: 51299a7dc2a0a264f98745d48f468a7a
+  - enabled: 1
+    path: Assets/Levels/MenuPausa.unity
+    guid: 428c7bea889680c41b75ea2ee8ee37d8
   m_configObjects: {}
