@@ -1,27 +1,25 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
 public class Dialogue : MonoBehaviour
 {
-   [SerializeField] private GameObject dialoguePanel;
-   [SerializeField] private TMP_Text dialogueText;
-   [SerializeField,TextArea(6,8)] private string[] dialogueLines;
+    [SerializeField] private GameObject dialoguePanel;
+    [SerializeField] private TMP_Text dialogueText;
+    [SerializeField, TextArea(6, 8)] private string[] dialogueLines;
 
     private bool isPlayerInRange;
     private bool dialogueStart;
     private int lineIndex;
-    private float numero = 0.05f;
-
+    private float typingSpeed = 0.05f;
 
     private void Update()
     {
-        if (isPlayerInRange && Input.GetButtonDown("Fire1"))
+        if (isPlayerInRange && Input.GetKeyDown(KeyCode.E))
         {
             if (!dialogueStart)
             {
-               StartDialogue();
+                StartDialogue();
             }
             else if (dialogueText.text == dialogueLines[lineIndex])
             {
@@ -30,8 +28,7 @@ public class Dialogue : MonoBehaviour
         }
     }
 
-
-    private void StartDialogue ()
+    private void StartDialogue()
     {
         dialogueStart = true;
         dialoguePanel.SetActive(true);
@@ -39,7 +36,7 @@ public class Dialogue : MonoBehaviour
         StartCoroutine(ShowLine());
     }
 
-    private void NextDialogueLine ()
+    private void NextDialogueLine()
     {
         lineIndex++;
 
@@ -49,38 +46,45 @@ public class Dialogue : MonoBehaviour
         }
         else
         {
-            dialogueStart = false;
-            dialoguePanel.SetActive(false);
+            EndDialogue();
         }
     }
 
-    private IEnumerator ShowLine ()
+    private IEnumerator ShowLine()
     {
         dialogueText.text = string.Empty;
 
         foreach (char ch in dialogueLines[lineIndex])
         {
             dialogueText.text += ch;
-            yield return new WaitForSeconds(numero);
+            yield return new WaitForSeconds(typingSpeed);
         }
     }
 
+    private void EndDialogue()
+    {
+        dialogueStart = false;
+        dialoguePanel.SetActive(false);
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
         if (collision.gameObject.CompareTag("Player"))
         {
             isPlayerInRange = true;
         }
-
     }
 
-    private void OnTriggerExit(Collider collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
             isPlayerInRange = false;
+            if (dialogueStart)
+            {
+                StopAllCoroutines();
+                EndDialogue();
+            }
         }
     }
 }
