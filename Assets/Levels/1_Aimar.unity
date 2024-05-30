@@ -2864,8 +2864,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 280f14ed5752b0a44b9e84e7cd599e1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialoguePanel: {fileID: 0}
-  dialogueText: {fileID: 0}
+  dialoguePanel: {fileID: 2111057785}
+  dialogueText: {fileID: 1506413380}
   dialogueLines:
   - Hola, parece que te has quedado dormido otra vez...
   - "Acabas de entrar en un lugar muy profundo de tus sue\xF1os !!"
