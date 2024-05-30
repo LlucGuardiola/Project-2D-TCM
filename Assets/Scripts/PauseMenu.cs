@@ -21,11 +21,7 @@ public class PauseMenu : MonoBehaviour
                 Pausar();
             }
         }
-
-
-        
     }
-
 
     void Continuar ()
     {
