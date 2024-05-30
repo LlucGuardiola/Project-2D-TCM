@@ -15,7 +15,7 @@ public class SceneLoader : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         LoadLevel(LevelNames);
-        
+        Destroy(this);
     }
 }
 
