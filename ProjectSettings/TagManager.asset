@@ -9,6 +9,7 @@ TagManager:
   - Deathzone
   - elevator
   - BossArea
+  - MenuPausa
   layers:
   - Default
   - TransparentFX

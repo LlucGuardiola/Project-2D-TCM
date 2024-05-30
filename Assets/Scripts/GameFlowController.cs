@@ -9,7 +9,12 @@ using UnityEngine;
 public class GameFlowController : MonoBehaviour
 {
     public static GameFlowController Instance { get; private set; }
-
+    public GameObject PauseMenUI;
+    private GameObject player;
+    private void Start()
+    {
+        player = GameObject.FindWithTag("Player");
+    }
     private void Awake()
     {
         if (Instance == null)
@@ -21,6 +26,7 @@ public class GameFlowController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        _currentState = GameState.Playing;
     }
 
     public enum GameState
@@ -40,13 +46,16 @@ public class GameFlowController : MonoBehaviour
     public void PauseGame()
     {
         _currentState = GameState.Paused;
+        PauseMenUI.SetActive(true);
         Time.timeScale = 0f;
     }
 
     public void UnPauseGame()
     {
         _currentState = GameState.Playing;
+        PauseMenUI.SetActive(false);
         Time.timeScale = 1f;
+
     }
 
     public bool ShouldPause()
@@ -58,14 +67,32 @@ public class GameFlowController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
+            Debug.Log("Pausa");
+         
+            
             if (ShouldPause())
             {
+                Debug.Log("Pausa");
                 PauseGame();
             }
             else if (_currentState == GameState.Paused)
             {
+                Debug.Log("No pausa");
                 UnPauseGame();
             }
+            
+            
         }
+        if (player.GetComponent<HealthManager>().LifeCounter == 3)
+        {
+            _currentState = GameState.Finished;
+            Finished();
+
+        }
+    }
+
+    public void Finished()
+    {
+            //Activar menu game over
     }
 }

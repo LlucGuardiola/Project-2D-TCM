@@ -4,41 +4,12 @@ using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
 {
-   public static bool GameIsPaused = false;
-   public GameObject PauseMenUI;
-
-
-    void Update()
+    public void Continuar ()
     {
-        if  (Input.GetKeyDown(KeyCode.Escape))
-        {
-            GameIsPaused = !GameIsPaused;
-
-            Debug.Log(GameIsPaused);
-
-            if (GameIsPaused)
-            {
-                Continuar();
-            }
-            else
-            {
-                Pausar();
-            }
-        }
+       GameFlowController.Instance.UnPauseGame();
     }
-
-    void Continuar ()
+    public void Salir()
     {
-        PauseMenUI.SetActive(false);
-        Time.timeScale = 1.0f;
-        GameIsPaused = false;
-
-    }
-
-    void Pausar ()
-    {
-        PauseMenUI.SetActive(true);
-        Time.timeScale = 0f;
-        GameIsPaused = true;
+        Application.Quit();
     }
 }
