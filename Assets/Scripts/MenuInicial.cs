@@ -7,11 +7,12 @@ public class MenuInicial : MonoBehaviour
 {
     public void Jugar ()
     {
-        SceneManager.LoadScene("Game scene");
+        SceneManager.LoadScene("1_Aimar");
     }
 
     public void Salir ()
     {
-        Application.Quit ();
+        Debug.Log("Boooomboclatt");
+        Application.Quit();
     }
 }
