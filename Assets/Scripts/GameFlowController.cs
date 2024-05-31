@@ -80,19 +80,16 @@ public class GameFlowController : MonoBehaviour
                 Debug.Log("No pausa");
                 UnPauseGame();
             }
-            
-            
         }
         if (player.GetComponent<HealthManager>().LifeCounter == 3)
         {
             _currentState = GameState.Finished;
             Finished();
-
         }
     }
 
     public void Finished()
     {
-            //Activar menu game over
+            // Activar menu game over
     }
 }
