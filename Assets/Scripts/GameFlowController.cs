@@ -11,12 +11,23 @@ using UnityEngine.SceneManagement;
 public class GameFlowController : MonoBehaviour
 {
     public static GameFlowController Instance { get; private set; }
-    public GameObject PauseMenUI;
-    public GameObject DeadUI;
+    private GameObject PauseMenUI;
+    private GameObject DeadUI;
     private GameObject player;
     private void Start()
     {
-        player = GameObject.FindWithTag("Player");
+      
+        SceneManager.LoadScene("Menu");
+        _currentState = GameState.PreGame;
+        if(_currentState != GameState.PreGame)
+        {
+            player = GameObject.FindWithTag("Player");
+            PauseMenUI = GameObject.FindWithTag("MenuPausa");
+            DeadUI = GameObject.FindWithTag("DeadScreen");
+
+            PauseMenUI.SetActive(false);
+            DeadUI.SetActive(false);
+        }
         
     }
     
