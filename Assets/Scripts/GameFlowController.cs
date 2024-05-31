@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Properties;
+using Unity.VisualScripting;
 using UnityEditor.Compilation;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -16,7 +17,9 @@ public class GameFlowController : MonoBehaviour
     private void Start()
     {
         player = GameObject.FindWithTag("Player");
+        
     }
+    
     
     private void Awake()
     {
@@ -26,12 +29,8 @@ public class GameFlowController : MonoBehaviour
             Instance = this;
            
         }
-     
-        
         _currentState = GameState.Playing;
     }
-    
-
     public enum GameState
     {
         PreGame,
