@@ -10,6 +10,7 @@ public class HealthManager : MonoBehaviour
     [SerializeField] Slider sliderVidas;
     public int LifeCounter;
 
+
     private void Start()
     {
         sliderVidas.maxValue = vidas;

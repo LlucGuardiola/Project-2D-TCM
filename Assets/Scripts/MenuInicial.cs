@@ -7,7 +7,8 @@ public class MenuInicial : MonoBehaviour
 {
     public void Jugar ()
     {
-        SceneManager.LoadScene("1_Aimar");     
+        
+        GameFlowController.Instance.Play();
     }
 
     public void Salir ()

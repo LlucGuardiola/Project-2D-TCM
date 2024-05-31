@@ -10,7 +10,7 @@ TagManager:
   - elevator
   - BossArea
   - MenuPausa
-  - DeadScene
+  - DeadScreen
   layers:
   - Default
   - TransparentFX

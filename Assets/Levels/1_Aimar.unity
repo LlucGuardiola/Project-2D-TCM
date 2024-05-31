@@ -979,6 +979,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 276fa1aabf7bcaf4499f63177ca0e441, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menu: {fileID: 285443906}
 --- !u!224 &285443911 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5698216546867626883, guid: a68cbd3a5ff2f04488046ef98f32a89b, type: 3}
@@ -1110,7 +1111,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3547540705984318401, guid: a68cbd3a5ff2f04488046ef98f32a89b, type: 3}
       propertyPath: m_TagString
-      value: DeadScene
+      value: DeadScreen
       objectReference: {fileID: 0}
     - target: {fileID: 3677214589704916953, guid: a68cbd3a5ff2f04488046ef98f32a89b, type: 3}
       propertyPath: m_text
@@ -1609,6 +1610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 276fa1aabf7bcaf4499f63177ca0e441, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menu: {fileID: 384547138}
 --- !u!1001 &393925988
 PrefabInstance:
   m_ObjectHideFlags: 0
