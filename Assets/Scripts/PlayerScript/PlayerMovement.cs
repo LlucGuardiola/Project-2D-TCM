@@ -13,8 +13,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] TrailRendererController tr;
 
     private bool canDash = true;
-    public bool IsDashing { get; private set; }
-
     public bool CanGetDamage { get; private set; } = true;
     public bool CanMove;
     private BoxCollider2D boxCollider; 
@@ -44,11 +42,14 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Update()
     {
+        Debug.Log(GetComponent<PlayerAttack>().isAtacking);
         Movement();
         
         Jump();
 
         Teleport();
+
+        Attack();
 
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && !GetComponent<PlayerAttack>().isAtacking)
         {
@@ -119,6 +120,20 @@ public class PlayerMovement : MonoBehaviour
         }
 
         animator.SetBool("run", body.velocity.x != 0 && ApplyingInput);
+    }
+
+    private void Attack()
+    {
+        if (!IsJumping)
+        {
+            if (Input.GetMouseButtonDown(0) && !GetComponent<Dash>().IsDashing)
+            {
+                if (GetComponent<PlayerAttack>().combatState)
+                {
+                  GetComponent<PlayerAttack>().Attack();
+                }
+            }
+        }
     }
 }
 

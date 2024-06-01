@@ -35,6 +35,7 @@ public class PlayerAttack : MonoBehaviour
 
         if (combatState)
         {
+            /*
             if(Time.time >= nextAttacktime && !player.GetComponent<PlayerMovement>().IsJumping)   
             {
                 if (Input.GetMouseButtonDown(0) && !GetComponent<PlayerMovement>().IsDashing)
@@ -44,6 +45,7 @@ public class PlayerAttack : MonoBehaviour
                     nextAttacktime = Time.time + attackRate / 2;
                 }
             }
+            */
             if (player.GetComponent<SpriteRenderer>().flipX)
             {
                 attackPoint.transform.position = new Vector2(player.transform.position.x + .8f, player.transform.position.y + 1.5f);
@@ -54,11 +56,12 @@ public class PlayerAttack : MonoBehaviour
             }
         }
     }
-    void Attack()
+    public void Attack()
     {
         animator.SetTrigger("Attack");  //Animación 
     }
-    private IEnumerator Dash(float dashingPower)
+    /*
+    private IEnumerator Dash(float dashingPower) 
     {
         yield return null;
         yield return animator.GetCurrentAnimatorClipInfo(0)[0].clip.length / 2;
@@ -73,6 +76,7 @@ public class PlayerAttack : MonoBehaviour
             yield return null;
         }
     }
+    */
     private void OnDrawGizmosSelected()  //Dibujar esfera para ver rango de ataque
     {
         if(attackPoint == null)
@@ -82,13 +86,13 @@ public class PlayerAttack : MonoBehaviour
     }
 
     private void AttackAnimation() { StartCoroutine(StartAttack()); } // Activated within the animation
-    private IEnumerator StartAttack()
+    private IEnumerator StartAttack() ////Pendent per canviar , ha de ser sense corutines
     {
         isAtacking = true;
         yield return new WaitForSeconds(animator.GetCurrentAnimatorClipInfo(0)[0].clip.length * 1.1f);
         isAtacking = false;
     }
-    private void Hit() // Activated within animation
+    private void Hit() // Activated within animation /// Canviar
     {
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);  //Detectar enemigos en un rango especificado
         
