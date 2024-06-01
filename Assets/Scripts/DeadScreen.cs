@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PauseMenu : MonoBehaviour
+public class DeadScreen : MonoBehaviour
 {
     public GameObject menu;
 
     private void Start()
     {
-        GameFlowController.Instance.SetPauseMenu(menu);
+        GameFlowController.Instance.SetDeadScreen(menu);
     }
 
-    public void Continuar ()
+    public void Continuar()
     {
-       GameFlowController.Instance.UnPauseGame();
+        GameFlowController.Instance.UnPauseGame();
     }
     public void Salir()
     {

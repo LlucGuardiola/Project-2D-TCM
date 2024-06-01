@@ -10,7 +10,6 @@ public class HealthManager : MonoBehaviour
     [SerializeField] Slider sliderVidas;
     public int LifeCounter;
 
-
     private void Start()
     {
         sliderVidas.maxValue = vidas;
@@ -28,7 +27,7 @@ public class HealthManager : MonoBehaviour
             sliderVidas.value = vidas;
 
             LifeCounter++;
-            Debug.Log(LifeCounter);
+           GameFlowController.Instance.SetCounterLife(LifeCounter);
         }
     }
 }

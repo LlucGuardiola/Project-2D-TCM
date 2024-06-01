@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MenuInicial : MonoBehaviour
 {
+    
     public void Jugar ()
     {
         
@@ -15,4 +16,5 @@ public class MenuInicial : MonoBehaviour
     {
         Application.Quit();
     }
+    
 }
