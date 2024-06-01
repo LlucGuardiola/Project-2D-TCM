@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private int maxJumpCount;      
     [SerializeField] private float jumpHeight;
     [SerializeField] private LayerMask groundLayer; // Detecció de col·lisió amb ground 
-    [SerializeField] TrailRenderer tr;
+    [SerializeField] TrailRendererController tr;
 
     private bool canDash = true;
     public bool IsDashing { get; private set; }
