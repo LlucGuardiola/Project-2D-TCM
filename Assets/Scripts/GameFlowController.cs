@@ -24,7 +24,7 @@ public class GameFlowController : MonoBehaviour
         SceneManager.LoadScene("Menu", LoadSceneMode.Additive);
 
     }
-   public void SetPauseMenu(GameObject pausemnu)
+    public void SetPauseMenu(GameObject pausemnu)
     {
         pauseMenuUI = pausemnu;
         pauseMenuUI.SetActive(false);
@@ -33,12 +33,12 @@ public class GameFlowController : MonoBehaviour
     public void SetDeadScreen(GameObject deadUI)
     {
         this.deadUI = deadUI;
-       deadUI.SetActive(false);
+        deadUI.SetActive(false);
     }
 
     public void SetCounterLife(float life)
     {
-        this.playerLife = life;
+        playerLife = life;
     }
 
     private void Awake()
