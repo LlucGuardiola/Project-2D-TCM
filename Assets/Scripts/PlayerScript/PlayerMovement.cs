@@ -52,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && !GetComponent<PlayerAttack>().isAtacking)
         {
-            StartCoroutine(Dash(0.2f, 1, 30));
+            GetComponent<Dash>().TryStartDash(1, 30, true);
         }
     }
     private void Jump()
@@ -96,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
     public void Movement()
     {
         if (!CanMove) return;  
-        if (IsDashing) return; 
+        if (GetComponent<Dash>().IsDashing) return; 
 
         float horizontalInput = Input.GetAxis("Horizontal");
 
@@ -119,54 +119,6 @@ public class PlayerMovement : MonoBehaviour
         }
 
         animator.SetBool("run", body.velocity.x != 0 && ApplyingInput);
-    }
-    private IEnumerator Dash(float dashingTime, float dashingCooldown, float dashingPower)
-    {
-        canDash = false;
-        IsDashing = true;
-        float originalGravity = body.gravityScale;
-        body.gravityScale = 0f;
-        tr.emitting = true;
-        body.velocity = GetComponent<SpriteRenderer>().flipX == true ? new Vector2( 1 * dashingPower, 0.1f) : 
-                                                                       new Vector2(-1 * dashingPower, 0.1f);
-
-        CanGetDamage = false;
-
-        yield return new WaitForSeconds(dashingTime * 1.1f);
-        body.gravityScale = originalGravity;
-        IsDashing = false;
-        tr.emitting = false;
-        CanGetDamage = true;
-
-        yield return new WaitForSeconds(dashingCooldown);
-        canDash = true;
-    }
-    private void OnTriggerEnter2D(Collider2D collision) // Respawn i checkpoints 
-    {
-        if (collision.gameObject.CompareTag("Checkpoint"))
-        {
-            GetComponent<ManageRespawn>().NewCheckpoint(collision.gameObject.transform.position);
-            Destroy(collision.gameObject.GetComponent<BoxCollider2D>());
-        }
-        if (collision.gameObject.CompareTag("Deathzone"))
-        {
-            GetComponent<ManageRespawn>().HasToRespawn = true;
-            GetComponent<HealthManager>().LoseLife(10);
-        }
-    }
-    private void OnCollisionEnter2D(Collision2D collision) 
-    {
-        if (collision.gameObject.CompareTag("elevator"))
-        {
-            transform.parent = collision.gameObject.transform;
-        }
-    }
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("elevator"))
-        {
-            transform.parent = null;
-        }
     }
 }
 
