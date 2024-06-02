@@ -15,7 +15,7 @@ public class GameFlowController : MonoBehaviour
     public static GameFlowController Instance { get; private set; }
     private GameObject pauseMenuUI;
     private GameObject deadUI;
-    public GameState _currentState;
+    private GameState _currentState;
     private float playerLife;
     private void Start()
     {
@@ -70,7 +70,8 @@ public class GameFlowController : MonoBehaviour
     {
         if(_currentState == GameState.Finished)
         {
-            SceneManager.LoadScene("1_Aimar");
+            SceneManager.LoadScene("GameFlowController");
+           
         }
         _currentState = GameState.Playing;
         Time.timeScale = 1f;
@@ -98,7 +99,7 @@ public class GameFlowController : MonoBehaviour
                     UnPauseGame();
                 }
             }
-            if (playerLife== 3)
+            if (playerLife== 1)
             {
                 _currentState = GameState.Finished;
                 Finished();
