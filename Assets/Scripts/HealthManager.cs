@@ -12,7 +12,6 @@ public class HealthManager : MonoBehaviour
     public int LifeCounter;
     public float seconds;
     bool estaRestandoVida;
-    GameObject player;
 
     private void Start()
     {
@@ -20,12 +19,15 @@ public class HealthManager : MonoBehaviour
         sliderVidas.value = sliderVidas.maxValue;
         seconds = 0;
         estaRestandoVida = false;
-        player = GameObject.FindWithTag("Player");
     }
     private void Update()
     {
         seconds += Time.deltaTime;
-        if (Input.GetKey(KeyCode.K) || estaRestandoVida)
+        if (Input.GetKey(KeyCode.K))
+        {
+            estaRestandoVida = !estaRestandoVida;
+        }
+        if (estaRestandoVida)
         {
             DegbugLife();
         }
