@@ -15,8 +15,10 @@ public class PlayerAttack : MonoBehaviour
     public int attackDamage = 25;                 //rango de ataque
     public float attackRange = 0.5f;
     public bool combatState;
-    public float attackRate = 2;                 //Cooldown attack
-    float nextAttacktime = 0f;
+    public float attackRate = 2;  
+    //Cooldown attack
+   // float nextAttacktime = 0f;
+    
 
     public void SetCombatState(bool combatState)
     {
