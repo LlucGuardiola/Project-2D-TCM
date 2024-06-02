@@ -86,7 +86,7 @@ public class GameFlowController : MonoBehaviour
         if (_currentState == GameState.Playing|| _currentState == GameState.Paused) 
         {
            
-            if (Input.GetKeyDown(KeyCode.P))
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
                 if (ShouldPause())
                 {
