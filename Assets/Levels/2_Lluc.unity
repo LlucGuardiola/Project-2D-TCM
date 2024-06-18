@@ -6592,7 +6592,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 258.21, y: 2.97, z: -10}
+  m_LocalPosition: {x: 259.83, y: 2.97, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7088,6 +7088,87 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e074c779f49c4204f8f9107d0806c71a, type: 3}
+--- !u!1001 &564398960
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2600743075565381318, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 532.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 2600743075565381318, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 2600743075565381318, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2600743075565381318, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2600743075565381318, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2600743075565381318, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2600743075565381318, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2600743075565381318, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2600743075565381318, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2600743075565381318, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6732829463098743652, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
+      propertyPath: dialogueText
+      value: 
+      objectReference: {fileID: 355110947}
+    - target: {fileID: 6732829463098743652, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
+      propertyPath: dialoguePanel
+      value: 
+      objectReference: {fileID: 1377646638}
+    - target: {fileID: 6732829463098743652, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
+      propertyPath: dialogueLines.Array.data[0]
+      value: "No me queda m\xE1s remedio de que te enfrentes t\xFA solo a todo esto..."
+      objectReference: {fileID: 0}
+    - target: {fileID: 6732829463098743652, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
+      propertyPath: dialogueLines.Array.data[1]
+      value: No puedes hacerme esto.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6732829463098743652, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
+      propertyPath: dialogueLines.Array.data[2]
+      value: Por supuesto, ya es hora de que te enfrentes a todo.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6732829463098743652, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
+      propertyPath: dialogueLines.Array.data[3]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7602003397623688624, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
+      propertyPath: m_Name
+      value: NPC (3)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
 --- !u!1 &570450809
 GameObject:
   m_ObjectHideFlags: 0
@@ -10214,7 +10295,7 @@ Transform:
   m_GameObject: {fileID: 850607990}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 258.33, y: 2.12, z: 0}
+  m_LocalPosition: {x: 259.75, y: 2.16, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -34951,6 +35032,95 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e074c779f49c4204f8f9107d0806c71a, type: 3}
+--- !u!1001 &1663588993
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2600743075565381318, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 412.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2600743075565381318, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 2600743075565381318, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2600743075565381318, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2600743075565381318, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2600743075565381318, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2600743075565381318, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2600743075565381318, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2600743075565381318, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2600743075565381318, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6732829463098743652, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
+      propertyPath: dialogueText
+      value: 
+      objectReference: {fileID: 355110947}
+    - target: {fileID: 6732829463098743652, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
+      propertyPath: dialoguePanel
+      value: 
+      objectReference: {fileID: 1377646638}
+    - target: {fileID: 6732829463098743652, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
+      propertyPath: dialogueLines.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6732829463098743652, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
+      propertyPath: dialogueLines.Array.data[0]
+      value: "De verdad crees que es bueno lo que te est\xE1s haciendo?"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6732829463098743652, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
+      propertyPath: dialogueLines.Array.data[1]
+      value: De que me estas hablando  -_-
+      objectReference: {fileID: 0}
+    - target: {fileID: 6732829463098743652, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
+      propertyPath: dialogueLines.Array.data[2]
+      value: Todos esos problemas que tienes dentro...
+      objectReference: {fileID: 0}
+    - target: {fileID: 6732829463098743652, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
+      propertyPath: dialogueLines.Array.data[3]
+      value: No se de que me hablas.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6732829463098743652, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
+      propertyPath: dialogueLines.Array.data[4]
+      value: "Tu mismo, tienes la primera prueba, te espero m\xE1s adelante."
+      objectReference: {fileID: 0}
+    - target: {fileID: 7602003397623688624, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
+      propertyPath: m_Name
+      value: NPC (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
 --- !u!4 &1667500269 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6930122694965717509, guid: 7f2681b23c23afc4fbb43c6dca9f41f9, type: 3}
@@ -38545,3 +38715,5 @@ SceneRoots:
   - {fileID: 1368009973}
   - {fileID: 314688717}
   - {fileID: 716407502}
+  - {fileID: 1663588993}
+  - {fileID: 564398960}
