@@ -22,6 +22,7 @@ public class HealthManager : MonoBehaviour
         {
             LoseLife(20);
         }
+        Debug.Log(vidas);
     }
     public void LoseLife(float damageDealt)
     {
@@ -35,7 +36,8 @@ public class HealthManager : MonoBehaviour
             sliderVidas.value = vidas;
 
             LifeCounter++;
-            GameFlowController.Instance.SetCounterLife(LifeCounter);
+            
+           // GameFlowController.Instance.SetCounterLife(LifeCounter); 
         }
     }
 }

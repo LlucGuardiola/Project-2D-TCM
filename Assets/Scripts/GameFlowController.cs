@@ -15,7 +15,7 @@ public class GameFlowController : MonoBehaviour
     private GameObject pauseMenuUI;
     private GameObject deadUI;
     private GameState _currentState;
-    private float playerLife;
+    private float counterLife;
     private void Start()
     {
        
@@ -37,7 +37,7 @@ public class GameFlowController : MonoBehaviour
 
     public void SetCounterLife(float life)
     {
-        playerLife = life;
+        counterLife = life;
     }
 
     private void Awake()
@@ -98,7 +98,7 @@ public class GameFlowController : MonoBehaviour
                     UnPauseGame();
                 }
             }
-            if (playerLife== 1)
+            if (counterLife== 3) ////////////////////// IMPORTANT CANVIAR
             {
                 _currentState = GameState.Finished;
                 Finished();
@@ -112,7 +112,7 @@ public class GameFlowController : MonoBehaviour
     }
     public void Play()
     {
-        SceneManager.LoadSceneAsync("1_Aimar", LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync("2_Lluc", LoadSceneMode.Additive);
         SceneManager.UnloadSceneAsync("Menu");
         _currentState = GameState.Playing;
     }

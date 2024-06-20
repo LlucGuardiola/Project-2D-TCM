@@ -16,15 +16,15 @@ public class ManageRespawn : MonoBehaviour
     }
     void Update()
     {
-        Respawn();
+        if (HasToRespawn)
+        {
+            Respawn();
+        }
     }
     public void Respawn()
     {
-        if (HasToRespawn)
-        {
-            player.transform.position = checkpoint;
-            HasToRespawn = false;
-        }
+        player.transform.position = checkpoint;
+        HasToRespawn = false;
     }
     public void NewCheckpoint(Vector2 newCheckpoint)
     {
