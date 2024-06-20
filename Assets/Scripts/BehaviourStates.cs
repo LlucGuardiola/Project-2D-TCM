@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class BehaviourStates : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public enum GameState
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Attack,
+        Follow,
+        Wait
     }
 }
