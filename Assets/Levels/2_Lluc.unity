@@ -8275,21 +8275,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6732829463098743652, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
       propertyPath: dialogueLines.Array.data[0]
-      value: Te has preguntado que son las bolas esas?
+      value: "\xBFTe has preguntado qu\xE9 son las bolas esas?"
       objectReference: {fileID: 0}
     - target: {fileID: 6732829463098743652, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
       propertyPath: dialogueLines.Array.data[1]
-      value: "No se me he dado con una y me ha hecho da\xF1o la verdad..."
+      value: "\rNo se, me he dado con una y me ha hecho da\xF1o la verdad..."
       objectReference: {fileID: 0}
     - target: {fileID: 6732829463098743652, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
       propertyPath: dialogueLines.Array.data[2]
       value: "Esos bichos son c\xFAmulos de pensamientos negativos que siempre te
-        has guardado para ti, como siemrpe haces..."
+        has guardado para ti, como siempre haces..."
       objectReference: {fileID: 0}
     - target: {fileID: 6732829463098743652, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
       propertyPath: dialogueLines.Array.data[3]
       value: "No me jodas @%#@@%$% enserio???, me tengo que tragar esta chapa en
-        un sue\xF1o tambien ??  "
+        un sue\xF1o tambien?"
       objectReference: {fileID: 0}
     - target: {fileID: 6732829463098743652, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
       propertyPath: dialogueLines.Array.data[4]
@@ -8298,12 +8298,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6732829463098743652, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
       propertyPath: dialogueLines.Array.data[5]
-      value: Es una broma no?
+      value: "\xBFEs una broma no?"
       objectReference: {fileID: 0}
     - target: {fileID: 6732829463098743652, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
       propertyPath: dialogueLines.Array.data[6]
-      value: "Intentalo, grita lo que quieras y pegate tortas en la cara ya ver\xE1s
-        como te van a doler jaja!!"
+      value: "\r\xA1Int\xE9ntalo, grita lo que quieras y pegate tortas en la cara,
+        ya ver\xE1s c\xF3mo te van a doler jaja!!"
       objectReference: {fileID: 0}
     - target: {fileID: 6732829463098743652, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
       propertyPath: dialogueLines.Array.data[7]
@@ -10820,7 +10820,7 @@ PrefabInstance:
       objectReference: {fileID: 1377646638}
     - target: {fileID: 6732829463098743652, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
       propertyPath: dialogueLines.Array.size
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6732829463098743652, guid: 551626d119f9e6246922fd3fabdeb513, type: 3}
       propertyPath: dialogueLines.Array.data[0]
