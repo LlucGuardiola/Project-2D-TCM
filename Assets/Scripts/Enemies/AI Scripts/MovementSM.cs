@@ -10,7 +10,8 @@ public class MovementSM : StateMachine
 
     [HideInInspector] public float closestDistance;
     [HideInInspector] public float currentDistance;
-    [HideInInspector]  public Transform player;
+    [HideInInspector] public Transform player;
+    [HideInInspector] public Animator animator;
     public BoxCollider2D bossArea;
 
     protected override void Start()
@@ -21,6 +22,7 @@ public class MovementSM : StateMachine
         closestDistance = worldSize.x *1.2f ;
         idleState = new Idle(this);
         movingState = new Moving(this);
+        animator = GetComponent<Animator>();
         base.Start();
     }
     

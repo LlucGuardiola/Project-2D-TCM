@@ -33,6 +33,7 @@ public class Idle : BaseState
             stateMachine.ChangeState(_sm.movingState);
             
         }
+        _sm.animator.SetBool("isRunning", false);
     }
     public bool IsInsideBossArea()
     {

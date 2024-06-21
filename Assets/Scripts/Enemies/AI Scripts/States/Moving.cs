@@ -34,6 +34,7 @@ public class Moving : BaseState
         { 
             stateMachine.ChangeState(_sm.idleState);
         }
+        _sm.animator.SetBool("isRunning", true);
         Follow();
     }
 
