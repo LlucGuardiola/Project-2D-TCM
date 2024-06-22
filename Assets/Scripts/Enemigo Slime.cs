@@ -53,7 +53,7 @@ public class EnemigoSlime : MonoBehaviour
     }
     IEnumerator WaitAndActivateMovement()
     {
-        player.GetComponent<HealthManager>().LoseLife(10);
+        player.GetComponent<HealthManager>().LoseLife(10,true);
         yield return new WaitForSeconds(0.4f);
         canGetDamage = true;
         player.GetComponent<PlayerMovement>().CanMove = true;

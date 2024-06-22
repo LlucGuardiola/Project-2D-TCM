@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Attack_Tests : MonoBehaviour
+public class Attack_Controller : MonoBehaviour
 {
     
     
@@ -12,7 +12,7 @@ public class Attack_Tests : MonoBehaviour
     private bool canAttack = true;
     [HideInInspector] public bool isAttacking = false;
 
-    private float end = 0.2f;
+    private float end;
     private float attackTimeLeft;
 
     private Animator animator;
@@ -30,15 +30,15 @@ public class Attack_Tests : MonoBehaviour
             AttackCooldown();
         }
     }
-    public void TryStartAttack(float attackCooldown, string [] attackAnim, Animator animator)
+    public void TryStartAttack(float attackCooldown, string [] attackAnim, Animator animator,float duration)
     {
         if (canAttack && !isAttacking)
         {
             this.attackCooldown = attackCooldown;
             animations = attackAnim;
             this.animator = animator;
+            end = duration;
             StartAttack();
-            Debug.Log("attack");
         }
     }
     void StartAttack()

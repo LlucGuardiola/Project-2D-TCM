@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Attack_Input : MonoBehaviour
 {
-    private Attack_Tests attack_script;
+    private Attack_Controller attack_script;
     private string[] attack_Anim;
     private Animator animator;
     private Dash dash;
 
     private void Start()
     {
-        attack_script = GetComponent<Attack_Tests>();
+        attack_script = GetComponent<Attack_Controller>();
         animator = GetComponent<Animator>();
         dash = GetComponent<Dash>();
         attack_Anim = new string[] {"Attack"};
@@ -23,7 +23,7 @@ public class Attack_Input : MonoBehaviour
             
             dash.TryStartDash(2, 10, true);
             
-            attack_script.TryStartAttack(2, attack_Anim,animator);
+            attack_script.TryStartAttack(2, attack_Anim,animator, 0.5f);
         }
     }
 }

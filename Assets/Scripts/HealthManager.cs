@@ -39,7 +39,7 @@ public class HealthManager : MonoBehaviour
 
                 LifeCounter++;
 
-                // GameFlowController.Instance.SetCounterLife(LifeCounter); 
+                // GameFlowController.Instance.SetCounterLife(LifeCounter); /////activar en la entrega
             }
         }
     }

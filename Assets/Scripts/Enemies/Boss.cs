@@ -15,7 +15,7 @@ public class Boss : MonoBehaviour
     protected float damage;
     protected Animator animator;
 
-    private bool hasHit = false;
+    
     protected bool isDashing = false;
     protected bool canDash = true;
 
@@ -125,7 +125,7 @@ public class Boss : MonoBehaviour
 
     public void Attack()
     {
-        attackPoint.position = new Vector2(
+            attackPoint.position = new Vector2(
             transform.position.x + (GetComponent<SpriteRenderer>().flipX ? -3.5f : 3.5f),
             transform.position.y + 1.1f
         );
@@ -152,10 +152,7 @@ public class Boss : MonoBehaviour
 
   
         
-    public void ResetHit()
-    {
-        hasHit = false;
-    }
+   
 
     private void AttackAnimation() // Activated within the animation
     {
@@ -169,6 +166,6 @@ public class Boss : MonoBehaviour
 
         yield return new WaitForSeconds(animator.GetCurrentAnimatorClipInfo(0)[0].clip.length);
         isAttacking = false;
-        ResetHit();
+   
     }
 }

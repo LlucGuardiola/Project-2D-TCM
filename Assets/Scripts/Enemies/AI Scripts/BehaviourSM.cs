@@ -13,7 +13,7 @@ public class BehaviourSM : StateMachine
     [HideInInspector] public float currentDistance;
     [HideInInspector] public Transform player;
     [HideInInspector] public Animator animator;
-    [HideInInspector] public Attack_Tests attackScript;
+    [HideInInspector] public Attack_Controller attackScript;
     [HideInInspector] public string [] attack_Anim;
 
     public BoxCollider2D bossArea;
@@ -27,7 +27,7 @@ public class BehaviourSM : StateMachine
         movingState = new Moving_State(this);
         AttackState = new Attack_State(this);
         animator = GetComponent<Animator>();
-        attackScript = GetComponent<Attack_Tests>();
+        attackScript = GetComponent<Attack_Controller>();
         attack_Anim = new string[] { "Attack", "Attack2" };
         base.Start();
     }

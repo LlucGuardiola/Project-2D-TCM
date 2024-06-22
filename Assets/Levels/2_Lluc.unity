@@ -7489,6 +7489,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Knight
       objectReference: {fileID: 0}
+    - target: {fileID: 2526193525349033629, guid: 0fecbd3d2ce640d4f978691f1159a264, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2801123851974390177, guid: 0fecbd3d2ce640d4f978691f1159a264, type: 3}
       propertyPath: vida
       value: 300
@@ -7503,7 +7507,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3810737840231611330, guid: 0fecbd3d2ce640d4f978691f1159a264, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.51
+      value: 3.72
       objectReference: {fileID: 0}
     - target: {fileID: 3810737840231611330, guid: 0fecbd3d2ce640d4f978691f1159a264, type: 3}
       propertyPath: m_LocalPosition.z
@@ -12755,6 +12759,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 471d6f187d3eae34193de464be3ee14d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackRange: 3
+  layermask:
+    serializedVersion: 2
+    m_Bits: 128
+  attackPoint: {fileID: 1303066639}
 --- !u!1 &1041798201
 GameObject:
   m_ObjectHideFlags: 0
@@ -26939,6 +26948,11 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 3564026850829729314, guid: b51901e6748833e4695e0c1db509dcd4, type: 3}
   m_PrefabInstance: {fileID: 1725494713}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1303066639 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3338785809663443418, guid: 53dcb2fd0bd544346b057439a9cc69c2, type: 3}
+  m_PrefabInstance: {fileID: 754571109}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1306094175
 GameObject:
