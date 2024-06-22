@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class BehaviourSM : StateMachine
 {
-    [HideInInspector]public Idle idleState;
-    [HideInInspector] public Moving movingState;
+    [HideInInspector]public Idle_State idleState;
+    [HideInInspector] public Moving_State movingState;
     [HideInInspector] public Attack_State AttackState;
 
 
@@ -13,6 +13,8 @@ public class BehaviourSM : StateMachine
     [HideInInspector] public float currentDistance;
     [HideInInspector] public Transform player;
     [HideInInspector] public Animator animator;
+    [HideInInspector] public Attack_Tests attackScript;
+
     public BoxCollider2D bossArea;
 
     protected override void Start()
@@ -21,10 +23,11 @@ public class BehaviourSM : StateMachine
         player = GameObject.FindGameObjectWithTag("Player").transform;
         Vector3 worldSize = Vector3.Scale(player.GetComponent<BoxCollider2D>().size, transform.localScale);
         closestDistance = worldSize.x *1.2f ;
-        idleState = new Idle(this);
-        movingState = new Moving(this);
+        idleState = new Idle_State(this);
+        movingState = new Moving_State(this);
         AttackState = new Attack_State(this);
         animator = GetComponent<Animator>();
+        attackScript = GetComponent<Attack_Tests>();
         base.Start();
     }
     

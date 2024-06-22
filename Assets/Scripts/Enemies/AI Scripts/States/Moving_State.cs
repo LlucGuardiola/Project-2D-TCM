@@ -4,13 +4,13 @@ using System.Xml.Xsl;
 using UnityEngine;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
-public class Moving : BaseState
+public class Moving_State : BaseState
 {
     
     private BehaviourSM _sm;
    
 
-    public Moving(BehaviourSM stateMachine) : base("Moving", stateMachine) 
+    public Moving_State(BehaviourSM stateMachine) : base("Moving", stateMachine) 
     {
         _sm = stateMachine;
     }
