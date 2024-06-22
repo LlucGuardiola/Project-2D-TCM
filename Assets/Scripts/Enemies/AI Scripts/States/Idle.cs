@@ -7,8 +7,8 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 public class Idle : BaseState
 {
 
-    private MovementSM _sm;
-    public Idle(MovementSM stateMachine) : base("Idle", stateMachine)
+    private BehaviourSM _sm;
+    public Idle(BehaviourSM stateMachine) : base("Idle", stateMachine)
     {
         _sm = stateMachine;
     }
@@ -26,13 +26,22 @@ public class Idle : BaseState
     {
         base.UpdateLogic();
         // Transiton to "moving" state
-        Debug.Log(_sm.currentDistance);
+       
+    
         if (_sm.currentDistance > _sm.closestDistance)
         {
             
             stateMachine.ChangeState(_sm.movingState);
             
         }
+        if (_sm.currentDistance <= _sm.closestDistance)
+        {
+
+            stateMachine.ChangeState(_sm.AttackState);
+            
+
+        }
+
         _sm.animator.SetBool("isRunning", false);
     }
     public bool IsInsideBossArea()
@@ -41,5 +50,6 @@ public class Idle : BaseState
         float bossAreaMaxX = _sm.bossArea.transform.position.x + (_sm.bossArea.size.x / 2);
         return _sm.transform.position.x > bossAreaMinX && _sm.transform.position.x < bossAreaMaxX;
     }
+   
 
 }

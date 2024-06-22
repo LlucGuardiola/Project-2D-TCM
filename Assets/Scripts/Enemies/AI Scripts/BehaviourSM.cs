@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovementSM : StateMachine
+public class BehaviourSM : StateMachine
 {
     [HideInInspector]public Idle idleState;
     [HideInInspector] public Moving movingState;
- 
+    [HideInInspector] public Attack_State AttackState;
+
 
     [HideInInspector] public float closestDistance;
     [HideInInspector] public float currentDistance;
@@ -22,6 +23,7 @@ public class MovementSM : StateMachine
         closestDistance = worldSize.x *1.2f ;
         idleState = new Idle(this);
         movingState = new Moving(this);
+        AttackState = new Attack_State(this);
         animator = GetComponent<Animator>();
         base.Start();
     }

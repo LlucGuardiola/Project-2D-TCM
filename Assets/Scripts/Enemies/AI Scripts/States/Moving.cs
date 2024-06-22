@@ -7,10 +7,10 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 public class Moving : BaseState
 {
     
-    private MovementSM _sm;
+    private BehaviourSM _sm;
    
 
-    public Moving(MovementSM stateMachine) : base("Moving", stateMachine) 
+    public Moving(BehaviourSM stateMachine) : base("Moving", stateMachine) 
     {
         _sm = stateMachine;
     }
