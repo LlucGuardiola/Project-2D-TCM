@@ -10593,6 +10593,7 @@ GameObject:
   - component: {fileID: 850607998}
   - component: {fileID: 850607999}
   - component: {fileID: 850608000}
+  - component: {fileID: 850608001}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -10790,7 +10791,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 850607990}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d153f998bbf54c441ab5f9fcf1c1651d, type: 3}
   m_Name: 
@@ -10847,6 +10848,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDashing: 0
+--- !u!114 &850608001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 850607990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 715f96c51dc157d4bbde2d7866e0a6d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &859141306 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5587555986255562326, guid: e074c779f49c4204f8f9107d0806c71a, type: 3}
@@ -12685,6 +12698,7 @@ MonoBehaviour:
   player: {fileID: 0}
   animator: {fileID: 0}
   attackScript: {fileID: 0}
+  attack_Anim: []
   bossArea: {fileID: 876758308}
 --- !u!114 &1036863760
 MonoBehaviour:

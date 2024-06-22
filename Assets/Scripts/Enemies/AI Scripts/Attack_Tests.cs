@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Attack_Tests : MonoBehaviour
@@ -15,10 +16,8 @@ public class Attack_Tests : MonoBehaviour
     private float attackTimeLeft;
 
     private Animator animator;
-    private void Start()
-    {
-        animator = GetComponent<Animator>();    
-    }
+    private string[] animations;
+  
     void Update()
     {
         if (isAttacking)
@@ -31,20 +30,21 @@ public class Attack_Tests : MonoBehaviour
             AttackCooldown();
         }
     }
-    public void TryStartAttack(float attackCooldown)
+    public void TryStartAttack(float attackCooldown, string [] attackAnim, Animator animator)
     {
         if (canAttack && !isAttacking)
         {
             this.attackCooldown = attackCooldown;
-            
+            animations = attackAnim;
+            this.animator = animator;
             StartAttack();
+            Debug.Log("attack");
         }
     }
     void StartAttack()
     {
-        Debug.Log("start attack");
-        string attackTrigger = UnityEngine.Random.Range(0, 2) == 0 ? "Attack" : "Attack2";
-        animator.SetTrigger(attackTrigger);
+        int i = UnityEngine.Random.Range(0, animations.Length); 
+        animator.SetTrigger(animations[i]);
         canAttack = false;
         isAttacking = true;
         attackTimeLeft = end;

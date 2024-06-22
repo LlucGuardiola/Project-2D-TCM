@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
 
         Teleport();
 
-        Attack();
+
 
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && !GetComponent<PlayerAttack>().isAtacking)
         {
@@ -122,18 +122,6 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("run", body.velocity.x != 0 && ApplyingInput);
     }
 
-    private void Attack()
-    {
-        if (!IsJumping)
-        {
-            if (Input.GetMouseButtonDown(0) && !GetComponent<Dash>().IsDashing)
-            {
-                if (GetComponent<PlayerAttack>().combatState)
-                {
-                  GetComponent<PlayerAttack>().Attack();
-                }
-            }
-        }
-    }
+  
 }
 

@@ -14,6 +14,7 @@ public class BehaviourSM : StateMachine
     [HideInInspector] public Transform player;
     [HideInInspector] public Animator animator;
     [HideInInspector] public Attack_Tests attackScript;
+    [HideInInspector] public string [] attack_Anim;
 
     public BoxCollider2D bossArea;
 
@@ -28,6 +29,7 @@ public class BehaviourSM : StateMachine
         AttackState = new Attack_State(this);
         animator = GetComponent<Animator>();
         attackScript = GetComponent<Attack_Tests>();
+        attack_Anim = new string[] { "Attack", "Attack2" };
         base.Start();
     }
     
