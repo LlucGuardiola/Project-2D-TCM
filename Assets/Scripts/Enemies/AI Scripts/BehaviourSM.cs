@@ -20,7 +20,6 @@ public class BehaviourSM : StateMachine
 
     protected override void Start()
     {
-       
         player = GameObject.FindGameObjectWithTag("Player").transform;
         Vector3 worldSize = Vector3.Scale(player.GetComponent<BoxCollider2D>().size, transform.localScale);
         closestDistance = worldSize.x *1.2f ;

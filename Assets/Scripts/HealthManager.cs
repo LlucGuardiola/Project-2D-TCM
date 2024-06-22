@@ -20,24 +20,27 @@ public class HealthManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.K))
         {
-            LoseLife(20);
+            LoseLife(20,true);
         }
         Debug.Log(vidas);
     }
-    public void LoseLife(float damageDealt)
+    public void LoseLife(float damageDealt,bool canGetDamaged)
     {
-        vidas -= damageDealt;
-        sliderVidas.value = vidas;
-
-        if (vidas <= 0)
+        if (canGetDamaged)
         {
-            GetComponent<ManageRespawn>().HasToRespawn = true;
-            vidas = sliderVidas.maxValue;
+            vidas -= damageDealt;
             sliderVidas.value = vidas;
 
-            LifeCounter++;
-            
-           // GameFlowController.Instance.SetCounterLife(LifeCounter); 
+            if (vidas <= 0)
+            {
+                GetComponent<ManageRespawn>().HasToRespawn = true;
+                vidas = sliderVidas.maxValue;
+                sliderVidas.value = vidas;
+
+                LifeCounter++;
+
+                // GameFlowController.Instance.SetCounterLife(LifeCounter); 
+            }
         }
     }
 }

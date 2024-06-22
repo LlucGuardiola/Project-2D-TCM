@@ -150,20 +150,7 @@ public class Boss : MonoBehaviour
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 
-    private void Hit() // Activated within the animation
-    {
-        if (hasHit) return;
-
-        Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playerLayer);
-        foreach (Collider2D hitPlayer in hitPlayers)
-        {
-            if (hitPlayer.GetComponent<PlayerMovement>().CanGetDamage)
-            {
-                hitPlayer.GetComponent<HealthManager>().LoseLife(10);
-                hasHit = true;
-            }
-        }
-    }
+  
         
     public void ResetHit()
     {
