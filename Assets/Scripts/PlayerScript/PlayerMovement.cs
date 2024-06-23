@@ -46,10 +46,6 @@ public class PlayerMovement : MonoBehaviour
         
         Jump();
 
-        Teleport();
-
-
-
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && !GetComponent<Attack_Controller>().isAttacking)
         {
             GetComponent<Dash>().TryStartDash(1, 30, true);
