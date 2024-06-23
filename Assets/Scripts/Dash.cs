@@ -16,6 +16,8 @@ public class Dash : MonoBehaviour
     private float dashingTime = 0.2f;
     private float dashTimeLeft;
     private float originalGravity;
+    public bool CanGetDamage { get; private set; } = true;
+
 
     private Rigidbody2D rigidBody;
 
@@ -48,6 +50,7 @@ public class Dash : MonoBehaviour
     }
     void StartDash()
     {
+        CanGetDamage = false;
         canDash = false;
         IsDashing = true;
         dashTimeLeft = dashingTime;
@@ -70,7 +73,7 @@ public class Dash : MonoBehaviour
     {
         rigidBody.gravityScale = originalGravity;
         IsDashing = false;
-
+        CanGetDamage = true;
         rigidBody.velocity = Vector2.zero;
     }
     void DashCooldown()

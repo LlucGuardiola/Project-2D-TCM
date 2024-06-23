@@ -13,7 +13,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] TrailRendererController tr;
 
     private bool canDash = true;
-    public bool CanGetDamage { get; private set; } = true;
     public bool CanMove;
     private BoxCollider2D boxCollider; 
     private static Rigidbody2D body;

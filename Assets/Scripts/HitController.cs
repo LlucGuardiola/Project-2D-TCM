@@ -12,11 +12,13 @@ public class HitController : MonoBehaviour
     [SerializeField] private Animator anim;
     private HealthManager healthManager;
     private bool isBoss;
+    private GameObject _player;
 
     private void Start()
     {
         healthManager = GetComponent<HealthManager>();
         isBoss = healthManager.isBoss;
+        _player = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void Update()
@@ -40,7 +42,7 @@ public class HitController : MonoBehaviour
                 HealthManager playerHealthManager = player.GetComponent<HealthManager>();
                 if (playerHealthManager != null)
                 {
-                    playerHealthManager.LoseLife(20, true);
+                    playerHealthManager.LoseLife(20, _player.GetComponent<Dash>().CanGetDamage);
                     Debug.Log("daño a jugador");
                 }
             }
