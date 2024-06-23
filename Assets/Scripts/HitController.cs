@@ -20,12 +20,12 @@ public class HitController
     {
         
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, layermask);  //Detectar enemigos en un rango especificado
-
         foreach (Collider2D enemy in hitEnemies)
         {
             if (enemy is CapsuleCollider2D)
             {
-               //////arreglar
+                //////arreglar
+                Debug.Log("daño");
             }
         }
     }
