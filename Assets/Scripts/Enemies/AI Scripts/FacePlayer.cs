@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Flip : MonoBehaviour
+public class FacePlayer : MonoBehaviour
 {
     // Start is called before the first frame update
    private Transform player;
