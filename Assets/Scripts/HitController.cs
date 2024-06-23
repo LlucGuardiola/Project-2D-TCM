@@ -31,6 +31,7 @@ public class HitController : MonoBehaviour
                 transform.position.x + (GetComponent<SpriteRenderer>().flipX ? -3.5f : 3.5f),
                 transform.position.y);
         }
+        
     }
 
     private void Hit() // Activated within animation
@@ -45,7 +46,7 @@ public class HitController : MonoBehaviour
                 {
                     playerHealthManager.LoseLife(Random.Range(7,13), _player.GetComponent<Dash>().CanGetDamage);
                     Debug.Log("daño a jugador");
-                    //anim.SetTrigger("HitP");
+                    anim.SetTrigger("HitP");
                 }
             }
         }
@@ -62,8 +63,7 @@ public class HitController : MonoBehaviour
                     {
                         enemyHealthManager.LoseLifeBoss(20, true);
                         Debug.Log("daño a boss");
-                        //anim.SetTrigger("HitB");
-
+                        anim.SetTrigger("HitB");
                     }
                 }
             }

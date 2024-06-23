@@ -1,14 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Xml.Xsl;
 using UnityEngine;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 
-public class Idle_State : BaseState
+public class Hit_State : BaseState
 {
-
     private BehaviourSM _sm;
-    public Idle_State(BehaviourSM stateMachine) : base("Idle", stateMachine)
+    public Hit_State(BehaviourSM stateMachine) : base("Hit", stateMachine)
     {
         _sm = stateMachine;
     }
@@ -19,21 +16,15 @@ public class Idle_State : BaseState
     public override void UpdatePhysics()
     {
         base.UpdatePhysics();
-        _sm.currentDistance = Vector3.Distance(_sm.player.transform.position, _sm.transform.position);
+       
     }
 
     public override void UpdateLogic()
     {
         base.UpdateLogic();
         // Transiton to "moving" state
-       
-    
-        if (_sm.currentDistance > _sm.closestDistance)
-        {
-            
-            stateMachine.ChangeState(_sm.movingState);
-            
-        }
+
+
         if (_sm.currentDistance > _sm.closestDistance)
         {
 
@@ -44,10 +35,9 @@ public class Idle_State : BaseState
         {
 
             stateMachine.ChangeState(_sm.AttackState);
-            
+
 
         }
 
-        _sm.animator.SetBool("isRunning", false);
     }
 }
