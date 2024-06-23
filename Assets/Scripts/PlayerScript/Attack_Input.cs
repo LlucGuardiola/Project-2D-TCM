@@ -21,7 +21,7 @@ public class Attack_Input : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && !GetComponent<Dash>().IsDashing && !GetComponent<PlayerMovement>().IsJumping)
         {
             
-            dash.TryStartDash(1, 10, true);
+            dash.TryStartDash(1,6, true);
             
             attack_script.TryStartAttack(1, attack_Anim,animator, 0.5f);
         }

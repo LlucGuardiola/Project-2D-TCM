@@ -14,9 +14,6 @@ public class HitController : MonoBehaviour
     private HealthManager healthManager;
     private bool isBoss;
     private GameObject _player;
-    private bool isDead = false;
-    
-
     private void Start()
     {
         healthManager = GetComponent<HealthManager>();
@@ -46,8 +43,7 @@ public class HitController : MonoBehaviour
                 HealthManager playerHealthManager = player.GetComponent<HealthManager>();
                 if (playerHealthManager != null)
                 {
-                    playerHealthManager.LoseLife(Random.Range(7,13), _player.GetComponent<Dash>().CanGetDamage);
-                    Debug.Log("daño a jugador");
+                    playerHealthManager.LoseLife(Random.Range(10,17), _player.GetComponent<Dash>().CanGetDamage);
                     anim.SetTrigger("HitP");
                 }
             }
@@ -63,18 +59,11 @@ public class HitController : MonoBehaviour
                     HealthManager enemyHealthManager = enemy.GetComponent<HealthManager>();
                     if (enemyHealthManager != null)
                     {
-                        enemyHealthManager.LoseLifeBoss(150, true);
-                        Debug.Log("daño a boss");
+                        enemyHealthManager.LoseLifeBoss(20, true);
                         anim.SetTrigger("HitB");
                         if (enemyHealthManager.vidas_Boss <= 0)
                         {
-                            if (!isDead)
-                            {
-                                isDead = true;
-                                Debug.Log("Dead");
                                 anim.SetBool("Dead", true);
-                            }
-                            
                         }
                           
                     }
