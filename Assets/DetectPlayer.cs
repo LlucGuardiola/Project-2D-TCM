@@ -8,12 +8,15 @@ public class DetectPlayer : MonoBehaviour
     [SerializeField] private GameObject wallR;
     [SerializeField] private GameObject wallL;
     [SerializeField] private  GameObject boss;
-   
+    [SerializeField] private Animator animator;
+    private GameObject player;
+
 
     // Start is called before the first frame update
 
     private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         boss.SetActive(false);
         wallR.SetActive(false);
         wallL.SetActive(false);
@@ -25,7 +28,6 @@ public class DetectPlayer : MonoBehaviour
         {
             Destroy(wallR);
             Destroy(wallL);
-            Destroy(boss);
             Destroy(this);
             boss.GetComponent<HealthManager>().HideHealthBar();
         }
@@ -33,9 +35,12 @@ public class DetectPlayer : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+       
         wallR.SetActive(true);
         wallL.SetActive(true);
         boss.SetActive(true);
+        boss.GetComponent<HitController>().anim = player.GetComponent<Animator>();
+        player.GetComponent<HitController>().anim = animator;
         boss.GetComponent<HealthManager>().ShowHealthBar();
     }
    

@@ -7,6 +7,8 @@ public class HealthManager : MonoBehaviour
     [SerializeField] public float vidas_Boss;
     [SerializeField] Slider sliderJugador;
     [SerializeField] Slider sliderEnemigo;
+    
+  
     private GameObject player;
     public int LifeCounter;
     public bool isBoss = false;
@@ -37,6 +39,7 @@ public class HealthManager : MonoBehaviour
                     sliderJugador.value = vidas;
                     LifeCounter++;
                     //GameFlowController.Instance.SetCounterLife(LifeCounter); /////activar en la entrega 
+
             }
         }
     }
@@ -45,9 +48,7 @@ public class HealthManager : MonoBehaviour
         if (canGetDamaged)
         {
             vidas_Boss -= damageDealt;
-            sliderEnemigo.value = vidas_Boss;
-           
-            
+            sliderEnemigo.value = vidas_Boss;  
         }
     }
     public void ShowHealthBar()
@@ -61,5 +62,9 @@ public class HealthManager : MonoBehaviour
         {
             sliderEnemigo.gameObject.SetActive(false);
         }
+    }
+    public void Dead()
+    {
+            Destroy(gameObject);
     }
 }

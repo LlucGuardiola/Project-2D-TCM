@@ -9,10 +9,12 @@ public class HitController : MonoBehaviour
     [SerializeField] private LayerMask layermask_Player;
     [SerializeField] private LayerMask layermask_Boss;
     [SerializeField] private Transform attackPoint;
-    [SerializeField] private Animator anim;
+    [SerializeField] public Animator anim;
+    
     private HealthManager healthManager;
     private bool isBoss;
     private GameObject _player;
+    private bool isDead = false;
     
 
     private void Start()
@@ -61,9 +63,20 @@ public class HitController : MonoBehaviour
                     HealthManager enemyHealthManager = enemy.GetComponent<HealthManager>();
                     if (enemyHealthManager != null)
                     {
-                        enemyHealthManager.LoseLifeBoss(20, true);
+                        enemyHealthManager.LoseLifeBoss(150, true);
                         Debug.Log("daño a boss");
                         anim.SetTrigger("HitB");
+                        if (enemyHealthManager.vidas_Boss <= 0)
+                        {
+                            if (!isDead)
+                            {
+                                isDead = true;
+                                Debug.Log("Dead");
+                                anim.SetBool("Dead", true);
+                            }
+                            
+                        }
+                          
                     }
                 }
             }

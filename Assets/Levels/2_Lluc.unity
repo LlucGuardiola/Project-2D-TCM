@@ -9580,7 +9580,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4096318701607666096, guid: c7599733121b742458e62f16bac92905, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 454.5
+      value: 454.7
       objectReference: {fileID: 0}
     - target: {fileID: 4096318701607666096, guid: c7599733121b742458e62f16bac92905, type: 3}
       propertyPath: m_LocalPosition.y
@@ -12580,6 +12580,7 @@ MonoBehaviour:
   wallR: {fileID: 1421991642}
   wallL: {fileID: 1649231257}
   boss: {fileID: 1036863752}
+  animator: {fileID: 1036863776}
 --- !u!61 &1028369479
 BoxCollider2D:
   m_ObjectHideFlags: 0
