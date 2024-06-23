@@ -7,6 +7,8 @@ public class ManageRespawn : MonoBehaviour
     public bool HasToRespawn;
     private Vector3 checkpoint;
     private GameObject player;
+   
+   
 
     void Start()
     {
@@ -16,6 +18,7 @@ public class ManageRespawn : MonoBehaviour
     }
     void Update()
     {
+        
         if (HasToRespawn)
         {
             Respawn();

@@ -35,7 +35,7 @@ public class DrawWireCube : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            player.GetComponent<PlayerAttack>().SetCombatState(true);
+            
             audioSource.Play();
             bossHealthManager.ShowHealthBar();
 
@@ -46,7 +46,7 @@ public class DrawWireCube : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            player.GetComponent<PlayerAttack>().SetCombatState(false);
+            
             audioSource.Stop();
             bossHealthManager.HideHealthBar();
 

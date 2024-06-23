@@ -51,14 +51,14 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && !GetComponent<PlayerAttack>().isAtacking)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && !GetComponent<Attack_Controller>().isAttacking)
         {
             GetComponent<Dash>().TryStartDash(1, 30, true);
         }
     }
     private void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && canJump && !GetComponent<PlayerAttack>().isAtacking)
+        if (Input.GetKeyDown(KeyCode.Space) && canJump && !GetComponent<Attack_Controller>().isAttacking)
         {
             jumpCount++;
             body.velocity = new Vector2(body.velocity.x, jumpHeight * 2);
@@ -101,14 +101,14 @@ public class PlayerMovement : MonoBehaviour
 
         float horizontalInput = Input.GetAxis("Horizontal");
 
-        if (!GetComponent<PlayerAttack>().isAtacking)
+        if (!GetComponent<Attack_Controller>().isAttacking)
         {
             body.velocity = new Vector2(horizontalInput * Speed, body.velocity.y);
             if (horizontalInput < 0) { body.GetComponent<SpriteRenderer>().flipX = false; }
             else if (horizontalInput > 0) { body.GetComponent<SpriteRenderer>().flipX = true; }
         }
 
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) && !GetComponent<PlayerAttack>().isAtacking) 
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) && !GetComponent<Attack_Controller>().isAttacking) 
         { ApplyingInput = true; }
         else
         {

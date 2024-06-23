@@ -4,27 +4,30 @@ using UnityEngine.UI;
 public class HealthManager : MonoBehaviour
 {
     [SerializeField] float vidas;
-    [SerializeField] Slider sliderVidas;
+    [SerializeField] float vidas_Boss;
+    [SerializeField] Slider sliderJugador;
+    [SerializeField] Slider sliderEnemigo;
+    private GameObject player;
     public int LifeCounter;
     public bool isBoss = false;
 
     private void Start()
     {
-        sliderVidas.maxValue = vidas;
-        sliderVidas.value = sliderVidas.maxValue;
+        player = GameObject.FindWithTag("Player");
+        sliderJugador.maxValue = vidas;
+        sliderJugador.value = sliderJugador.maxValue;
+
+        sliderEnemigo.maxValue = vidas_Boss;
+        sliderEnemigo.value = sliderEnemigo.maxValue;
 
         if (isBoss)
         {
-            sliderVidas.gameObject.SetActive(false);
+            sliderEnemigo.gameObject.SetActive(false);
         }
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            LoseLife(20, true);
-        }
         Debug.Log(vidas);
     }
 
@@ -33,31 +36,33 @@ public class HealthManager : MonoBehaviour
         if (canGetDamaged)
         {
             vidas -= damageDealt;
-            sliderVidas.value = vidas;
+            sliderJugador.value = vidas;
 
             if (vidas <= 0)
             {
-                if (!isBoss) 
-                {
-                    GetComponent<ManageRespawn>().HasToRespawn = true;
-                    vidas = sliderVidas.maxValue;
-                    sliderVidas.value = vidas;
-
+                    Debug.Log("Respawn");
+                    player.GetComponent<ManageRespawn>().HasToRespawn = true;
+                    vidas = sliderJugador.maxValue;
+                    sliderJugador.value = vidas;
                     LifeCounter++;
-
-                    //GameFlowController.Instance.SetCounterLife(LifeCounter); /////activar en la entrega
-                }
+                    //GameFlowController.Instance.SetCounterLife(LifeCounter); /////activar en la entrega 
             }
         }
     }
-
-    public float Vidas => vidas;
+    public void LoseLifeBoss(float damageDealt, bool canGetDamaged)
+    {
+        if (canGetDamaged)
+        {
+            vidas_Boss -= damageDealt;
+            sliderEnemigo.value = vidas_Boss;
+        }
+    }
 
     public void ShowHealthBar()
     {
         if (isBoss)
         {
-            sliderVidas.gameObject.SetActive(true);
+            sliderEnemigo.gameObject.SetActive(true);
         }
     }
 
@@ -65,7 +70,7 @@ public class HealthManager : MonoBehaviour
     {
         if (isBoss)
         {
-            sliderVidas.gameObject.SetActive(false);
+            sliderEnemigo.gameObject.SetActive(false);
         }
     }
 }
