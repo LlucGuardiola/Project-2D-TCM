@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class HealthManager : MonoBehaviour
 {
     [SerializeField] float vidas;
-    [SerializeField] float vidas_Boss;
+    [SerializeField] public float vidas_Boss;
     [SerializeField] Slider sliderJugador;
     [SerializeField] Slider sliderEnemigo;
     private GameObject player;
@@ -19,16 +19,7 @@ public class HealthManager : MonoBehaviour
 
         sliderEnemigo.maxValue = vidas_Boss;
         sliderEnemigo.value = sliderEnemigo.maxValue;
-
-        if (isBoss)
-        {
-            sliderEnemigo.gameObject.SetActive(false);
-        }
-    }
-
-    private void Update()
-    {
-        Debug.Log(vidas);
+        
     }
 
     public void LoseLife(float damageDealt, bool canGetDamaged)
@@ -55,15 +46,13 @@ public class HealthManager : MonoBehaviour
         {
             vidas_Boss -= damageDealt;
             sliderEnemigo.value = vidas_Boss;
+           
+            
         }
     }
-
     public void ShowHealthBar()
     {
-        if (isBoss)
-        {
             sliderEnemigo.gameObject.SetActive(true);
-        }
     }
 
     public void HideHealthBar()

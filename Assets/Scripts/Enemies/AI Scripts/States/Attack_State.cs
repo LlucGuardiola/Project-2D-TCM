@@ -24,7 +24,7 @@ public class Attack_State : BaseState
         _sm.currentDistance = Vector3.Distance(_sm.player.transform.position, _sm.transform.position);
         if (_sm.currentDistance <= _sm.closestDistance)
         {
-            _sm.attackScript.TryStartAttack(2,_sm.attack_Anim,_sm.animator,1.2f);
+            _sm.attackScript.TryStartAttack(UnityEngine.Random.Range(1.5f,3f),_sm.attack_Anim,_sm.animator,1.2f);
         }
 
     }
