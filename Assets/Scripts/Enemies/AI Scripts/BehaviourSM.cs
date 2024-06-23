@@ -15,6 +15,7 @@ public class BehaviourSM : StateMachine
     [HideInInspector] public Animator animator;
     [HideInInspector] public Attack_Controller attackScript;
     [HideInInspector] public string [] attack_Anim;
+    
 
     public BoxCollider2D bossArea;
 

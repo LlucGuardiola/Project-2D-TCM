@@ -21,7 +21,6 @@ public class HealthManager : MonoBehaviour
 
         sliderEnemigo.maxValue = vidas_Boss;
         sliderEnemigo.value = sliderEnemigo.maxValue;
-        
     }
 
     public void LoseLife(float damageDealt, bool canGetDamaged)
@@ -33,13 +32,11 @@ public class HealthManager : MonoBehaviour
 
             if (vidas <= 0)
             {
-                    Debug.Log("Respawn");
                     player.GetComponent<ManageRespawn>().HasToRespawn = true;
                     vidas = sliderJugador.maxValue;
                     sliderJugador.value = vidas;
                     LifeCounter++;
-                    //GameFlowController.Instance.SetCounterLife(LifeCounter); /////activar en la entrega 
-
+                    GameFlowController.Instance.SetCounterLife(LifeCounter);
             }
         }
     }

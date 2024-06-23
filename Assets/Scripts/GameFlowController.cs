@@ -98,7 +98,7 @@ public class GameFlowController : MonoBehaviour
                     UnPauseGame();
                 }
             }
-            if (counterLife== 3) ////////////////////// IMPORTANT CANVIAR
+            if (counterLife== 3)
             {
                 _currentState = GameState.Finished;
                 Finished();

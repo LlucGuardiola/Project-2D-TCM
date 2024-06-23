@@ -86,13 +86,7 @@ public class PlayerMovement : MonoBehaviour
             else { return false; }
         }
     }
-    private void Teleport() // Teleport clicando (1,2,3,4) para canviar de escenas.
-    {
-        if (Input.GetKey(KeyCode.Alpha1)) { body.transform.position = new Vector3(200f, 2f, 0f); }
-        if (Input.GetKey(KeyCode.Alpha2)) { body.transform.position = new Vector3(261f, 2.3f, 0f); }
-        if (Input.GetKey(KeyCode.Alpha3)) { body.transform.position = new Vector3(610f, -99f, 0f); }
-        if (Input.GetKey(KeyCode.Alpha4)) { body.transform.position = new Vector3(796f, 4f, 0f); }
-    }
+
     public void Movement()
     {
         if (!CanMove) return;  
