@@ -3,19 +3,19 @@ using UnityEngine;
 
 public class Boss : MonoBehaviour
 {
-    [SerializeField] protected float vida;
     [SerializeField] protected AnimationClip deathAnim;
     [SerializeField] protected BoxCollider2D bossArea;
+    [SerializeField] protected float vida;
 
     protected GameObject player;
     protected float closestDistance;
     protected float currentDistance;
     protected Vector3 currentPosition;
     protected bool dead = false;
-    protected float damage;
     protected Animator animator;
+    protected float damage;
 
-    
+
     protected bool isDashing = false;
     protected bool canDash = true;
 
@@ -25,12 +25,17 @@ public class Boss : MonoBehaviour
     protected float nextAttackTime = 0f;
     [SerializeField] protected Transform attackPoint;
 
+    private HealthManager healthManager;
+
     public virtual void Start()
     {
         player = GameObject.FindWithTag("Player");
         animator = GetComponent<Animator>();
         Vector3 worldSize = Vector3.Scale(player.GetComponent<BoxCollider2D>().size, transform.localScale);
         closestDistance = worldSize.x;
+
+        healthManager = GetComponent<HealthManager>();
+        healthManager.isBoss = true;
     }
 
     public Boss(float vida, float damage)
@@ -74,16 +79,18 @@ public class Boss : MonoBehaviour
 
     public virtual void TakeDamage(int damage)
     {
+        healthManager.LoseLife(damage, true);
+
         vida -= damage;
         if (vida <= 0) Die();
-
         StartCoroutine(Dash(0.2f, 10, false, 1));
         animator.SetTrigger("Hit");
+        
     }
 
     private void ManageDash()
     {
-        if (currentDistance > 10 && currentDistance < 30 && UnityEngine.Random.Range(0, 2) == 0 && canDash && !isAttacking)
+        if (currentDistance > 10 && currentDistance < 30 && Random.Range(0, 2) == 0 && canDash && !isAttacking)
         {
             StartCoroutine(Dash(0.2f, 25, true, 0));
             canDash = false;
@@ -116,25 +123,28 @@ public class Boss : MonoBehaviour
 
     public virtual void Die()
     {
+        
+
         dead = true;
         animator.SetBool("Dead", dead);
         GetComponent<Collider2D>().enabled = false;
         enabled = false;
         Destroy(gameObject, deathAnim.length);
+        healthManager.HideHealthBar();
     }
 
     public void Attack()
     {
-            attackPoint.position = new Vector2(
+        attackPoint.position = new Vector2(
             transform.position.x + (GetComponent<SpriteRenderer>().flipX ? -3.5f : 3.5f),
             transform.position.y + 1.1f
         );
 
         if (IsPlayerInRange() && Time.time >= nextAttackTime)
         {
-            string attackTrigger = UnityEngine.Random.Range(0, 2) == 0 ? "Attack" : "Attack2";
+            string attackTrigger = Random.Range(0, 2) == 0 ? "Attack" : "Attack2";
             animator.SetTrigger(attackTrigger);
-            nextAttackTime = Time.time + UnityEngine.Random.Range(1, 3.6f);
+            nextAttackTime = Time.time + Random.Range(1, 3.6f);
         }
     }
 
@@ -150,10 +160,6 @@ public class Boss : MonoBehaviour
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 
-  
-        
-   
-
     private void AttackAnimation() // Activated within the animation
     {
         StartCoroutine(StartAttack());
@@ -166,6 +172,5 @@ public class Boss : MonoBehaviour
 
         yield return new WaitForSeconds(animator.GetCurrentAnimatorClipInfo(0)[0].clip.length);
         isAttacking = false;
-   
     }
 }

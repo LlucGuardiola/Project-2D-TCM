@@ -8,6 +8,7 @@ public class DrawWireCube : MonoBehaviour
     [SerializeField] private BoxCollider2D boxCollider;
     private AudioSource audioSource;
     private GameObject player;
+    [SerializeField] private HealthManager bossHealthManager; 
 
     private void Awake()
     {
@@ -36,6 +37,9 @@ public class DrawWireCube : MonoBehaviour
         {
             player.GetComponent<PlayerAttack>().SetCombatState(true);
             audioSource.Play();
+            bossHealthManager.ShowHealthBar();
+
+
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -44,6 +48,8 @@ public class DrawWireCube : MonoBehaviour
         {
             player.GetComponent<PlayerAttack>().SetCombatState(false);
             audioSource.Stop();
+            bossHealthManager.HideHealthBar();
+
         }
     }
 }
